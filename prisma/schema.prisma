@@ -1,0 +1,140 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Plan {
+  FREE
+  STARTER
+  GROWTH
+}
+
+enum Platform {
+  GOOGLE
+  ZOMATO
+  SWIGGY
+}
+
+enum CampaignType {
+  EMAIL
+  WHATSAPP
+}
+
+enum AlertType {
+  WHATSAPP_NEGATIVE
+  EMAIL_DIGEST
+}
+
+model User {
+  id                      String     @id @default(cuid())
+  email                   String     @unique
+  name                    String?
+  avatarUrl               String?
+  plan                    Plan       @default(FREE)
+  razorpaySubscriptionId  String?
+  razorpayCustomerId      String?
+  aiRepliesUsed           Int        @default(0)
+  aiRepliesResetAt        DateTime   @default(now())
+  onboardingCompleted     Boolean    @default(false)
+  createdAt               DateTime   @default(now())
+  updatedAt               DateTime   @updatedAt
+
+  businesses  Business[]
+
+  @@map("users")
+}
+
+model Business {
+  id                  String    @id @default(cuid())
+  userId              String
+  name                String
+  category            String?
+  location            String?
+  googleLocationId    String?
+  googleAccessToken   String?
+  googleRefreshToken  String?
+  googleTokenExpiry   DateTime?
+  timezone            String    @default("Asia/Kolkata")
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reviews    Review[]
+  campaigns  Campaign[]
+  alerts     Alert[]
+
+  @@map("businesses")
+}
+
+model Review {
+  id              String    @id @default(cuid())
+  businessId      String
+  googleReviewId  String?   @unique
+  author          String
+  authorPhotoUrl  String?
+  rating          Int       // 1–5
+  text            String?
+  platform        Platform  @default(GOOGLE)
+  reviewDate      DateTime
+  isAnswered      Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+
+  business  Business  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  reply     Reply?
+
+  @@index([businessId, reviewDate(sort: Desc)])
+  @@index([businessId, rating])
+  @@map("reviews")
+}
+
+model Reply {
+  id              String    @id @default(cuid())
+  reviewId        String    @unique
+  aiGeneratedText String
+  finalText       String?
+  postedAt        DateTime?
+  approvedAt      DateTime?
+  approvedBy      String?   // user id
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  review  Review  @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+
+  @@map("replies")
+}
+
+model Campaign {
+  id          String        @id @default(cuid())
+  businessId  String
+  type        CampaignType
+  recipient   String        // phone or email
+  reviewLink  String
+  sentAt      DateTime?
+  clickedAt   DateTime?
+  reviewedAt  DateTime?
+  createdAt   DateTime      @default(now())
+
+  business  Business  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@index([businessId])
+  @@map("campaigns")
+}
+
+model Alert {
+  id          String     @id @default(cuid())
+  businessId  String
+  type        AlertType
+  enabled     Boolean    @default(true)
+  config      Json?      // e.g. { "phone": "+91..." }
+  createdAt   DateTime   @default(now())
+
+  business  Business  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@unique([businessId, type])
+  @@map("alerts")
+}
