@@ -31,7 +31,7 @@ type WidgetLayout = "grid" | "list" | "badge" | "carousel";
 
 // ─── Widget Preview ────────────────────────────────────────────────────────────
 function WidgetPreview({
-  layout, theme: themeId, maxReviews, minRating, showSummary, showName, primaryColor, businessName,
+  layout, themeId, maxReviews, minRating, showSummary, showName, primaryColor, businessName,
 }: {
   layout: WidgetLayout; themeId: string; maxReviews: number; minRating: number;
   showSummary: boolean; showName: boolean; primaryColor: string; businessName: string;
@@ -257,7 +257,7 @@ export function WidgetPage() {
                 style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d1d5db' fill-opacity='0.4'%3E%3Cpath d='M0 0h1v1H0zm9 0h1v1H9zm10 0h1v1h-1zM0 9h1v1H0zm9 9h1v1H9zm10 0h1v1h-1zM0 19h1v1H0z'/%3E%3C/g%3E%3C/svg%3E\")" }}>
                 <div style={{ width: previewDevice === "mobile" ? 340 : "100%", maxWidth: 600 }}>
                   <WidgetPreview
-                    layout={layout} theme={themeId} maxReviews={maxReviews} minRating={minRating}
+                    layout={layout} themeId={themeId} maxReviews={maxReviews} minRating={minRating}
                     showSummary={showSummary} showName={showName} primaryColor={primaryColor}
                     businessName="Sharma's Kitchen"
                   />
