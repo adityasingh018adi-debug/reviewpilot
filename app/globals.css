@@ -17,50 +17,51 @@ html {
 }
 
 @layer base {
+  /* ── Light mode ── */
   :root {
-    --background: 0 0% 100%;
-    --foreground: 263 50% 8%;
+    --background: 240 20% 98%;
+    --foreground: 234 40% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 263 50% 8%;
+    --card-foreground: 234 40% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 263 50% 8%;
-    --primary: 262 83% 58%;
+    --popover-foreground: 234 40% 10%;
+    --primary: 254 80% 62%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 262 40% 96%;
-    --secondary-foreground: 262 83% 50%;
-    --muted: 262 25% 96%;
-    --muted-foreground: 262 15% 48%;
-    --accent: 322 85% 62%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 84.2% 60.2%;
+    --secondary: 240 20% 95%;
+    --secondary-foreground: 234 40% 25%;
+    --muted: 240 15% 94%;
+    --muted-foreground: 234 15% 48%;
+    --accent: 240 20% 95%;
+    --accent-foreground: 234 40% 15%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 263 25% 91%;
-    --input: 263 25% 91%;
-    --ring: 262 83% 58%;
+    --border: 234 20% 90%;
+    --input: 234 20% 90%;
+    --ring: 254 80% 62%;
     --radius: 0.75rem;
   }
 
+  /* ── AURORA DARK — Cosmic premium palette ── */
   .dark {
-    /* Dark navy — DoclifyAI-inspired */
-    --background: 230 28% 7%;        /* #0d0f1c deep navy */
-    --foreground: 220 15% 94%;       /* near-white */
-    --card: 228 25% 10%;             /* #131625 card navy */
-    --card-foreground: 220 15% 94%;
-    --popover: 228 25% 10%;
-    --popover-foreground: 220 15% 94%;
-    --primary: 262 83% 65%;          /* violet */
+    --background: 236 52% 5%;        /* #060818 — near-black cosmic */
+    --foreground: 230 25% 92%;       /* #E4E8F7 — blue-white text    */
+    --card: 233 45% 8%;              /* #0C1020 — deep navy cards    */
+    --card-foreground: 230 25% 92%;
+    --popover: 233 45% 8%;
+    --popover-foreground: 230 25% 92%;
+    --primary: 254 80% 66%;          /* #7B5CFF — vivid indigo       */
     --primary-foreground: 0 0% 100%;
-    --secondary: 228 22% 16%;        /* subtle navy */
-    --secondary-foreground: 220 15% 80%;
-    --muted: 228 22% 13%;
-    --muted-foreground: 220 10% 48%;
-    --accent: 228 22% 16%;
-    --accent-foreground: 220 15% 90%;
-    --destructive: 0 62.8% 50%;
+    --secondary: 231 35% 14%;        /* #151E30 — elevated surface   */
+    --secondary-foreground: 230 20% 78%;
+    --muted: 232 38% 11%;            /* #101828 — muted bg           */
+    --muted-foreground: 228 14% 44%; /* #5D6590 — dim text           */
+    --accent: 231 35% 14%;
+    --accent-foreground: 230 25% 92%;
+    --destructive: 350 80% 55%;
     --destructive-foreground: 0 0% 100%;
-    --border: 228 20% 16%;           /* subtle border */
-    --input: 228 20% 16%;
-    --ring: 262 83% 65%;
+    --border: 230 30% 15%;           /* #172030 — barely-there border */
+    --input: 230 30% 15%;
+    --ring: 254 80% 66%;
   }
 }
 
