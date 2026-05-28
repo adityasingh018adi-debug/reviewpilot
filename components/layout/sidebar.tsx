@@ -22,6 +22,11 @@ import {
   Sparkles,
   Star,
   Sun,
+  Users,
+  FileText,
+  Plug,
+  LifeBuoy,
+  Mail,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import type { User, Business } from "@/types";
@@ -36,9 +41,14 @@ const navItems = [
   { href: "/dashboard/reviews", label: "Reviews", icon: Star },
   { href: "/dashboard/ai-replies", label: "AI Replies", icon: Sparkles },
   { href: "/dashboard/analytics", label: "Analytics", icon: BarChart3 },
-  { href: "/dashboard/campaigns", label: "Campaigns", icon: Send, badge: "New" },
+  { href: "/dashboard/campaigns", label: "Review Requests", icon: Mail },
+  { href: "/dashboard/customers", label: "Customers", icon: Users },
+  { href: "/dashboard/templates", label: "Templates", icon: FileText },
+  { href: "/dashboard/integrations", label: "Integrations", icon: Plug },
+  { href: "/dashboard/team", label: "Team", icon: Building2 },
   { href: "/dashboard/settings", label: "Settings", icon: Settings },
   { href: "/dashboard/billing", label: "Billing", icon: CreditCard },
+  { href: "/dashboard/support", label: "Support", icon: LifeBuoy },
 ];
 
 export function Sidebar({ user, business }: SidebarProps) {
