@@ -19,6 +19,8 @@ import {
   Moon,
   Send,
   Settings,
+  Sparkles,
+  Star,
   Sun,
 } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -31,6 +33,8 @@ interface SidebarProps {
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/dashboard/reviews", label: "Reviews", icon: Star },
+  { href: "/dashboard/ai-replies", label: "AI Replies", icon: Sparkles },
   { href: "/dashboard/analytics", label: "Analytics", icon: BarChart3 },
   { href: "/dashboard/campaigns", label: "Campaigns", icon: Send, badge: "New" },
   { href: "/dashboard/settings", label: "Settings", icon: Settings },
