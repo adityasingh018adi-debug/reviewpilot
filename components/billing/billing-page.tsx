@@ -15,15 +15,10 @@ import {
   Calendar,
   Receipt,
   Users,
-  MessageSquare,
-  BarChart2,
   Sparkles,
-  Shield,
   HelpCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 

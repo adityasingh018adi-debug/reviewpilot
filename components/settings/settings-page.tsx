@@ -496,7 +496,6 @@ function SectionContent({ section }: { section: SettingsSection }) {
 
 export function SettingsPage() {
   const [activeSection, setActiveSection] = useState<SettingsSection>("business_profile");
-  const activeNav = NAV_ITEMS.find((n) => n.id === activeSection)!;
 
   return (
     <div className="flex flex-col h-full">

@@ -13,17 +13,12 @@ import {
   Settings,
   Zap,
   Globe,
-  MessageSquare,
   Star,
-  BarChart2,
-  Users,
   Link2,
   ArrowRight,
 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Progress } from "@/components/ui/progress";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
