@@ -8,9 +8,9 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   BarChart3, Bell, Bot, Building2, ChevronDown, ChevronLeft, ChevronRight,
-  Code2, CreditCard, Crown, LayoutDashboard, LifeBuoy, LogOut, Mail,
+  Code2, CreditCard, LayoutDashboard, LifeBuoy, LogOut, Mail,
   MapPin, MessageCircle, Moon, Newspaper, Plug, QrCode, Settings,
-  Sparkles, Star, Sun, Trophy, UserCircle, Users, FileText,
+  Sparkles, Star, Sun, Trophy, UserCircle, Users, FileText, ShieldCheck,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import type { User, Business } from "@/types";
@@ -68,6 +68,12 @@ const NAV_GROUPS = [
       { href: "/dashboard/billing", label: "Billing", icon: CreditCard },
       { href: "/dashboard/support", label: "Support", icon: LifeBuoy },
       { href: "/dashboard/owner", label: "Owner", icon: UserCircle },
+    ],
+  },
+  {
+    label: "SYSTEM",
+    items: [
+      { href: "/admin", label: "Admin Panel", icon: ShieldCheck },
     ],
   },
 ];
@@ -164,33 +170,6 @@ export function Sidebar({ user, business }: SidebarProps) {
 
       {/* Bottom section */}
       <div className="p-3 border-t space-y-2 shrink-0">
-        {/* Plan info box */}
-        {!collapsed && (
-          <Link
-            href="/dashboard/growth-plan"
-            className="block px-3 py-3 rounded-xl bg-indigo-50 border border-indigo-100 hover:bg-indigo-100 transition-colors cursor-pointer"
-          >
-            <div className="flex items-center gap-2 mb-1.5">
-              <div className="w-6 h-6 rounded-full bg-indigo-600 flex items-center justify-center">
-                <Crown className="h-3.5 w-3.5 text-white" />
-              </div>
-              <span className="text-sm font-semibold text-gray-800">Growth Plan</span>
-              <span className="text-xs font-bold text-indigo-600 ml-auto">₹999</span>
-            </div>
-            <div className="h-1.5 bg-indigo-100 rounded-full overflow-hidden mb-1.5">
-              <div className="h-full bg-indigo-500 rounded-full w-[63%]" />
-            </div>
-            <p className="text-xs text-gray-400">Renews Jun 15, 2024</p>
-          </Link>
-        )}
-        {collapsed && (
-          <Link href="/dashboard/growth-plan" className="flex justify-center">
-            <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center">
-              <Crown className="h-4 w-4 text-white" />
-            </div>
-          </Link>
-        )}
-
         {/* Theme toggle */}
         <Button
           variant="ghost"
