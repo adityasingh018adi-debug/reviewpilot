@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { createServerClient } from "@/lib/supabase/server";
 import { Sidebar } from "@/components/layout/sidebar";
 import { PageTransition } from "@/components/layout/page-transition";
+import { MobileBottomNav } from "@/components/pwa/mobile-bottom-nav";
 import { isDemoMode } from "@/lib/demo-mode";
 import type { User, Business } from "@/types";
 
@@ -54,10 +55,15 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
   return (
     <div className="flex h-screen overflow-hidden">
-      <Sidebar user={data.user} business={data.business} />
-      <main className="flex-1 overflow-y-auto bg-background">
+      {/* Sidebar — hidden on mobile */}
+      <div className="hidden md:flex">
+        <Sidebar user={data.user} business={data.business} />
+      </div>
+      <main className="flex-1 overflow-y-auto bg-background pb-16 md:pb-0">
         <PageTransition>{children}</PageTransition>
       </main>
+      {/* Bottom nav — only on mobile */}
+      <MobileBottomNav />
     </div>
   );
 }

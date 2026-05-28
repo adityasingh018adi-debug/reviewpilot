@@ -1,11 +1,23 @@
+import withPWAInit from "@ducanh2912/next-pwa";
+
+const withPWA = withPWAInit({
+  dest: "public",
+  cacheOnFrontEndNav: true,
+  aggressiveFrontEndNavCaching: true,
+  reloadOnOnline: true,
+  swcMinify: true,
+  disable: false,
+  workboxOptions: {
+    disableDevLogs: true,
+  },
+});
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-    // Lint warnings should not block production builds
     ignoreDuringBuilds: true,
   },
   typescript: {
-    // Type errors are still surfaced; only lint is skipped above
     ignoreBuildErrors: false,
   },
   images: {
@@ -17,4 +29,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withPWA(nextConfig);
