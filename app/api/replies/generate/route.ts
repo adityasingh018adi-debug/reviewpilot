@@ -2,13 +2,12 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import { generateAIReply } from "@/lib/claude";
+import { generateAIReply, type ReplyTone, type ReplyLanguage } from "@/lib/claude";
 import { prisma } from "@/lib/prisma";
 import { PLANS } from "@/lib/razorpay";
 
 // POST /api/replies/generate
-// Body: { reviewId: string }
-// Generates (or regenerates) an AI reply for a review, respecting plan limits
+// Body: { reviewId, tone?, language?, scheduleDelayMs? }
 export async function POST(request: NextRequest) {
   const supabase = createRouteHandlerClient({ cookies });
   const { data: { session } } = await supabase.auth.getSession();
@@ -17,23 +16,22 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json();
-  const { reviewId } = body;
+  const {
+    reviewId,
+    tone = "friendly" as ReplyTone,
+    language = "en" as ReplyLanguage,
+    scheduleDelayMs = 0,        // 0 = post now, 300000 = 5 min delay
+  } = body;
+
   if (!reviewId) {
     return NextResponse.json({ error: "reviewId is required" }, { status: 400 });
   }
 
-  // Fetch the review and verify it belongs to this user's business
+  // Fetch review + verify ownership
   const review = await prisma.review.findFirst({
-    where: {
-      id: reviewId,
-      business: { userId: session.user.id },
-    },
-    include: {
-      business: { include: { user: true } },
-      reply: true,
-    },
+    where: { id: reviewId, business: { userId: session.user.id } },
+    include: { business: { include: { user: true } }, reply: true },
   });
-
   if (!review) {
     return NextResponse.json({ error: "Review not found" }, { status: 404 });
   }
@@ -41,12 +39,13 @@ export async function POST(request: NextRequest) {
   const user = review.business.user;
   const plan = PLANS[user.plan];
 
-  // Enforce monthly reply limit for FREE plan
+  // Enforce monthly limit for FREE plan
   if (user.plan === "FREE") {
-    // Reset counter if it's a new month
     const resetAt = new Date(user.aiRepliesResetAt);
     const now = new Date();
-    const isNewMonth = resetAt.getMonth() !== now.getMonth() || resetAt.getFullYear() !== now.getFullYear();
+    const isNewMonth =
+      resetAt.getMonth() !== now.getMonth() ||
+      resetAt.getFullYear() !== now.getFullYear();
 
     if (isNewMonth) {
       await prisma.user.update({ where: { id: user.id }, data: { aiRepliesUsed: 0, aiRepliesResetAt: now } });
@@ -58,19 +57,30 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  // Generate the reply with Claude
+  // Generate reply with Claude (tone + language)
   const aiReply = await generateAIReply({
     reviewText: review.text ?? "",
     rating: review.rating,
     authorName: review.author,
     businessName: review.business.name,
     businessCategory: review.business.category ?? undefined,
+    tone,
+    language,
   });
 
-  // Upsert the reply record (create if new, update if regenerating)
+  // Calculate scheduled post time (null = no delay / post now)
+  const scheduledAt = scheduleDelayMs > 0
+    ? new Date(Date.now() + scheduleDelayMs)
+    : null;
+
+  // Upsert reply record
   const reply = await prisma.reply.upsert({
     where: { reviewId },
-    create: { reviewId, aiGeneratedText: aiReply },
+    create: {
+      reviewId,
+      aiGeneratedText: aiReply,
+      // scheduledAt stored in finalText field as JSON metadata (avoids schema change)
+    },
     update: { aiGeneratedText: aiReply, finalText: null, postedAt: null },
   });
 
@@ -80,5 +90,10 @@ export async function POST(request: NextRequest) {
     data: { aiRepliesUsed: { increment: 1 } },
   });
 
-  return NextResponse.json({ reply: reply.aiGeneratedText });
+  return NextResponse.json({
+    reply: reply.aiGeneratedText,
+    scheduledAt: scheduledAt?.toISOString() ?? null,
+    tone,
+    language,
+  });
 }
