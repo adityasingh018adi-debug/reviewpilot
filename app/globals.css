@@ -41,25 +41,26 @@ html {
   }
 
   .dark {
-    --background: 263 40% 6%;
-    --foreground: 263 20% 96%;
-    --card: 263 35% 9%;
-    --card-foreground: 263 20% 96%;
-    --popover: 263 35% 9%;
-    --popover-foreground: 263 20% 96%;
-    --primary: 262 83% 68%;
-    --primary-foreground: 263 40% 6%;
-    --secondary: 263 30% 15%;
-    --secondary-foreground: 262 83% 75%;
-    --muted: 263 30% 12%;
-    --muted-foreground: 263 15% 55%;
-    --accent: 322 85% 68%;
-    --accent-foreground: 263 40% 6%;
-    --destructive: 0 62.8% 45%;
+    /* Dark navy — DoclifyAI-inspired */
+    --background: 230 28% 7%;        /* #0d0f1c deep navy */
+    --foreground: 220 15% 94%;       /* near-white */
+    --card: 228 25% 10%;             /* #131625 card navy */
+    --card-foreground: 220 15% 94%;
+    --popover: 228 25% 10%;
+    --popover-foreground: 220 15% 94%;
+    --primary: 262 83% 65%;          /* violet */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 228 22% 16%;        /* subtle navy */
+    --secondary-foreground: 220 15% 80%;
+    --muted: 228 22% 13%;
+    --muted-foreground: 220 10% 48%;
+    --accent: 228 22% 16%;
+    --accent-foreground: 220 15% 90%;
+    --destructive: 0 62.8% 50%;
     --destructive-foreground: 0 0% 100%;
-    --border: 263 30% 18%;
-    --input: 263 30% 18%;
-    --ring: 262 83% 68%;
+    --border: 228 20% 16%;           /* subtle border */
+    --input: 228 20% 16%;
+    --ring: 262 83% 65%;
   }
 }
 
@@ -126,12 +127,12 @@ html {
 .float-2 { animation: floatB 7s ease-in-out infinite; }
 .float-3 { animation: floatC 9s ease-in-out infinite; }
 
-/* ─── Gradient mesh background ──────────────────────────────────────────────── */
+/* ─── Gradient mesh background (dark navy, DoclifyAI style) ────────────────── */
 .mesh-gradient {
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(99, 102, 241, 0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 80%, rgba(236, 72, 153, 0.04) 0%, transparent 50%);
+    radial-gradient(ellipse at 20% 50%, rgba(124, 58, 237, 0.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 10%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 90%, rgba(56, 189, 248, 0.04) 0%, transparent 45%);
 }
 
 /* ─── Animated gradient border ──────────────────────────────────────────────── */
