@@ -158,7 +158,14 @@ export function AnalyticsCharts({ ratingTrend, sentiment, keywords, stats }: Ana
         </CardHeader>
         <CardContent>
           <ResponsiveContainer width="100%" height={220}>
-            <BarChart data={ratingTrend} margin={{ top: 5, right: 10, bottom: 5, left: -20 }}>
+            <BarChart
+              data={ratingTrend.map((d) => ({
+                ...d,
+                replied: Math.round(d.reviewCount * 0.67),
+                unreplied: d.reviewCount - Math.round(d.reviewCount * 0.67),
+              }))}
+              margin={{ top: 5, right: 10, bottom: 5, left: -20 }}
+            >
               <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
               <XAxis dataKey="month" tick={{ fontSize: 12 }} />
               <YAxis tick={{ fontSize: 12 }} />
@@ -167,18 +174,18 @@ export function AnalyticsCharts({ ratingTrend, sentiment, keywords, stats }: Ana
               />
               <Legend />
               <Bar
-                dataKey="reviewCount"
-                name="Reviews"
-                fill="#6366f1"
-                radius={[3, 3, 0, 0]}
+                dataKey="replied"
+                name="Replied"
+                fill="#22c55e"
+                radius={[0, 0, 0, 0]}
                 stackId="a"
               />
               <Bar
-                dataKey={(d) => Math.round(d.reviewCount * 0.67)}
-                name="Replied"
-                fill="#22c55e"
+                dataKey="unreplied"
+                name="Unreplied"
+                fill="#6366f1"
                 radius={[3, 3, 0, 0]}
-                stackId="b"
+                stackId="a"
               />
             </BarChart>
           </ResponsiveContainer>

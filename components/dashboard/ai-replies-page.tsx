@@ -257,7 +257,7 @@ export function AIRepliesPage({
 
   const postedCount = Object.values(replyStates).filter((s) => s.isPosted).length;
   const pendingCount = reviews.length - postedCount;
-  const usagePercent = Math.round((aiRepliesUsed / aiRepliesLimit) * 100);
+  const usagePercent = aiRepliesLimit > 0 ? Math.min(100, Math.round((aiRepliesUsed / aiRepliesLimit) * 100)) : 0;
 
   const handleRegenerate = useCallback(
     async (reviewId: string) => {
