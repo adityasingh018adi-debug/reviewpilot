@@ -7,51 +7,69 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
-  BarChart3,
-  Building2,
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  CreditCard,
-  Crown,
-  LayoutDashboard,
-  LifeBuoy,
-  LogOut,
-  Mail,
-  Moon,
-  Plug,
-  QrCode,
-  Settings,
-  Sparkles,
-  Star,
-  Sun,
-  Users,
-  FileText,
-  UserCircle,
+  BarChart3, Bell, Bot, Building2, ChevronDown, ChevronLeft, ChevronRight,
+  Code2, CreditCard, Crown, LayoutDashboard, LifeBuoy, LogOut, Mail,
+  MapPin, MessageCircle, Moon, Newspaper, Plug, QrCode, Settings,
+  Sparkles, Star, Sun, Trophy, UserCircle, Users, FileText,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import type { User, Business } from "@/types";
 
-interface SidebarProps {
-  user: User;
-  business: Business | null;
-}
+interface SidebarProps { user: User; business: Business | null; }
 
-const navItems = [
-  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/dashboard/reviews", label: "Reviews", icon: Star },
-  { href: "/dashboard/ai-replies", label: "AI Replies", icon: Sparkles },
-  { href: "/dashboard/analytics", label: "Analytics", icon: BarChart3 },
-  { href: "/dashboard/campaigns", label: "Review Requests", icon: Mail },
-  { href: "/dashboard/customers", label: "Customers", icon: Users },
-  { href: "/dashboard/templates", label: "Templates", icon: FileText },
-  { href: "/dashboard/qr-reviews", label: "QR Reviews", icon: QrCode },
-  { href: "/dashboard/integrations", label: "Integrations", icon: Plug },
-  { href: "/dashboard/settings", label: "Settings", icon: Settings },
-  { href: "/dashboard/billing", label: "Billing", icon: CreditCard },
-  { href: "/dashboard/team", label: "Team", icon: Building2 },
-  { href: "/dashboard/support", label: "Support", icon: LifeBuoy },
-  { href: "/dashboard/owner", label: "Owner", icon: UserCircle },
+// ─── Nav groups ───────────────────────────────────────────────────────────────
+const NAV_GROUPS = [
+  {
+    label: null, // no label for top item
+    items: [
+      { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+    ],
+  },
+  {
+    label: "REVIEWS & AI",
+    items: [
+      { href: "/dashboard/reviews", label: "Reviews", icon: Star },
+      { href: "/dashboard/ai-replies", label: "AI Replies", icon: Sparkles },
+      { href: "/dashboard/auto-reply", label: "Auto-Reply", icon: Bot },
+      { href: "/dashboard/alerts", label: "Smart Alerts", icon: Bell },
+    ],
+  },
+  {
+    label: "GROWTH TOOLS",
+    items: [
+      { href: "/dashboard/qr-reviews", label: "QR Reviews", icon: QrCode },
+      { href: "/dashboard/whatsapp", label: "WhatsApp", icon: MessageCircle },
+      { href: "/dashboard/goals", label: "Review Goals", icon: Trophy },
+      { href: "/dashboard/widget", label: "Review Widget", icon: Code2 },
+      { href: "/dashboard/digest", label: "Weekly Digest", icon: Newspaper },
+    ],
+  },
+  {
+    label: "MANAGE",
+    items: [
+      { href: "/dashboard/analytics", label: "Analytics", icon: BarChart3 },
+      { href: "/dashboard/campaigns", label: "Review Requests", icon: Mail },
+      { href: "/dashboard/customers", label: "Customers", icon: Users },
+      { href: "/dashboard/templates", label: "Templates", icon: FileText },
+    ],
+  },
+  {
+    label: "BUSINESS",
+    items: [
+      { href: "/dashboard/locations", label: "Locations", icon: MapPin },
+      { href: "/dashboard/integrations", label: "Integrations", icon: Plug },
+      { href: "/dashboard/team", label: "Team", icon: Building2 },
+    ],
+  },
+  {
+    label: "ACCOUNT",
+    items: [
+      { href: "/dashboard/settings", label: "Settings", icon: Settings },
+      { href: "/dashboard/billing", label: "Billing", icon: CreditCard },
+      { href: "/dashboard/support", label: "Support", icon: LifeBuoy },
+      { href: "/dashboard/owner", label: "Owner", icon: UserCircle },
+    ],
+  },
 ];
 
 export function Sidebar({ user, business }: SidebarProps) {
@@ -62,21 +80,26 @@ export function Sidebar({ user, business }: SidebarProps) {
 
   useEffect(() => setMounted(true), []);
 
+  const isActive = (href: string) =>
+    href === "/dashboard"
+      ? pathname === "/dashboard"
+      : pathname.startsWith(href);
+
   return (
     <aside
       className={cn(
-        "flex flex-col h-screen sticky top-0 border-r bg-card transition-all duration-300",
+        "flex flex-col h-screen sticky top-0 border-r bg-card transition-all duration-300 overflow-y-auto",
         collapsed ? "w-16" : "w-60"
       )}
     >
       {/* Logo + collapse toggle */}
-      <div className="flex items-center justify-between p-4 h-16 border-b">
+      <div className="flex items-center justify-between px-4 h-14 border-b shrink-0">
         {!collapsed && (
           <Link href="/dashboard" className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-md bg-primary flex items-center justify-center shrink-0">
+            <div className="w-7 h-7 rounded-md bg-primary flex items-center justify-center shrink-0 glow-violet">
               <span className="text-primary-foreground font-bold text-xs">R</span>
             </div>
-            <span className="font-bold">ReviewPilot</span>
+            <span className="font-bold text-sm">ReviewPilot</span>
           </Link>
         )}
         {collapsed && (
@@ -87,7 +110,7 @@ export function Sidebar({ user, business }: SidebarProps) {
           </Link>
         )}
         {!collapsed && (
-          <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => setCollapsed(true)}>
+          <Button variant="ghost" size="icon" className="h-7 w-7 shrink-0" onClick={() => setCollapsed(true)}>
             <ChevronLeft className="h-4 w-4" />
           </Button>
         )}
@@ -95,43 +118,52 @@ export function Sidebar({ user, business }: SidebarProps) {
 
       {/* Expand button when collapsed */}
       {collapsed && (
-        <Button
-          variant="ghost"
-          size="icon"
-          className="mx-auto mt-2 h-7 w-7"
-          onClick={() => setCollapsed(false)}
-        >
+        <Button variant="ghost" size="icon" className="mx-auto mt-2 h-7 w-7 shrink-0" onClick={() => setCollapsed(false)}>
           <ChevronRight className="h-4 w-4" />
         </Button>
       )}
 
-      {/* Nav items */}
-      <nav className="flex-1 p-3 space-y-0.5 overflow-y-auto">
-        {navItems.map((item) => {
-          const Icon = item.icon;
-          const active = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-                active
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
-                collapsed && "justify-center px-2"
-              )}
-              title={collapsed ? item.label : undefined}
-            >
-              <Icon className="h-4 w-4 shrink-0" />
-              {!collapsed && <span className="flex-1">{item.label}</span>}
-            </Link>
-          );
-        })}
+      {/* Nav */}
+      <nav className="flex-1 py-2 px-2 space-y-0.5 overflow-y-auto">
+        {NAV_GROUPS.map((group, gi) => (
+          <div key={gi} className={gi > 0 ? "mt-1" : ""}>
+            {/* Group label */}
+            {group.label && !collapsed && (
+              <p className="px-3 pt-3 pb-1.5 text-[10px] font-bold text-muted-foreground/60 uppercase tracking-widest">
+                {group.label}
+              </p>
+            )}
+            {group.label && collapsed && gi > 0 && (
+              <div className="my-1.5 mx-3 border-t border-border/50" />
+            )}
+            {/* Nav items */}
+            {group.items.map((item) => {
+              const Icon = item.icon;
+              const active = isActive(item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-150",
+                    active
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+                    collapsed && "justify-center px-2"
+                  )}
+                  title={collapsed ? item.label : undefined}
+                >
+                  <Icon className="h-4 w-4 shrink-0" />
+                  {!collapsed && <span className="truncate">{item.label}</span>}
+                </Link>
+              );
+            })}
+          </div>
+        ))}
       </nav>
 
       {/* Bottom section */}
-      <div className="p-3 border-t space-y-2">
+      <div className="p-3 border-t space-y-2 shrink-0">
         {/* Plan info box */}
         {!collapsed && (
           <Link
@@ -148,7 +180,7 @@ export function Sidebar({ user, business }: SidebarProps) {
             <div className="h-1.5 bg-indigo-100 rounded-full overflow-hidden mb-1.5">
               <div className="h-full bg-indigo-500 rounded-full w-[63%]" />
             </div>
-            <p className="text-xs text-gray-400">Renews on Jun 15, 2024</p>
+            <p className="text-xs text-gray-400">Renews Jun 15, 2024</p>
           </Link>
         )}
         {collapsed && (
@@ -162,17 +194,12 @@ export function Sidebar({ user, business }: SidebarProps) {
         {/* Theme toggle */}
         <Button
           variant="ghost"
-          className={cn(
-            "w-full text-muted-foreground hover:text-foreground",
-            collapsed ? "justify-center px-2" : "justify-start gap-3 px-3"
-          )}
+          className={cn("w-full text-muted-foreground hover:text-foreground", collapsed ? "justify-center px-2" : "justify-start gap-3 px-3")}
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
-          {mounted ? (
-            theme === "dark" ? <Sun className="h-4 w-4 shrink-0" /> : <Moon className="h-4 w-4 shrink-0" />
-          ) : (
-            <div className="h-4 w-4 shrink-0" />
-          )}
+          {mounted
+            ? theme === "dark" ? <Sun className="h-4 w-4 shrink-0" /> : <Moon className="h-4 w-4 shrink-0" />
+            : <div className="h-4 w-4 shrink-0" />}
           {!collapsed && <span className="text-sm font-medium">Toggle theme</span>}
         </Button>
 
@@ -180,7 +207,7 @@ export function Sidebar({ user, business }: SidebarProps) {
         <div className={cn("flex items-center gap-2 px-3 py-2", collapsed && "justify-center px-2")}>
           <Avatar className="h-7 w-7 shrink-0">
             <AvatarImage src={user.avatarUrl || undefined} />
-            <AvatarFallback className="text-xs">
+            <AvatarFallback className="text-xs bg-violet-100 text-violet-700 font-semibold">
               {user.name?.[0]?.toUpperCase() ?? user.email[0].toUpperCase()}
             </AvatarFallback>
           </Avatar>
@@ -189,11 +216,11 @@ export function Sidebar({ user, business }: SidebarProps) {
               <p className="text-sm font-medium truncate">{user.name ?? "User"}</p>
               <div className="flex items-center gap-1">
                 <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                <p className="text-xs text-muted-foreground truncate">Online</p>
+                <p className="text-xs text-muted-foreground">Online</p>
               </div>
             </div>
           )}
-          {!collapsed && <ChevronDown className="h-3.5 w-3.5 text-muted-foreground flex-shrink-0" />}
+          {!collapsed && <ChevronDown className="h-3.5 w-3.5 text-muted-foreground shrink-0" />}
         </div>
 
         {/* Sign out */}
@@ -201,10 +228,7 @@ export function Sidebar({ user, business }: SidebarProps) {
           <Button
             type="submit"
             variant="ghost"
-            className={cn(
-              "w-full text-muted-foreground hover:text-destructive",
-              collapsed ? "justify-center px-2" : "justify-start gap-3 px-3"
-            )}
+            className={cn("w-full text-muted-foreground hover:text-destructive", collapsed ? "justify-center px-2" : "justify-start gap-3 px-3")}
           >
             <LogOut className="h-4 w-4 shrink-0" />
             {!collapsed && <span className="text-sm font-medium">Sign out</span>}
