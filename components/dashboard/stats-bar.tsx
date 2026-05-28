@@ -45,9 +45,11 @@ export function StatsBar({ stats }: StatsBarProps) {
       {items.map((item) => {
         const Icon = item.icon;
         return (
-          <Card key={item.label} className="border-0 shadow-sm">
-            <CardContent className="p-5">
-              <div className="flex items-start justify-between">
+          <Card key={item.label} className="border-0 shadow-sm stat-card-3d overflow-hidden">
+            <CardContent className="p-5 relative">
+              {/* subtle gradient accent */}
+              <div className={`absolute top-0 right-0 w-16 h-16 rounded-bl-3xl opacity-30 ${item.bg}`} />
+              <div className="flex items-start justify-between relative">
                 <div>
                   <p className="text-sm text-muted-foreground font-medium">{item.label}</p>
                   <div className="flex items-baseline gap-1 mt-1">
@@ -57,7 +59,7 @@ export function StatsBar({ stats }: StatsBarProps) {
                     )}
                   </div>
                 </div>
-                <div className={`p-2 rounded-lg ${item.bg}`}>
+                <div className={`p-2.5 rounded-xl ${item.bg} shadow-sm`}>
                   <Icon className={`h-5 w-5 ${item.color}`} />
                 </div>
               </div>

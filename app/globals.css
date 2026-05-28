@@ -147,6 +147,70 @@
   transform: perspective(1200px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
 }
 
+/* ─── Deep 3D lift (more dramatic, for hero cards) ──────────────────────────── */
+.card-3d-deep {
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s ease;
+  will-change: transform;
+}
+.card-3d-deep:hover {
+  transform: perspective(600px) rotateX(-6deg) rotateY(6deg) translateZ(16px);
+  box-shadow:
+    0 30px 80px rgba(139, 92, 246, 0.18),
+    0 10px 30px rgba(0,0,0,0.10),
+    0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* ─── Tilt on mouse enter (JS-free approximation via CSS) ───────────────────── */
+.tilt-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+}
+.tilt-card:hover {
+  transform: perspective(800px) rotateX(-3deg) translateY(-4px) scale(1.01);
+  box-shadow: 0 20px 50px rgba(99, 102, 241, 0.15), 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* ─── QR code glow ──────────────────────────────────────────────────────────── */
+.qr-glow {
+  filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.35));
+  transition: filter 0.3s ease;
+}
+.qr-glow:hover {
+  filter: drop-shadow(0 0 24px rgba(139, 92, 246, 0.6));
+}
+
+/* ─── Neon button glow ──────────────────────────────────────────────────────── */
+.btn-neon {
+  position: relative;
+  overflow: hidden;
+}
+.btn-neon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* ─── Particle dots background ──────────────────────────────────────────────── */
+.particle-bg {
+  background-image: radial-gradient(circle, rgba(139, 92, 246, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ─── Frosted glass card ─────────────────────────────────────────────────────── */
+.frost-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+.dark .frost-card {
+  background: rgba(20, 10, 40, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 /* ─── Countdown timer animation ─────────────────────────────────────────────── */
 .countdown-ring {
   animation: countdownPulse 1s ease-in-out infinite;
