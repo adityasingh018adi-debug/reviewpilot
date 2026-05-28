@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createServerClient } from "@/lib/supabase/server";
 import { Sidebar } from "@/components/layout/sidebar";
+import { PageTransition } from "@/components/layout/page-transition";
 import { isDemoMode } from "@/lib/demo-mode";
 import type { User, Business } from "@/types";
 
@@ -55,7 +56,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
     <div className="flex h-screen overflow-hidden">
       <Sidebar user={data.user} business={data.business} />
       <main className="flex-1 overflow-y-auto bg-background">
-        {children}
+        <PageTransition>{children}</PageTransition>
       </main>
     </div>
   );

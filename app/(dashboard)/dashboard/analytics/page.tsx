@@ -7,7 +7,7 @@ export const metadata = { title: "Analytics" };
 
 export default function AnalyticsPage() {
   return (
-    <div className="p-6 max-w-5xl mx-auto space-y-6 animate-fade-in">
+    <div className="p-6 space-y-6 animate-fade-in">
       <div>
         <h1 className="text-2xl font-bold">Analytics</h1>
         <p className="text-muted-foreground text-sm mt-0.5">

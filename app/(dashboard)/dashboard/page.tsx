@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic";
 import { Suspense } from "react";
 import { StatsBar } from "@/components/dashboard/stats-bar";
 import { ReviewFeed } from "@/components/dashboard/review-feed";
+import { FeatureSlides } from "@/components/dashboard/feature-slides";
 import { Button } from "@/components/ui/button";
 import { MOCK_REVIEWS, MOCK_STATS, MOCK_BUSINESS } from "@/lib/mock-data";
 import { RefreshCw, Wifi, QrCode, Sparkles, TrendingUp, ArrowRight } from "lucide-react";
@@ -28,7 +29,7 @@ export default async function DashboardPage() {
   });
 
   return (
-    <div className="p-6 max-w-5xl mx-auto space-y-6 animate-fade-in mesh-gradient min-h-screen">
+    <div className="p-6 space-y-6 animate-fade-in mesh-gradient min-h-screen">
 
       {/* ── Page header ── */}
       <div className="flex items-start justify-between flex-wrap gap-4">
@@ -55,7 +56,7 @@ export default async function DashboardPage() {
       {/* ── Stats bar ── */}
       <Suspense fallback={
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {Array.from({length: 4}).map((_, i) => (
+          {Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="h-24 rounded-xl skeleton" />
           ))}
         </div>
@@ -64,9 +65,7 @@ export default async function DashboardPage() {
       </Suspense>
 
       {/* ── Quick action banners ── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 stagger-2">
-
-        {/* QR Reviews CTA */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Link
           href="/dashboard/qr-reviews"
           className="group flex items-center gap-4 p-5 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-lg shadow-violet-200/50 hover:shadow-violet-300/60 transition-all hover:-translate-y-0.5 card-3d"
@@ -81,7 +80,6 @@ export default async function DashboardPage() {
           <ArrowRight className="h-5 w-5 text-white/60 group-hover:translate-x-1 transition-transform" />
         </Link>
 
-        {/* AI Replies CTA */}
         <Link
           href="/dashboard/ai-replies"
           className="group flex items-center gap-4 p-5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg shadow-emerald-200/50 hover:shadow-emerald-300/60 transition-all hover:-translate-y-0.5 card-3d"
@@ -91,7 +89,7 @@ export default async function DashboardPage() {
           </div>
           <div className="flex-1">
             <p className="font-bold">AI Reply Studio</p>
-            <p className="text-sm text-emerald-100">Reply in 15 languages · 4 tones · 5-min schedule</p>
+            <p className="text-sm text-emerald-100">15 languages · 4 tones · 5-min human delay</p>
           </div>
           <ArrowRight className="h-5 w-5 text-white/60 group-hover:translate-x-1 transition-transform" />
         </Link>
@@ -99,11 +97,11 @@ export default async function DashboardPage() {
 
       {/* ── Google connect banner ── */}
       {!business.googleLocationId && (
-        <div className="rounded-2xl border border-blue-200 bg-blue-50/80 backdrop-blur-sm p-5 flex items-center justify-between gap-4 flex-wrap stagger-3">
+        <div className="rounded-2xl border border-blue-200 bg-blue-50/80 backdrop-blur-sm p-5 flex items-center justify-between gap-4 flex-wrap">
           <div>
             <p className="font-semibold text-sm text-blue-900">Connect Google My Business</p>
             <p className="text-xs text-blue-700 mt-0.5">
-              Pull live reviews and post AI replies automatically to Google.
+              Pull live reviews and post AI replies directly to Google.
             </p>
           </div>
           <Button size="sm" asChild className="bg-blue-600 hover:bg-blue-700 text-white gap-2">
@@ -120,14 +118,22 @@ export default async function DashboardPage() {
         </div>
       )}
 
+      {/* ── Feature Slides ── */}
+      <div className="bg-white/60 backdrop-blur-sm rounded-2xl border border-border/60 p-5 shadow-sm">
+        <FeatureSlides />
+      </div>
+
       {/* ── Review feed ── */}
-      <div className="space-y-3 stagger-4">
+      <div className="space-y-3">
         <div className="flex items-center justify-between">
           <h2 className="font-semibold text-lg flex items-center gap-2">
             <TrendingUp className="h-5 w-5 text-violet-500" />
             Recent Reviews
           </h2>
-          <Link href="/dashboard/reviews" className="text-sm text-violet-600 hover:text-violet-800 font-medium flex items-center gap-1">
+          <Link
+            href="/dashboard/reviews"
+            className="text-sm text-violet-600 hover:text-violet-800 font-medium flex items-center gap-1"
+          >
             View all <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
