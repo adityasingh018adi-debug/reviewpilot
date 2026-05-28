@@ -5,26 +5,28 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   BarChart3,
   Building2,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
   CreditCard,
+  Crown,
   LayoutDashboard,
+  LifeBuoy,
   LogOut,
+  Mail,
   Moon,
+  Plug,
   Settings,
   Sparkles,
   Star,
   Sun,
   Users,
   FileText,
-  Plug,
-  LifeBuoy,
-  Mail,
+  UserCircle,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import type { User, Business } from "@/types";
@@ -43,10 +45,11 @@ const navItems = [
   { href: "/dashboard/customers", label: "Customers", icon: Users },
   { href: "/dashboard/templates", label: "Templates", icon: FileText },
   { href: "/dashboard/integrations", label: "Integrations", icon: Plug },
-  { href: "/dashboard/team", label: "Team", icon: Building2 },
   { href: "/dashboard/settings", label: "Settings", icon: Settings },
   { href: "/dashboard/billing", label: "Billing", icon: CreditCard },
+  { href: "/dashboard/team", label: "Team", icon: Building2 },
   { href: "/dashboard/support", label: "Support", icon: LifeBuoy },
+  { href: "/dashboard/owner", label: "Owner", icon: UserCircle },
 ];
 
 export function Sidebar({ user, business }: SidebarProps) {
@@ -100,21 +103,8 @@ export function Sidebar({ user, business }: SidebarProps) {
         </Button>
       )}
 
-      {/* Business switcher */}
-      {business && !collapsed && (
-        <div className="mx-3 mt-3 p-3 rounded-lg bg-muted/50 border">
-          <div className="flex items-center gap-2">
-            <Building2 className="h-4 w-4 text-muted-foreground shrink-0" />
-            <div className="min-w-0">
-              <p className="text-sm font-medium truncate">{business.name}</p>
-              <p className="text-xs text-muted-foreground truncate">{business.category}</p>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Nav items */}
-      <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
+      <nav className="flex-1 p-3 space-y-0.5 overflow-y-auto">
         {navItems.map((item) => {
           const Icon = item.icon;
           const active = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
@@ -132,23 +122,41 @@ export function Sidebar({ user, business }: SidebarProps) {
               title={collapsed ? item.label : undefined}
             >
               <Icon className="h-4 w-4 shrink-0" />
-              {!collapsed && (
-                <>
-                  <span className="flex-1">{item.label}</span>
-                  {item.badge && (
-                    <Badge variant="secondary" className="text-xs py-0 h-5">
-                      {item.badge}
-                    </Badge>
-                  )}
-                </>
-              )}
+              {!collapsed && <span className="flex-1">{item.label}</span>}
             </Link>
           );
         })}
       </nav>
 
       {/* Bottom section */}
-      <div className="p-3 border-t space-y-1">
+      <div className="p-3 border-t space-y-2">
+        {/* Plan info box */}
+        {!collapsed && (
+          <Link
+            href="/dashboard/growth-plan"
+            className="block px-3 py-3 rounded-xl bg-indigo-50 border border-indigo-100 hover:bg-indigo-100 transition-colors cursor-pointer"
+          >
+            <div className="flex items-center gap-2 mb-1.5">
+              <div className="w-6 h-6 rounded-full bg-indigo-600 flex items-center justify-center">
+                <Crown className="h-3.5 w-3.5 text-white" />
+              </div>
+              <span className="text-sm font-semibold text-gray-800">Growth Plan</span>
+              <span className="text-xs font-bold text-indigo-600 ml-auto">₹999</span>
+            </div>
+            <div className="h-1.5 bg-indigo-100 rounded-full overflow-hidden mb-1.5">
+              <div className="h-full bg-indigo-500 rounded-full w-[63%]" />
+            </div>
+            <p className="text-xs text-gray-400">Renews on Jun 15, 2024</p>
+          </Link>
+        )}
+        {collapsed && (
+          <Link href="/dashboard/growth-plan" className="flex justify-center">
+            <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center">
+              <Crown className="h-4 w-4 text-white" />
+            </div>
+          </Link>
+        )}
+
         {/* Theme toggle */}
         <Button
           variant="ghost"
@@ -159,11 +167,7 @@ export function Sidebar({ user, business }: SidebarProps) {
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
           {mounted ? (
-            theme === "dark" ? (
-              <Sun className="h-4 w-4 shrink-0" />
-            ) : (
-              <Moon className="h-4 w-4 shrink-0" />
-            )
+            theme === "dark" ? <Sun className="h-4 w-4 shrink-0" /> : <Moon className="h-4 w-4 shrink-0" />
           ) : (
             <div className="h-4 w-4 shrink-0" />
           )}
@@ -171,12 +175,7 @@ export function Sidebar({ user, business }: SidebarProps) {
         </Button>
 
         {/* User profile */}
-        <div
-          className={cn(
-            "flex items-center gap-2 px-3 py-2",
-            collapsed && "justify-center px-2"
-          )}
-        >
+        <div className={cn("flex items-center gap-2 px-3 py-2", collapsed && "justify-center px-2")}>
           <Avatar className="h-7 w-7 shrink-0">
             <AvatarImage src={user.avatarUrl || undefined} />
             <AvatarFallback className="text-xs">
@@ -186,9 +185,13 @@ export function Sidebar({ user, business }: SidebarProps) {
           {!collapsed && (
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium truncate">{user.name ?? "User"}</p>
-              <p className="text-xs text-muted-foreground truncate">{user.plan} plan</p>
+              <div className="flex items-center gap-1">
+                <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                <p className="text-xs text-muted-foreground truncate">Online</p>
+              </div>
             </div>
           )}
+          {!collapsed && <ChevronDown className="h-3.5 w-3.5 text-muted-foreground flex-shrink-0" />}
         </div>
 
         {/* Sign out */}

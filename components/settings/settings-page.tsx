@@ -2,204 +2,301 @@
 
 import { useState } from "react";
 import {
-  Building2,
-  Settings,
-  Star,
-  Sparkles,
-  Bell,
-  Palette,
-  Users,
-  Shield,
-  Code2,
-  Database,
-  Trash2,
-  ChevronRight,
-  Upload,
-  Globe,
-  MapPin,
-  Phone,
-  Mail,
-  Instagram,
-  Twitter,
-  Facebook,
-  Save,
-  Camera,
-  Link2,
-  Plus,
-  CheckCircle2,
-  AlertCircle,
+  Building2, Settings, Star, Sparkles, Bell, Palette, Users, Shield,
+  Code2, Database, Trash2, ChevronRight, Upload, Globe, MapPin,
+  Phone, Mail, Instagram, Twitter, Facebook, Save, Camera, Link2,
+  Plus, CheckCircle2, AlertCircle, HelpCircle, Youtube,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
-
 type SettingsSection =
-  | "business_profile"
-  | "general"
-  | "review_settings"
-  | "ai_preferences"
-  | "notifications"
-  | "branding"
-  | "users_permissions"
-  | "security"
-  | "api_webhooks"
-  | "data_export"
-  | "danger_zone";
+  | "business_profile" | "general" | "review_settings" | "ai_preferences"
+  | "notifications" | "branding" | "users_permissions" | "security"
+  | "api_webhooks" | "data_export" | "danger_zone";
 
 interface NavItem {
   id: SettingsSection;
   label: string;
+  subtitle: string;
   icon: typeof Building2;
-  badge?: string;
   danger?: boolean;
 }
 
-// ─── Navigation Items ──────────────────────────────────────────────────────────
-
 const NAV_ITEMS: NavItem[] = [
-  { id: "business_profile", label: "Business Profile", icon: Building2 },
-  { id: "general", label: "General", icon: Settings },
-  { id: "review_settings", label: "Review Settings", icon: Star },
-  { id: "ai_preferences", label: "AI Preferences", icon: Sparkles },
-  { id: "notifications", label: "Notifications", icon: Bell },
-  { id: "branding", label: "Branding", icon: Palette },
-  { id: "users_permissions", label: "Users & Permissions", icon: Users },
-  { id: "security", label: "Security", icon: Shield },
-  { id: "api_webhooks", label: "API & Webhooks", icon: Code2 },
-  { id: "data_export", label: "Data & Export", icon: Database },
-  { id: "danger_zone", label: "Danger Zone", icon: Trash2, danger: true },
+  { id: "business_profile", label: "Business Profile", subtitle: "Basic information about your business", icon: Building2 },
+  { id: "general", label: "General Settings", subtitle: "Manage general preferences", icon: Settings },
+  { id: "review_settings", label: "Review Settings", subtitle: "Set review rules and preferences", icon: Star },
+  { id: "ai_preferences", label: "AI Preferences", subtitle: "Configure AI reply behavior", icon: Sparkles },
+  { id: "notifications", label: "Notifications", subtitle: "Manage email and alerts", icon: Bell },
+  { id: "branding", label: "Branding", subtitle: "Customize your brand identity", icon: Palette },
+  { id: "users_permissions", label: "Users & Permissions", subtitle: "Manage team and access", icon: Users },
+  { id: "security", label: "Security", subtitle: "Password and security settings", icon: Shield },
+  { id: "api_webhooks", label: "API & Webhooks", subtitle: "Developer settings and API keys", icon: Code2 },
+  { id: "data_export", label: "Data & Export", subtitle: "Export or manage your data", icon: Database },
+  { id: "danger_zone", label: "Danger Zone", subtitle: "Delete account or data", icon: Trash2, danger: true },
 ];
 
-// ─── Business Profile Section ─────────────────────────────────────────────────
+// ─── Business Profile ─────────────────────────────────────────────────────────
 
 function BusinessProfileSection() {
+  const checkboxSettings = [
+    { label: "Enable review request emails", desc: "Send automated emails to customers to collect reviews", defaultOn: true },
+    { label: "Show only 4 and 5 star reviews on public pages", desc: "Filter low ratings from public widgets and pages", defaultOn: true },
+    { label: "Require review approval", desc: "Approve reviews before they go live", defaultOn: true },
+  ];
+
   return (
     <div className="flex gap-6">
-      {/* Main Form */}
-      <div className="flex-1 space-y-6">
-        {/* Logo Upload */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
-          <h3 className="text-base font-semibold text-gray-900 mb-4">Business Logo</h3>
-          <div className="flex items-center gap-6">
-            <div className="relative">
-              <div className="w-20 h-20 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-600 text-2xl font-bold">
-                RP
-              </div>
-              <button className="absolute -bottom-1.5 -right-1.5 p-1.5 bg-white border border-gray-200 rounded-full shadow-sm hover:bg-gray-50">
-                <Camera className="h-3.5 w-3.5 text-gray-600" />
-              </button>
-            </div>
-            <div>
-              <p className="text-sm font-medium text-gray-700 mb-1">Upload your business logo</p>
-              <p className="text-xs text-gray-500 mb-3">Recommended size: 512×512px. Max 2MB. PNG or JPG.</p>
-              <div className="flex gap-2">
-                <Button size="sm" variant="outline" className="gap-2">
-                  <Upload className="h-3.5 w-3.5" />
-                  Upload Logo
-                </Button>
-                <Button size="sm" variant="ghost" className="text-gray-500">
-                  Remove
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Business Details */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
-          <h3 className="text-base font-semibold text-gray-900 mb-5">Business Details</h3>
+      {/* Main form */}
+      <div className="flex-1 space-y-8 min-w-0">
+        {/* Business Profile */}
+        <section>
+          <h2 className="text-lg font-semibold text-gray-900 mb-1">Business Profile</h2>
+          <p className="text-sm text-gray-500 mb-5">Update your business information. It will be used across the platform.</p>
           <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label className="text-sm font-medium text-gray-700 mb-1.5 block">Business Name *</Label>
-                <Input defaultValue="ReviewPilot Inc." className="h-9 bg-gray-50" />
-              </div>
-              <div>
-                <Label className="text-sm font-medium text-gray-700 mb-1.5 block">Business Type</Label>
-                <select className="w-full h-9 rounded-md border border-gray-200 bg-gray-50 px-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                  <option>Restaurant</option>
-                  <option>Retail</option>
-                  <option>Healthcare</option>
-                  <option>Hospitality</option>
-                  <option>Services</option>
-                  <option>Other</option>
-                </select>
-              </div>
-            </div>
             <div>
-              <Label className="text-sm font-medium text-gray-700 mb-1.5 block">Business Description</Label>
-              <textarea
-                className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-700 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                rows={3}
-                defaultValue="AI-powered review management platform that helps businesses collect, manage, and respond to customer reviews."
-              />
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label className="text-sm font-medium text-gray-700 mb-1.5 block">Website URL</Label>
-                <div className="relative">
-                  <Globe className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                  <Input defaultValue="https://reviewpilot.app" className="pl-9 h-9 bg-gray-50" />
-                </div>
-              </div>
-              <div>
-                <Label className="text-sm font-medium text-gray-700 mb-1.5 block">Phone Number</Label>
-                <div className="relative">
-                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                  <Input defaultValue="+91 98765 43210" className="pl-9 h-9 bg-gray-50" />
-                </div>
-              </div>
+              <Label className="text-sm font-medium text-gray-700 mb-1.5 block">Business Name</Label>
+              <Input defaultValue="Cafe Delight" className="h-10 bg-white border-gray-300" />
             </div>
             <div>
               <Label className="text-sm font-medium text-gray-700 mb-1.5 block">Business Email</Label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                <Input defaultValue="hello@reviewpilot.app" className="pl-9 h-9 bg-gray-50" />
+              <Input defaultValue="hello@cafedelight.com" className="h-10 bg-white border-gray-300" />
+            </div>
+            <div>
+              <Label className="text-sm font-medium text-gray-700 mb-1.5 block">Phone Number</Label>
+              <div className="flex gap-2">
+                <div className="flex items-center gap-1.5 border border-gray-300 rounded-lg px-3 h-10 bg-white cursor-pointer hover:bg-gray-50">
+                  <span className="text-base">🇮🇳</span>
+                  <ChevronRight className="h-3.5 w-3.5 text-gray-400 rotate-90" />
+                </div>
+                <Input defaultValue="+91 98765 43210" className="flex-1 h-10 bg-white border-gray-300" />
+              </div>
+            </div>
+            <div>
+              <Label className="text-sm font-medium text-gray-700 mb-1.5 block">Business Website</Label>
+              <Input defaultValue="https://www.cafedelight.com" className="h-10 bg-white border-gray-300" />
+            </div>
+          </div>
+        </section>
+
+        {/* General Settings */}
+        <section>
+          <h2 className="text-lg font-semibold text-gray-900 mb-1">General Settings</h2>
+          <p className="text-sm text-gray-500 mb-5">Manage your general preferences.</p>
+          <div className="grid grid-cols-2 gap-4">
+            {[
+              { label: "Language", value: "English" },
+              { label: "Date Format", value: "May 31, 2024" },
+              { label: "Time Format", value: "12 Hour (01:30 PM)" },
+              { label: "Currency", value: "INR (₹) – Indian Rupee" },
+            ].map((f) => (
+              <div key={f.label}>
+                <Label className="text-sm font-medium text-gray-700 mb-1.5 block">{f.label}</Label>
+                <div className="h-10 border border-gray-300 rounded-lg bg-white flex items-center justify-between px-3 cursor-pointer hover:bg-gray-50">
+                  <span className="text-sm text-gray-700">{f.value}</span>
+                  <ChevronRight className="h-4 w-4 text-gray-400 rotate-90" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Review Settings */}
+        <section>
+          <h2 className="text-lg font-semibold text-gray-900 mb-1">Review Settings</h2>
+          <p className="text-sm text-gray-500 mb-5">Configure how reviews are collected and displayed.</p>
+          <div className="space-y-4">
+            {checkboxSettings.map((item) => (
+              <label key={item.label} className="flex items-start gap-3 cursor-pointer">
+                <div className="relative mt-0.5">
+                  <input type="checkbox" className="sr-only peer" defaultChecked={item.defaultOn} />
+                  <div className="w-5 h-5 border-2 border-gray-300 rounded peer-checked:bg-indigo-600 peer-checked:border-indigo-600 transition-colors" />
+                  <CheckCircle2 className="absolute inset-0 h-5 w-5 text-white opacity-0 peer-checked:opacity-100" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-800">{item.label}</p>
+                  <p className="text-xs text-gray-500 mt-0.5">{item.desc}</p>
+                </div>
+              </label>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      {/* Right panel */}
+      <div className="w-72 flex-shrink-0 space-y-5">
+        {/* Business Logo */}
+        <div className="bg-white rounded-xl border border-gray-200 p-5">
+          <Label className="text-sm font-semibold text-gray-700 mb-4 block">Business Logo</Label>
+          <div className="flex flex-col items-center gap-3">
+            <div className="relative">
+              <div className="w-20 h-20 rounded-full bg-amber-900 flex items-center justify-center overflow-hidden border-2 border-gray-200">
+                <span className="text-white font-bold text-lg">CD</span>
+              </div>
+              <button className="absolute -bottom-1 -right-1 p-1.5 bg-white border border-gray-200 rounded-full shadow-sm">
+                <Camera className="h-3.5 w-3.5 text-gray-600" />
+              </button>
+            </div>
+            <div className="flex gap-2 w-full">
+              <Button size="sm" variant="outline" className="flex-1 gap-1.5 text-xs">
+                <Upload className="h-3.5 w-3.5" />
+                Change Logo
+              </Button>
+              <Button size="sm" variant="outline" className="text-xs text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200">
+                Remove
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Business Category + Timezone */}
+        <div className="bg-white rounded-xl border border-gray-200 p-5 space-y-4">
+          <div>
+            <Label className="text-sm font-medium text-gray-700 mb-1.5 block">Business Category</Label>
+            <div className="h-10 border border-gray-300 rounded-lg bg-gray-50 flex items-center justify-between px-3 cursor-pointer">
+              <span className="text-sm text-gray-700">Restaurant / Cafe</span>
+              <ChevronRight className="h-4 w-4 text-gray-400 rotate-90" />
+            </div>
+          </div>
+          <div>
+            <Label className="text-sm font-medium text-gray-700 mb-1.5 block">Time Zone</Label>
+            <div className="h-10 border border-gray-300 rounded-lg bg-gray-50 flex items-center justify-between px-3 cursor-pointer">
+              <span className="text-sm text-gray-700">(GMT+05:30) Asia/Kolkata</span>
+              <ChevronRight className="h-4 w-4 text-gray-400 rotate-90" />
+            </div>
+          </div>
+        </div>
+
+        {/* Business Address */}
+        <div className="bg-white rounded-xl border border-gray-200 p-5">
+          <h4 className="flex items-center gap-2 text-sm font-semibold text-gray-800 mb-4">
+            <MapPin className="h-4 w-4 text-indigo-500" />
+            Business Address
+          </h4>
+          <div className="space-y-3">
+            <div>
+              <Label className="text-xs text-gray-500 mb-1 block">Address</Label>
+              <Input defaultValue="123, MG Road, Connaught Place" className="h-8 text-sm" />
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <Label className="text-xs text-gray-500 mb-1 block">City</Label>
+                <Input defaultValue="New Delhi" className="h-8 text-sm" />
+              </div>
+              <div>
+                <Label className="text-xs text-gray-500 mb-1 block">State</Label>
+                <div className="h-8 border border-gray-300 rounded-md bg-white flex items-center justify-between px-2 cursor-pointer">
+                  <span className="text-sm text-gray-700">Delhi</span>
+                  <ChevronRight className="h-3.5 w-3.5 text-gray-400 rotate-90" />
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <Label className="text-xs text-gray-500 mb-1 block">Postal Code</Label>
+                <Input defaultValue="110001" className="h-8 text-sm" />
+              </div>
+              <div>
+                <Label className="text-xs text-gray-500 mb-1 block">Country</Label>
+                <div className="h-8 border border-gray-300 rounded-md bg-white flex items-center justify-between px-2 cursor-pointer">
+                  <span className="text-sm text-gray-700">India</span>
+                  <ChevronRight className="h-3.5 w-3.5 text-gray-400 rotate-90" />
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Operating Hours */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
-          <div className="flex items-center justify-between mb-5">
-            <h3 className="text-base font-semibold text-gray-900">Operating Hours</h3>
-            <label className="flex items-center gap-2 cursor-pointer">
-              <div className="relative">
-                <input type="checkbox" className="sr-only peer" defaultChecked />
-                <div className="w-10 h-5 bg-gray-200 rounded-full peer peer-checked:bg-indigo-600 transition-colors" />
-                <div className="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform peer-checked:translate-x-5" />
-              </div>
-              <span className="text-sm text-gray-600">Show on profile</span>
-            </label>
+        {/* Social Profiles */}
+        <div className="bg-white rounded-xl border border-gray-200 p-5">
+          <div className="flex items-center gap-2 mb-4">
+            <Globe className="h-4 w-4 text-indigo-500" />
+            <h4 className="text-sm font-semibold text-gray-800">Social Profiles</h4>
           </div>
-          <div className="space-y-2">
-            {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map((day, i) => (
-              <div key={day} className="flex items-center gap-3">
-                <div className="w-24 text-sm text-gray-600">{day}</div>
-                <label className="relative cursor-pointer">
-                  <input type="checkbox" className="sr-only peer" defaultChecked={i < 5} />
-                  <div className="w-8 h-4 bg-gray-200 rounded-full peer peer-checked:bg-indigo-600 transition-colors" />
-                  <div className="absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full shadow transition-transform peer-checked:translate-x-4" />
-                </label>
-                {i < 5 ? (
-                  <div className="flex items-center gap-2">
-                    <Input defaultValue="09:00 AM" className="w-28 h-7 text-xs bg-gray-50" />
-                    <span className="text-gray-400 text-xs">to</span>
-                    <Input defaultValue="06:00 PM" className="w-28 h-7 text-xs bg-gray-50" />
-                  </div>
-                ) : (
-                  <span className="text-xs text-gray-400">Closed</span>
-                )}
+          <div className="space-y-3">
+            {[
+              { icon: "G", color: "bg-blue-500", label: "Google Business Profile", value: "https://g.page/cafedelight" },
+              { icon: "f", color: "bg-blue-600", label: "Facebook", value: "https://facebook.com/cafedelight" },
+              { icon: "In", color: "bg-gradient-to-br from-pink-500 to-purple-600", label: "Instagram", value: "https://instagram.com/cafedelight" },
+              { icon: "▶", color: "bg-red-600", label: "YouTube", value: "https://youtube.com/@cafedelight" },
+            ].map((s) => (
+              <div key={s.label} className="flex items-center gap-2">
+                <div className={`${s.color} w-7 h-7 rounded-lg flex items-center justify-center text-white text-xs font-bold flex-shrink-0`}>
+                  {s.icon}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs text-gray-500">{s.label}</p>
+                  <p className="text-xs text-gray-700 truncate">{s.value}</p>
+                </div>
+                <button className="text-xs text-indigo-600 hover:text-indigo-700 font-medium flex-shrink-0">Edit</button>
               </div>
             ))}
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
 
-        <div className="flex justify-end gap-3">
-          <Button variant="outline" size="sm">Cancel</Button>
+function PlaceholderSection({ title, subtitle }: { title: string; subtitle: string }) {
+  return (
+    <div className="flex flex-col items-center justify-center py-20 text-center">
+      <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4">
+        <Settings className="h-6 w-6 text-indigo-600" />
+      </div>
+      <h3 className="text-base font-semibold text-gray-900 mb-1">{title}</h3>
+      <p className="text-sm text-gray-500 max-w-sm mb-4">{subtitle}</p>
+      <Button size="sm" className="bg-indigo-600 hover:bg-indigo-700 text-white">Configure</Button>
+    </div>
+  );
+}
+
+function DangerSection() {
+  return (
+    <div className="max-w-xl space-y-4">
+      <p className="text-sm text-gray-500 mb-6">These actions are permanent and cannot be undone.</p>
+      {[
+        { label: "Delete all reviews", desc: "Permanently delete all synced reviews.", btn: "Delete Reviews", red: true },
+        { label: "Reset settings", desc: "Reset all settings to their defaults.", btn: "Reset Settings", red: true },
+        { label: "Delete account", desc: "Permanently delete your account and data.", btn: "Delete Account", red: true },
+      ].map((item) => (
+        <div key={item.label} className="flex items-center justify-between p-4 rounded-lg bg-gray-50 border border-gray-200">
+          <div>
+            <p className="text-sm font-medium text-gray-800">{item.label}</p>
+            <p className="text-xs text-gray-500 mt-0.5">{item.desc}</p>
+          </div>
+          <Button size="sm" className="bg-red-600 hover:bg-red-700 text-white">{item.btn}</Button>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function SectionContent({ id }: { id: SettingsSection }) {
+  const nav = NAV_ITEMS.find((n) => n.id === id)!;
+  if (id === "business_profile") return <BusinessProfileSection />;
+  if (id === "danger_zone") return <DangerSection />;
+  return <PlaceholderSection title={nav.label} subtitle={nav.subtitle} />;
+}
+
+export function SettingsPage() {
+  const [active, setActive] = useState<SettingsSection>("business_profile");
+
+  return (
+    <div className="flex flex-col h-full">
+      {/* Page header */}
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
+          <p className="text-sm text-gray-500 mt-0.5">Manage your business settings and preferences.</p>
+        </div>
+        <div className="flex items-center gap-3">
+          <Button variant="outline" size="sm" className="gap-2 text-gray-600">
+            <HelpCircle className="h-4 w-4" />
+            Need Help?
+          </Button>
           <Button size="sm" className="gap-2 bg-indigo-600 hover:bg-indigo-700 text-white">
             <Save className="h-4 w-4" />
             Save Changes
@@ -207,333 +304,38 @@ function BusinessProfileSection() {
         </div>
       </div>
 
-      {/* Right Panel */}
-      <div className="w-72 space-y-4">
-        {/* Business Address */}
-        <div className="bg-white rounded-xl border border-gray-200 p-5">
-          <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
-            <MapPin className="h-4 w-4 text-indigo-500" />
-            Business Address
-          </h3>
-          <div className="space-y-3">
-            <div>
-              <Label className="text-xs text-gray-500 mb-1 block">Street Address</Label>
-              <Input defaultValue="42 MG Road, Indiranagar" className="h-8 text-sm bg-gray-50" />
-            </div>
-            <div className="grid grid-cols-2 gap-2">
-              <div>
-                <Label className="text-xs text-gray-500 mb-1 block">City</Label>
-                <Input defaultValue="Bengaluru" className="h-8 text-sm bg-gray-50" />
-              </div>
-              <div>
-                <Label className="text-xs text-gray-500 mb-1 block">State</Label>
-                <Input defaultValue="Karnataka" className="h-8 text-sm bg-gray-50" />
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-2">
-              <div>
-                <Label className="text-xs text-gray-500 mb-1 block">PIN Code</Label>
-                <Input defaultValue="560038" className="h-8 text-sm bg-gray-50" />
-              </div>
-              <div>
-                <Label className="text-xs text-gray-500 mb-1 block">Country</Label>
-                <Input defaultValue="India" className="h-8 text-sm bg-gray-50" />
-              </div>
-            </div>
-            <Button size="sm" variant="outline" className="w-full gap-2 text-xs">
-              <MapPin className="h-3.5 w-3.5" />
-              Verify on Map
-            </Button>
-          </div>
-        </div>
-
-        {/* Social Profiles */}
-        <div className="bg-white rounded-xl border border-gray-200 p-5">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
-              <Link2 className="h-4 w-4 text-indigo-500" />
-              Social Profiles
-            </h3>
-            <button className="p-1 rounded hover:bg-gray-100">
-              <Plus className="h-4 w-4 text-gray-500" />
-            </button>
-          </div>
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <div className="p-1.5 rounded-lg bg-blue-50">
-                <Facebook className="h-4 w-4 text-blue-600" />
-              </div>
-              <Input placeholder="Facebook URL" defaultValue="facebook.com/reviewpilot" className="h-8 text-xs bg-gray-50 flex-1" />
-              <button className="p-1 rounded hover:bg-gray-100">
-                <CheckCircle2 className="h-4 w-4 text-green-500" />
-              </button>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="p-1.5 rounded-lg bg-sky-50">
-                <Twitter className="h-4 w-4 text-sky-500" />
-              </div>
-              <Input placeholder="Twitter URL" defaultValue="twitter.com/reviewpilot" className="h-8 text-xs bg-gray-50 flex-1" />
-              <button className="p-1 rounded hover:bg-gray-100">
-                <CheckCircle2 className="h-4 w-4 text-green-500" />
-              </button>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="p-1.5 rounded-lg bg-pink-50">
-                <Instagram className="h-4 w-4 text-pink-500" />
-              </div>
-              <Input placeholder="Instagram URL" className="h-8 text-xs bg-gray-50 flex-1" />
-              <button className="p-1 rounded hover:bg-gray-100">
-                <AlertCircle className="h-4 w-4 text-gray-300" />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Profile Completeness */}
-        <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl border border-indigo-100 p-4">
-          <p className="text-sm font-semibold text-indigo-800 mb-1">Profile Completeness</p>
-          <div className="flex items-center gap-2 mb-2">
-            <div className="flex-1 h-2 bg-indigo-100 rounded-full overflow-hidden">
-              <div className="h-full w-[78%] bg-indigo-500 rounded-full" />
-            </div>
-            <span className="text-sm font-bold text-indigo-700">78%</span>
-          </div>
-          <p className="text-xs text-indigo-600">Add Instagram profile to reach 85%</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ─── General Section ──────────────────────────────────────────────────────────
-
-function GeneralSection() {
-  return (
-    <div className="max-w-2xl space-y-6">
-      <div className="bg-white rounded-xl border border-gray-200 p-6">
-        <h3 className="text-base font-semibold text-gray-900 mb-5">General Settings</h3>
-        <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <Label className="text-sm font-medium text-gray-700 mb-1.5 block">Language</Label>
-              <select className="w-full h-9 rounded-md border border-gray-200 bg-gray-50 px-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <option>English (US)</option>
-                <option>English (UK)</option>
-                <option>Hindi</option>
-                <option>Spanish</option>
-              </select>
-            </div>
-            <div>
-              <Label className="text-sm font-medium text-gray-700 mb-1.5 block">Timezone</Label>
-              <select className="w-full h-9 rounded-md border border-gray-200 bg-gray-50 px-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <option>Asia/Kolkata (IST +5:30)</option>
-                <option>America/New_York (EST)</option>
-                <option>Europe/London (GMT)</option>
-              </select>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <Label className="text-sm font-medium text-gray-700 mb-1.5 block">Date Format</Label>
-              <select className="w-full h-9 rounded-md border border-gray-200 bg-gray-50 px-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <option>DD/MM/YYYY</option>
-                <option>MM/DD/YYYY</option>
-                <option>YYYY-MM-DD</option>
-              </select>
-            </div>
-            <div>
-              <Label className="text-sm font-medium text-gray-700 mb-1.5 block">Currency</Label>
-              <select className="w-full h-9 rounded-md border border-gray-200 bg-gray-50 px-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <option>INR (₹)</option>
-                <option>USD ($)</option>
-                <option>EUR (€)</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex justify-end gap-3">
-        <Button variant="outline" size="sm">Cancel</Button>
-        <Button size="sm" className="gap-2 bg-indigo-600 hover:bg-indigo-700 text-white">
-          <Save className="h-4 w-4" />
-          Save Changes
-        </Button>
-      </div>
-    </div>
-  );
-}
-
-// ─── Review Settings Section ──────────────────────────────────────────────────
-
-function ReviewSettingsSection() {
-  const toggles = [
-    { label: "Auto-reply to 5-star reviews", desc: "Automatically send AI-generated replies to positive reviews", defaultOn: true },
-    { label: "Review request automation", desc: "Send review requests after purchase/visit completion", defaultOn: true },
-    { label: "Negative review alerts", desc: "Get instant notifications for reviews below 3 stars", defaultOn: true },
-    { label: "Review gating", desc: "Filter unhappy customers before asking for public reviews", defaultOn: false },
-    { label: "Competitor monitoring", desc: "Track competitor reviews and ratings", defaultOn: false },
-    { label: "Review widget on website", desc: "Show live review feed on your website", defaultOn: true },
-  ];
-
-  return (
-    <div className="max-w-2xl space-y-4">
-      <div className="bg-white rounded-xl border border-gray-200 p-6">
-        <h3 className="text-base font-semibold text-gray-900 mb-5">Review Settings</h3>
-        <div className="space-y-4">
-          {toggles.map((t) => (
-            <div key={t.label} className="flex items-start justify-between gap-4 py-2 border-b border-gray-100 last:border-0">
-              <div>
-                <p className="text-sm font-medium text-gray-800">{t.label}</p>
-                <p className="text-xs text-gray-500 mt-0.5">{t.desc}</p>
-              </div>
-              <label className="relative cursor-pointer flex-shrink-0 mt-0.5">
-                <input type="checkbox" className="sr-only peer" defaultChecked={t.defaultOn} />
-                <div className="w-10 h-5 bg-gray-200 rounded-full peer peer-checked:bg-indigo-600 transition-colors" />
-                <div className="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform peer-checked:translate-x-5" />
-              </label>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="flex justify-end gap-3">
-        <Button variant="outline" size="sm">Cancel</Button>
-        <Button size="sm" className="gap-2 bg-indigo-600 hover:bg-indigo-700 text-white">
-          <Save className="h-4 w-4" />
-          Save Changes
-        </Button>
-      </div>
-    </div>
-  );
-}
-
-// ─── Placeholder Section ──────────────────────────────────────────────────────
-
-function PlaceholderSection({ title, description }: { title: string; description: string }) {
-  return (
-    <div className="flex flex-col items-center justify-center py-16 text-center">
-      <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4">
-        <Settings className="h-6 w-6 text-indigo-600" />
-      </div>
-      <h3 className="text-lg font-semibold text-gray-900 mb-2">{title}</h3>
-      <p className="text-sm text-gray-500 max-w-sm">{description}</p>
-      <Button size="sm" className="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white">
-        Configure
-      </Button>
-    </div>
-  );
-}
-
-// ─── Danger Zone Section ──────────────────────────────────────────────────────
-
-function DangerZoneSection() {
-  return (
-    <div className="max-w-2xl space-y-4">
-      <div className="bg-white rounded-xl border border-red-200 p-6">
-        <h3 className="text-base font-semibold text-red-700 mb-2">Danger Zone</h3>
-        <p className="text-sm text-gray-600 mb-5">
-          These actions are permanent and cannot be undone. Please proceed with extreme caution.
-        </p>
-        <div className="space-y-4">
-          {[
-            { label: "Export all data", desc: "Download all your business data as a CSV/JSON file.", action: "Export Data", danger: false },
-            { label: "Reset all settings", desc: "Reset all settings to their default values.", action: "Reset Settings", danger: true },
-            { label: "Delete all reviews", desc: "Permanently delete all synced reviews from the dashboard.", action: "Delete Reviews", danger: true },
-            { label: "Delete account", desc: "Permanently delete your account and all associated data.", action: "Delete Account", danger: true },
-          ].map((item) => (
-            <div key={item.label} className="flex items-center justify-between p-4 rounded-lg bg-gray-50 border border-gray-200">
-              <div>
-                <p className="text-sm font-medium text-gray-800">{item.label}</p>
-                <p className="text-xs text-gray-500 mt-0.5">{item.desc}</p>
-              </div>
-              <Button
-                size="sm"
-                variant={item.danger ? "destructive" : "outline"}
-                className={item.danger ? "bg-red-600 hover:bg-red-700 text-white" : ""}
-              >
-                {item.action}
-              </Button>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ─── Section Content Map ──────────────────────────────────────────────────────
-
-function SectionContent({ section }: { section: SettingsSection }) {
-  switch (section) {
-    case "business_profile":
-      return <BusinessProfileSection />;
-    case "general":
-      return <GeneralSection />;
-    case "review_settings":
-      return <ReviewSettingsSection />;
-    case "danger_zone":
-      return <DangerZoneSection />;
-    case "ai_preferences":
-      return <PlaceholderSection title="AI Preferences" description="Configure AI tone, response style, language preferences, and reply automation rules." />;
-    case "notifications":
-      return <PlaceholderSection title="Notifications" description="Set up email, SMS, and in-app notification preferences for review alerts and reports." />;
-    case "branding":
-      return <PlaceholderSection title="Branding" description="Customize colors, fonts, and email templates to match your brand identity." />;
-    case "users_permissions":
-      return <PlaceholderSection title="Users & Permissions" description="Manage team members, roles, and access permissions for your workspace." />;
-    case "security":
-      return <PlaceholderSection title="Security" description="Configure two-factor authentication, session management, and security policies." />;
-    case "api_webhooks":
-      return <PlaceholderSection title="API & Webhooks" description="Generate API keys and configure webhooks to integrate with external systems." />;
-    case "data_export":
-      return <PlaceholderSection title="Data & Export" description="Export your reviews, analytics, and customer data in various formats." />;
-    default:
-      return null;
-  }
-}
-
-// ─── Main Component ────────────────────────────────────────────────────────────
-
-export function SettingsPage() {
-  const [activeSection, setActiveSection] = useState<SettingsSection>("business_profile");
-
-  return (
-    <div className="flex flex-col h-full">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
-          <p className="text-sm text-gray-500 mt-0.5">Manage your account and business preferences</p>
-        </div>
-      </div>
-
       <div className="flex gap-6 flex-1 min-h-0">
-        {/* Left Sidebar Navigation */}
-        <div className="w-56 flex-shrink-0">
+        {/* Left sidebar nav */}
+        <div className="w-64 flex-shrink-0">
           <div className="bg-white rounded-xl border border-gray-200 p-2 sticky top-0">
             <nav className="space-y-0.5">
               {NAV_ITEMS.map((item) => {
-                const isActive = activeSection === item.id;
+                const isActive = active === item.id;
                 return (
                   <button
                     key={item.id}
-                    onClick={() => setActiveSection(item.id)}
-                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors ${
+                    onClick={() => setActive(item.id)}
+                    className={`w-full flex items-start gap-3 px-3 py-2.5 rounded-lg text-left transition-colors ${
                       isActive
-                        ? item.danger
-                          ? "bg-red-50 text-red-700"
-                          : "bg-indigo-50 text-indigo-700"
-                        : item.danger
-                        ? "text-red-600 hover:bg-red-50"
-                        : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                        ? item.danger ? "bg-red-50" : "bg-indigo-50 border-l-2 border-indigo-600"
+                        : item.danger ? "hover:bg-red-50" : "hover:bg-gray-50"
                     }`}
                   >
-                    <item.icon className={`h-4 w-4 flex-shrink-0 ${isActive ? (item.danger ? "text-red-500" : "text-indigo-500") : "text-gray-400"}`} />
-                    <span className="font-medium flex-1 text-left">{item.label}</span>
-                    {item.badge && (
-                      <span className="px-1.5 py-0.5 text-xs bg-indigo-100 text-indigo-700 rounded-full">{item.badge}</span>
-                    )}
-                    {isActive && <ChevronRight className="h-3.5 w-3.5" />}
+                    <item.icon className={`h-4 w-4 mt-0.5 flex-shrink-0 ${
+                      isActive
+                        ? item.danger ? "text-red-500" : "text-indigo-600"
+                        : item.danger ? "text-red-400" : "text-gray-400"
+                    }`} />
+                    <div className="min-w-0">
+                      <p className={`text-sm font-medium ${
+                        isActive
+                          ? item.danger ? "text-red-700" : "text-indigo-700"
+                          : item.danger ? "text-red-600" : "text-gray-700"
+                      }`}>
+                        {item.label}
+                      </p>
+                      <p className="text-xs text-gray-400 mt-0.5 truncate">{item.subtitle}</p>
+                    </div>
                   </button>
                 );
               })}
@@ -541,9 +343,9 @@ export function SettingsPage() {
           </div>
         </div>
 
-        {/* Main Content */}
+        {/* Main content */}
         <div className="flex-1 overflow-y-auto">
-          <SectionContent section={activeSection} />
+          <SectionContent id={active} />
         </div>
       </div>
     </div>
