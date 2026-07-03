@@ -126,15 +126,32 @@
   .center p{color:var(--slate);font-size:17px}
 
   .features{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
-  .fcard{border:1px solid var(--line);border-radius:16px;padding:26px 22px;transition:box-shadow .2s,transform .2s;background:var(--card)}
+  .fcard{border:1px solid var(--line);border-radius:20px;padding:20px;transition:box-shadow .2s,transform .2s;background:var(--card);position:relative;overflow:hidden}
   .fcard:hover{box-shadow:var(--shadow-soft);transform:translateY(-3px)}
-  .ficon{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:22px;margin-bottom:16px;background:var(--chip-bg)}
-  .fcard h3{font-size:17px;margin-bottom:8px}
-  .fcard p{font-size:14px;color:var(--slate)}
-  .tags{margin-top:14px;display:flex;gap:6px;flex-wrap:wrap}
+  .fcard::before{content:"";position:absolute;inset:0;border-radius:20px;padding:1px;background:linear-gradient(160deg,var(--fc-accent-a,transparent),transparent 40%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.5}
+  .fillus{position:relative;height:132px;border-radius:14px;margin-bottom:20px;display:grid;place-items:center;overflow:hidden;background:linear-gradient(150deg,var(--fc-a),var(--fc-b))}
+  .fillus .spark{position:absolute;color:rgba(255,255,255,.55)}
+  .fillus .bubble{width:78px;height:78px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.55),transparent 60%),var(--fc-bubble);box-shadow:0 14px 26px -8px rgba(0,0,0,.35),inset 0 1px 1px rgba(255,255,255,.4)}
+  .fillus .bubble svg{width:36px;height:36px;color:#fff;filter:drop-shadow(0 2px 3px rgba(0,0,0,.2))}
+  .fbadge{position:absolute;left:14px;bottom:-16px;width:44px;height:44px;border-radius:12px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;box-shadow:0 8px 18px rgba(0,0,0,.15)}
+  .fbadge svg{width:20px;height:20px}
+  .fcard h3{font-size:17px;margin:14px 0 8px 4px}
+  .fcard p{font-size:14px;color:var(--slate);padding:0 4px}
+  .tags{margin-top:14px;display:flex;gap:6px;flex-wrap:wrap;padding:0 4px}
   .tag{font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--chip-bg);color:var(--chip-ink)}
   @media(max-width:900px){.features{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:560px){.features{grid-template-columns:1fr}}
+
+  /* TRUST BAR */
+  .trustbar{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:44px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px 8px}
+  .trustbar .tb-item{display:flex;align-items:flex-start;gap:14px;padding:0 22px;border-left:1px solid var(--line)}
+  .trustbar .tb-item:first-child{border-left:none}
+  .tb-ic{width:44px;height:44px;flex:none;border-radius:50%;background:var(--chip-bg);display:grid;place-items:center}
+  .tb-ic svg{width:21px;height:21px;color:var(--violet)}
+  .tb-item b{display:block;font-size:14.5px}
+  .tb-item small{font-size:12.5px;color:var(--muted);line-height:1.4}
+  @media(max-width:900px){.trustbar{grid-template-columns:repeat(2,1fr);gap:24px 0}.trustbar .tb-item{border-left:none}}
+  @media(max-width:560px){.trustbar{grid-template-columns:1fr}}
 
   /* HOW */
   .soft{background:var(--bg-soft)}
@@ -291,34 +308,74 @@
 <section class="pad" id="features">
   <div class="wrap">
     <div class="center">
-      <span class="eyebrow">Features</span>
-      <h2>Everything you need to dominate reviews</h2>
+      <span class="eyebrow">✦ Features</span>
+      <h2>Everything you need to dominate <span style="color:var(--violet)">reviews</span></h2>
       <p>From AI replies to multi-language support — ReviewDot handles your entire review strategy automatically.</p>
     </div>
     <div class="features">
-      <div class="fcard">
-        <div class="ficon" style="color:var(--violet)">✦</div>
+      <div class="fcard" style="--fc-accent-a:rgba(168,85,247,.5)">
+        <div class="fillus" style="--fc-a:#ede4fb;--fc-b:#e0d3fb;--fc-bubble:linear-gradient(160deg,#a855f7,#7c3aed)">
+          <svg class="spark" style="top:16px;left:20px;width:16px;height:16px" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg>
+          <svg class="spark" style="bottom:20px;right:18px;width:12px;height:12px" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg>
+          <div class="bubble"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><circle cx="9" cy="11" r="1" fill="currentColor" stroke="none"/><circle cx="13" cy="11" r="1" fill="currentColor" stroke="none"/><circle cx="17" cy="11" r="1" fill="currentColor" stroke="none"/></svg></div>
+          <div class="fbadge" style="color:var(--violet)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg></div>
+        </div>
         <h3>AI Tone Selection</h3>
         <p>Reply in your brand's voice — friendly, luxury, professional, or funny. The AI adapts to every review.</p>
         <div class="tags"><span class="tag">Friendly</span><span class="tag">Luxury</span><span class="tag">Professional</span></div>
       </div>
-      <div class="fcard">
-        <div class="ficon" style="color:#e11d48">🌐</div>
+
+      <div class="fcard" style="--fc-accent-a:rgba(59,130,246,.5)">
+        <div class="fillus" style="--fc-a:#dbeafe;--fc-b:#c7d9fb;--fc-bubble:linear-gradient(160deg,#60a5fa,#2563eb)">
+          <svg class="spark" style="top:16px;right:20px;width:14px;height:14px" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg>
+          <div class="bubble"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
+          <div class="fbadge" style="color:#3b82f6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
+        </div>
         <h3>20+ Languages</h3>
         <p>Auto-detect the review language and reply in the same language — English, Hindi, French, German, Arabic &amp; more.</p>
-        <div class="tags"><span class="tag">English</span><span class="tag">Hindi</span><span class="tag">French</span></div>
+        <div class="tags"><span class="tag">English</span><span class="tag">Hindi</span><span class="tag">French</span><span class="tag">+17</span></div>
       </div>
-      <div class="fcard">
-        <div class="ficon" style="color:#ea580c">🔔</div>
+
+      <div class="fcard" style="--fc-accent-a:rgba(251,146,60,.5)">
+        <div class="fillus" style="--fc-a:#feecd6;--fc-b:#fddfb0;--fc-bubble:linear-gradient(160deg,#fbbf24,#f59e0b)">
+          <span style="position:absolute;top:16px;right:24px;width:20px;height:20px;border-radius:50%;background:#ef4444;color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center;box-shadow:0 4px 10px rgba(239,68,68,.5)">1</span>
+          <div class="bubble"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+          <div class="fbadge" style="color:#f59e0b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+        </div>
         <h3>Negative Review Alerts</h3>
         <p>Instant alerts for 1–3 star reviews. AI suggests a de-escalation reply so you approve before it posts.</p>
         <div class="tags"><span class="tag">Instant alerts</span><span class="tag">Owner approval</span></div>
       </div>
-      <div class="fcard">
-        <div class="ficon" style="color:#059669">📊</div>
+
+      <div class="fcard" style="--fc-accent-a:rgba(52,211,153,.5)">
+        <div class="fillus" style="--fc-a:#d6f5e6;--fc-b:#bdedd9;--fc-bubble:linear-gradient(160deg,#34d399,#059669)">
+          <div class="bubble" style="border-radius:14px;width:84px;height:64px">
+            <svg viewBox="0 0 24 24" width="52" height="40"><rect x="1" y="2" width="22" height="16" rx="2.5" fill="#fff" opacity=".92"/><circle cx="4.3" cy="4.6" r=".6" fill="#f87171"/><circle cx="6" cy="4.6" r=".6" fill="#fbbf24"/><circle cx="7.7" cy="4.6" r=".6" fill="#34d399"/><rect x="3" y="10" width="4" height="6" rx="1" fill="#6366f1"/><rect x="8.5" y="7" width="4" height="9" rx="1" fill="#a855f7"/><circle cx="18" cy="11" r="4.2" fill="none" stroke="#3b82f6" stroke-width="1.6"/><path d="M18 6.8A4.2 4.2 0 0 1 22.2 11" stroke="#a855f7" stroke-width="1.6" fill="none"/></svg>
+          </div>
+          <div class="fbadge" style="color:#059669"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
+        </div>
         <h3>Analytics Dashboard</h3>
         <p>Track rating trends, sentiment analysis, response rate, and top keywords from all your reviews.</p>
         <div class="tags"><span class="tag">Trends</span><span class="tag">Sentiment</span><span class="tag">Keywords</span></div>
+      </div>
+    </div>
+
+    <div class="trustbar">
+      <div class="tb-item">
+        <span class="tb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <div><b>100% Safe &amp; Secure</b><small>Your data is always protected</small></div>
+      </div>
+      <div class="tb-item">
+        <span class="tb-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg></span>
+        <div><b>Save 10+ Hours / Week</b><small>Automate replies and focus on what matters</small></div>
+      </div>
+      <div class="tb-item">
+        <span class="tb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></span>
+        <div><b>Improve Ratings</b><small>Respond faster. Build trust. Grow your brand.</small></div>
+      </div>
+      <div class="tb-item">
+        <span class="tb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span>
+        <div><b>Works Everywhere</b><small>Google, Facebook, TripAdvisor, Yelp &amp; more</small></div>
       </div>
     </div>
   </div>
