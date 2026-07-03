@@ -131,7 +131,7 @@ export function WidgetPage() {
   const [copied, setCopied] = useState(false);
 
   const businessSlug = "sharmas-kitchen";
-  const embedCode = `<!-- ReviewPilot Widget -->
+  const embedCode = `<!-- ReviewDot Widget -->
 <div id="reviewpilot-widget"></div>
 <script
   src="https://reviewpilot-eosin.vercel.app/widget.js"

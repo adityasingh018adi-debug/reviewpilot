@@ -105,7 +105,7 @@ export function Sidebar({ user, business }: SidebarProps) {
             <div className="w-7 h-7 rounded-md bg-primary flex items-center justify-center shrink-0 glow-violet">
               <span className="text-primary-foreground font-bold text-xs">R</span>
             </div>
-            <span className="font-bold text-sm">ReviewPilot</span>
+            <span className="font-bold text-sm">ReviewDot</span>
           </Link>
         )}
         {collapsed && (

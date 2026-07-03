@@ -44,7 +44,7 @@ export default function LoginPage() {
           <div>
             <p className="font-bold text-sm">Live Demo — No signup needed</p>
             <p className="text-violet-200 text-xs mt-0.5">
-              Explore the full ReviewPilot dashboard instantly
+              Explore the full ReviewDot dashboard instantly
             </p>
           </div>
         </div>
@@ -74,7 +74,7 @@ export default function LoginPage() {
       <Card>
         <CardHeader>
           <CardTitle>Welcome back</CardTitle>
-          <CardDescription>Sign in to your ReviewPilot account</CardDescription>
+          <CardDescription>Sign in to your ReviewDot account</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           {/* Google button */}

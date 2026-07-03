@@ -2,7 +2,7 @@ export const dynamic = "force-dynamic";
 
 import { BillingPage } from "@/components/billing/billing-page";
 
-export const metadata = { title: "Billing — ReviewPilot" };
+export const metadata = { title: "Billing — ReviewDot" };
 
 export default function Page() {
   return (

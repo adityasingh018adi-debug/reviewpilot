@@ -2,7 +2,7 @@ export const dynamic = "force-dynamic";
 
 import { SettingsPage } from "@/components/settings/settings-page";
 
-export const metadata = { title: "Settings — ReviewPilot" };
+export const metadata = { title: "Settings — ReviewDot" };
 
 export default function Page() {
   return (

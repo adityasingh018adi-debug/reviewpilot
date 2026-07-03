@@ -40,7 +40,7 @@ export default function LandingPage() {
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
-              }}>ReviewPilot</span>
+              }}>ReviewDot</span>
             </div>
 
             <div className="hidden md:flex items-center gap-8">
@@ -178,7 +178,7 @@ export default function LandingPage() {
                     <div className="w-5 h-5 rounded-lg bg-white/20 flex items-center justify-center">
                       <span className="text-white font-bold text-[10px]">R</span>
                     </div>
-                    <span className="text-white font-semibold text-sm">ReviewPilot</span>
+                    <span className="text-white font-semibold text-sm">ReviewDot</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     {[1,2,3].map((i) => (
@@ -294,7 +294,7 @@ export default function LandingPage() {
             </span>
             <h2 className="text-4xl font-bold text-slate-900">Everything you need to dominate reviews</h2>
             <p className="text-slate-600 max-w-2xl mx-auto text-lg">
-              From AI replies to multi-language support — ReviewPilot handles your entire review strategy automatically.
+              From AI replies to multi-language support — ReviewDot handles your entire review strategy automatically.
             </p>
           </div>
 
@@ -379,7 +379,7 @@ export default function LandingPage() {
               </h2>
               <p className="text-slate-600 text-lg leading-relaxed">
                 Whether your customer writes in Hindi, French, German, or Arabic —
-                ReviewPilot detects the language and crafts a perfect, on-brand reply in the same language.
+                ReviewDot detects the language and crafts a perfect, on-brand reply in the same language.
               </p>
               <div className="grid grid-cols-2 gap-3">
                 {[
@@ -456,7 +456,7 @@ export default function LandingPage() {
 
             {[
               { step: "1", icon: Globe, title: "Connect", desc: "Link your Google Business Profile with one click. No technical skills needed — takes under 60 seconds." },
-              { step: "2", icon: Sparkles, title: "AI Replies", desc: "ReviewPilot reads every new review and crafts a personalized, on-brand reply in the right language instantly." },
+              { step: "2", icon: Sparkles, title: "AI Replies", desc: "ReviewDot reads every new review and crafts a personalized, on-brand reply in the right language instantly." },
               { step: "3", icon: TrendingUp, title: "Grow", desc: "Approve replies, track your ratings over time, and watch your business reputation grow automatically." },
             ].map((item) => {
               const Icon = item.icon;
@@ -588,7 +588,7 @@ export default function LandingPage() {
                 name: "Rajesh Kumar",
                 role: "Restaurant Owner, Mumbai",
                 flag: "🇮🇳",
-                text: "ReviewPilot transformed how we manage Google reviews. The AI replies in Hindi and English perfectly match our friendly tone. Our rating went from 4.1 to 4.7 in just 3 months!",
+                text: "ReviewDot transformed how we manage Google reviews. The AI replies in Hindi and English perfectly match our friendly tone. Our rating went from 4.1 to 4.7 in just 3 months!",
               },
               {
                 name: "Marie Dupont",
@@ -600,7 +600,7 @@ export default function LandingPage() {
                 name: "Ahmad Hassan",
                 role: "Café Owner, Dubai",
                 flag: "🇦🇪",
-                text: "Managing reviews in Arabic used to be a nightmare. Now ReviewPilot handles everything automatically. The negative review alerts saved us from a PR crisis twice!",
+                text: "Managing reviews in Arabic used to be a nightmare. Now ReviewDot handles everything automatically. The negative review alerts saved us from a PR crisis twice!",
               },
             ].map((t) => (
               <div key={t.name}
@@ -639,7 +639,7 @@ export default function LandingPage() {
             Ready to automate<br />your reviews?
           </h2>
           <p className="text-violet-200 text-lg max-w-xl mx-auto">
-            Join 500+ businesses using ReviewPilot to grow their reputation on autopilot — in any language.
+            Join 500+ businesses using ReviewDot to grow their reputation on autopilot — in any language.
           </p>
           <Link href="/signup">
             <button className="inline-flex items-center gap-2 px-10 py-4 text-base font-bold text-violet-700 bg-white rounded-2xl hover:bg-violet-50 transition-all shadow-2xl shadow-black/20 hover:scale-105">
@@ -661,7 +661,7 @@ export default function LandingPage() {
                   style={{ background: "linear-gradient(135deg, #7c3aed, #6d28d9)" }}>
                   <span className="text-white font-bold text-sm">R</span>
                 </div>
-                <span className="font-bold text-white text-lg">ReviewPilot</span>
+                <span className="font-bold text-white text-lg">ReviewDot</span>
               </div>
               <p className="text-sm leading-relaxed">
                 AI-powered review management for businesses worldwide. Grow your reputation on autopilot.
@@ -691,7 +691,7 @@ export default function LandingPage() {
           </div>
 
           <div className="border-t border-slate-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-sm">© 2024 ReviewPilot. All rights reserved.</p>
+            <p className="text-sm">© 2024 ReviewDot. All rights reserved.</p>
             <div className="flex items-center gap-6 text-sm">
               <span className="flex items-center gap-1.5">
                 <MessageSquare className="w-3.5 h-3.5 text-violet-400" />

@@ -243,7 +243,7 @@ export function AdminDashboard({ onLogout }: Props) {
             <h1 className="text-3xl font-black bg-gradient-to-r from-white via-violet-200 to-indigo-300 bg-clip-text text-transparent">
               Admin Command Center
             </h1>
-            <p className="text-gray-500 text-sm mt-1">Full visibility across all ReviewPilot operations</p>
+            <p className="text-gray-500 text-sm mt-1">Full visibility across all ReviewDot operations</p>
           </div>
 
           <GlobeOrb />

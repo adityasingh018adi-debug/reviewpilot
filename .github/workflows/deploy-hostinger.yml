@@ -1,0 +1,44 @@
+name: Deploy site to Hostinger
+
+# Auto-uploads the static marketing site (hostinger-site/) to Hostinger
+# over FTP whenever it changes. No more manual File Manager uploads.
+#
+# One-time setup — add these repository secrets in GitHub:
+#   Settings → Secrets and variables → Actions → New repository secret
+#     FTP_SERVER    e.g. 82.180.xxx.xxx  or  ftp.reviewdot.in
+#     FTP_USERNAME  e.g. u504476760.reviewdot.in
+#     FTP_PASSWORD  your FTP account password
+# Get these in Hostinger: hPanel → Websites → reviewdot.in → Files → FTP Accounts.
+
+on:
+  push:
+    branches:
+      - master
+      - claude/brand-name-reviewdot-hifg4e
+    paths:
+      - "hostinger-site/**"
+      - ".github/workflows/deploy-hostinger.yml"
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy hostinger-site to public_html via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./hostinger-site/
+          server-dir: public_html/
+          # Keep the deploy log out of the served site
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/README.md

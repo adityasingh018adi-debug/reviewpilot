@@ -22,7 +22,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
-            }}>ReviewPilot</span>
+            }}>ReviewDot</span>
           </div>
           <p className="text-slate-500 text-sm mt-2">AI-powered review management · 20+ languages</p>
         </div>

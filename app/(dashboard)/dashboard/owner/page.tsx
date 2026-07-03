@@ -2,7 +2,7 @@ export const dynamic = "force-dynamic";
 
 import { OwnerPage } from "@/components/owner/owner-page";
 
-export const metadata = { title: "Owner — ReviewPilot" };
+export const metadata = { title: "Owner — ReviewDot" };
 
 export default function Page() {
   return (
