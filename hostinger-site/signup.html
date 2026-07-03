@@ -231,14 +231,9 @@
 
   </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onerror="window.__sbLoadFailed=true"></script>
 <script>
   function tog(id){var i=document.getElementById(id);i.type=i.type==='password'?'text':'password';}
-
-  var supabaseClient = window.supabase.createClient(
-    'https://okcjqgkbzhnslsafqebk.supabase.co',
-    'sb_publishable_OrP4ORHi5ROyKA7XPsxfKQ_4twHqLo1'
-  );
 
   function showMsg(kind, text){
     var el = document.getElementById('formMsg');
@@ -249,6 +244,22 @@
     el.className = 'form-msg show ' + kind;
   }
 
+  var supabaseClient = null;
+  var initError = null;
+  try{
+    if(window.__sbLoadFailed || typeof window.supabase === 'undefined'){
+      initError = 'Could not load the sign-up service (ad blocker, offline, or the script was blocked). Please disable any ad/script blocker and refresh the page.';
+    } else {
+      supabaseClient = window.supabase.createClient(
+        'https://okcjqgkbzhnslsafqebk.supabase.co',
+        'sb_publishable_OrP4ORHi5ROyKA7XPsxfKQ_4twHqLo1'
+      );
+    }
+  }catch(err){
+    initError = 'Sign-up service failed to start: ' + (err && err.message ? err.message : err);
+  }
+  if(initError){ document.addEventListener('DOMContentLoaded', function(){ showMsg('error', initError); }); }
+
   function oauthComingSoon(e){
     e.preventDefault();
     showMsg('error', 'Google/Apple sign-in isn\'t set up yet -- use email and password below.');
@@ -256,6 +267,9 @@
 
   document.getElementById('signupForm').addEventListener('submit', async function(e){
     e.preventDefault();
+
+    if(!supabaseClient){ showMsg('error', initError || 'Sign-up service is unavailable. Please refresh and try again.'); return; }
+
     var firstName = document.getElementById('firstName').value.trim();
     var lastName = document.getElementById('lastName').value.trim();
     var email = document.getElementById('email').value.trim();
@@ -264,6 +278,7 @@
     var agree = document.getElementById('agree').checked;
     var btn = document.getElementById('submitBtn');
 
+    if(!email){ showMsg('error', 'Please enter your email address.'); return; }
     if(pw1 !== pw2){ showMsg('error', 'Passwords don\'t match.'); return; }
     if(pw1.length < 6){ showMsg('error', 'Password must be at least 6 characters.'); return; }
     if(!agree){ showMsg('error', 'Please agree to the Terms & Conditions and Privacy Policy.'); return; }
@@ -271,24 +286,31 @@
     btn.disabled = true;
     btn.innerHTML = '<svg class="spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-9-9"/></svg> Creating account...';
 
-    var { data, error } = await supabaseClient.auth.signUp({
-      email: email,
-      password: pw1,
-      options: { data: { first_name: firstName, last_name: lastName, full_name: firstName + ' ' + lastName } }
-    });
+    try{
+      var { data, error } = await supabaseClient.auth.signUp({
+        email: email,
+        password: pw1,
+        options: { data: { first_name: firstName, last_name: lastName, full_name: firstName + ' ' + lastName } }
+      });
 
-    if(error){
-      var msg = error.message && error.message.toLowerCase().includes('already registered')
-        ? 'An account with this email already exists. Try logging in instead.'
-        : (error.message || 'Something went wrong. Please try again.');
-      showMsg('error', msg);
+      if(error){
+        var lower = (error.message || '').toLowerCase();
+        var msg = lower.includes('already registered') || lower.includes('already exists')
+          ? 'An account with this email already exists. Try logging in instead.'
+          : (error.message || 'Something went wrong. Please try again.');
+        showMsg('error', msg);
+        btn.disabled = false;
+        btn.innerHTML = 'Create account <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+        return;
+      }
+
+      document.getElementById('signupForm').style.display = 'none';
+      showMsg('success', 'Account created! Check <b>' + email + '</b> for a confirmation link, then log in to your dashboard.');
+    }catch(err){
+      showMsg('error', 'Network error reaching the sign-up service: ' + (err && err.message ? err.message : err) + '. Please check your connection and try again.');
       btn.disabled = false;
       btn.innerHTML = 'Create account <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
-      return;
     }
-
-    document.getElementById('signupForm').style.display = 'none';
-    showMsg('success', 'Account created! Check <b>' + email + '</b> for a confirmation link, then log in to your dashboard.');
   });
 </script>
 </body>

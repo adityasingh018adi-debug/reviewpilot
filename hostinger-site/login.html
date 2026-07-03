@@ -132,13 +132,8 @@
     </div>
   </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onerror="window.__sbLoadFailed=true"></script>
 <script>
-  var supabaseClient = window.supabase.createClient(
-    'https://okcjqgkbzhnslsafqebk.supabase.co',
-    'sb_publishable_OrP4ORHi5ROyKA7XPsxfKQ_4twHqLo1'
-  );
-
   function showMsg(kind, text){
     var el = document.getElementById('formMsg');
     var icon = kind === 'success'
@@ -148,6 +143,22 @@
     el.className = 'form-msg show ' + kind;
   }
 
+  var supabaseClient = null;
+  var initError = null;
+  try{
+    if(window.__sbLoadFailed || typeof window.supabase === 'undefined'){
+      initError = 'Could not load the sign-in service (ad blocker, offline, or the script was blocked). Please disable any ad/script blocker and refresh the page.';
+    } else {
+      supabaseClient = window.supabase.createClient(
+        'https://okcjqgkbzhnslsafqebk.supabase.co',
+        'sb_publishable_OrP4ORHi5ROyKA7XPsxfKQ_4twHqLo1'
+      );
+    }
+  }catch(err){
+    initError = 'Sign-in service failed to start: ' + (err && err.message ? err.message : err);
+  }
+  if(initError){ document.addEventListener('DOMContentLoaded', function(){ showMsg('error', initError); }); }
+
   function oauthComingSoon(e){
     e.preventDefault();
     showMsg('error', 'Google/Apple sign-in isn\'t set up yet -- use email and password below.');
@@ -155,27 +166,41 @@
 
   document.getElementById('loginForm').addEventListener('submit', async function(e){
     e.preventDefault();
+
+    if(!supabaseClient){ showMsg('error', initError || 'Sign-in service is unavailable. Please refresh and try again.'); return; }
+
     var email = document.getElementById('email').value.trim();
     var pw = document.getElementById('pw').value;
     var btn = document.getElementById('submitBtn');
 
+    if(!email || !pw){ showMsg('error', 'Please enter your email and password.'); return; }
+
     btn.disabled = true;
     btn.innerHTML = '<svg class="spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-9-9"/></svg> Signing in...';
 
-    var { data, error } = await supabaseClient.auth.signInWithPassword({ email: email, password: pw });
+    try{
+      var { data, error } = await supabaseClient.auth.signInWithPassword({ email: email, password: pw });
 
-    if(error){
-      var msg = error.message && error.message.toLowerCase().includes('invalid login')
-        ? 'Incorrect email or password.'
-        : (error.message || 'Something went wrong. Please try again.');
-      showMsg('error', msg);
+      if(error){
+        var lower = (error.message || '').toLowerCase();
+        var msg = lower.includes('invalid login')
+          ? 'Incorrect email or password.'
+          : lower.includes('email not confirmed')
+          ? 'Please confirm your email first -- check your inbox for the confirmation link we sent when you signed up.'
+          : (error.message || 'Something went wrong. Please try again.');
+        showMsg('error', msg);
+        btn.disabled = false;
+        btn.innerHTML = 'Sign in <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+        return;
+      }
+
+      document.getElementById('loginForm').style.display = 'none';
+      showMsg('success', 'Signed in! Welcome back, ' + (data.user && data.user.user_metadata && data.user.user_metadata.first_name ? data.user.user_metadata.first_name : email) + '.');
+    }catch(err){
+      showMsg('error', 'Network error reaching the sign-in service: ' + (err && err.message ? err.message : err) + '. Please check your connection and try again.');
       btn.disabled = false;
       btn.innerHTML = 'Sign in <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
-      return;
     }
-
-    document.getElementById('loginForm').style.display = 'none';
-    showMsg('success', 'Signed in! Welcome back, ' + (data.user && data.user.user_metadata && data.user.user_metadata.first_name ? data.user.user_metadata.first_name : email) + '.');
   });
 </script>
 </body>
