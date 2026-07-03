@@ -3,11 +3,17 @@
     Header set Cache-Control "no-cache, no-store, must-revalidate"
     Header set Pragma "no-cache"
     Header set Expires "0"
+    # Tell Hostinger's LiteSpeed edge cache not to serve a stale copy of HTML
+    Header set X-LiteSpeed-Cache-Control "no-cache"
   </FilesMatch>
 </IfModule>
 
 <IfModule mod_expires.c>
   ExpiresActive Off
+</IfModule>
+
+<IfModule LiteSpeed>
+  CacheLookup off
 </IfModule>
 
 DirectoryIndex index.html
