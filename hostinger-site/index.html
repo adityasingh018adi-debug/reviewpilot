@@ -9,37 +9,68 @@
 <meta property="og:description" content="AI-powered review management. Auto-reply to Google reviews in 20+ languages, get negative-review alerts, and grow your reputation on autopilot.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%237c3aed'/%3E%3Ccircle cx='16' cy='16' r='6' fill='white'/%3E%3C/svg%3E">
+<script>
+  /* Set theme before paint to avoid flash */
+  (function(){
+    try{
+      var t=localStorage.getItem('reviewdot-theme');
+      if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+      document.documentElement.setAttribute('data-theme',t);
+    }catch(e){document.documentElement.setAttribute('data-theme','light');}
+  })();
+</script>
 <style>
   :root{
     --violet:#7c3aed; --violet-dark:#6d28d9; --violet-light:#a78bfa;
-    --ink:#0f0f1a; --slate:#475569; --muted:#64748b;
-    --bg:#ffffff; --bg-soft:#faf9ff; --line:#ecebf5;
     --grad:linear-gradient(135deg,#7c3aed 0%,#a855f7 100%);
+    --bg:#ffffff; --bg-soft:#faf9ff; --card:#ffffff;
+    --ink:#0f0f1a; --slate:#475569; --muted:#64748b; --line:#ecebf5;
+    --chip-bg:#f3effe; --chip-ink:#6d28d9;
+    --header:rgba(255,255,255,.85);
+    --shadow:0 30px 60px rgba(80,50,160,.18);
+    --shadow-soft:0 16px 36px rgba(80,50,160,.12);
+    --hero-glow:#efe7ff;
+  }
+  :root[data-theme="dark"]{
+    --bg:#0b0b13; --bg-soft:#111120; --card:#15151f;
+    --ink:#f4f3fb; --slate:#c3c8d4; --muted:#8b90a0; --line:#242438;
+    --chip-bg:#1e1a33; --chip-ink:#c4b5fd;
+    --header:rgba(11,11,19,.85);
+    --shadow:0 30px 60px rgba(0,0,0,.5);
+    --shadow-soft:0 16px 36px rgba(0,0,0,.4);
+    --hero-glow:rgba(124,58,237,.16);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;transition:background .25s,color .25s}
   a{text-decoration:none;color:inherit}
   .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
   .btn{display:inline-block;padding:14px 26px;border-radius:12px;font-weight:600;font-size:15px;transition:transform .15s ease,box-shadow .15s ease;cursor:pointer;border:none}
   .btn-primary{background:var(--grad);color:#fff;box-shadow:0 8px 24px rgba(124,58,237,.35)}
   .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(124,58,237,.45)}
-  .btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
   .btn-ghost:hover{border-color:var(--violet-light)}
-  .eyebrow{display:inline-block;background:#f3effe;color:var(--violet-dark);font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:6px 14px;border-radius:999px}
+  .eyebrow{display:inline-block;background:var(--chip-bg);color:var(--chip-ink);font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:6px 14px;border-radius:999px}
 
   /* NAV */
-  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  header{position:sticky;top:0;z-index:50;background:var(--header);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
   nav{display:flex;align-items:center;justify-content:space-between;height:68px}
   .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}
   .logo .dot{width:32px;height:32px;border-radius:9px;background:var(--grad);display:grid;place-items:center;color:#fff;font-weight:800}
   .navlinks{display:flex;gap:30px;font-size:15px;font-weight:500;color:var(--slate)}
   .navlinks a:hover{color:var(--violet)}
   .navcta{display:flex;align-items:center;gap:14px}
-  @media(max-width:820px){.navlinks{display:none}.navcta .sign{display:none}}
+  /* Theme toggle */
+  .theme-toggle{display:flex;background:var(--bg-soft);border:1px solid var(--line);border-radius:999px;padding:3px}
+  .theme-toggle button{display:flex;align-items:center;gap:6px;border:none;background:none;color:var(--muted);font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:background .15s,color .15s}
+  .theme-toggle button svg{width:15px;height:15px}
+  .theme-toggle button.active{background:var(--card);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.15)}
+  :root[data-theme="dark"] .theme-toggle button.active{color:#fff}
+  @media(max-width:920px){.navlinks{display:none}.navcta .sign{display:none}}
+  @media(max-width:560px){.theme-toggle button span{display:none}.theme-toggle button{padding:7px 9px}}
 
   /* HERO */
-  .hero{background:radial-gradient(1200px 500px at 70% -10%,#efe7ff 0%,transparent 60%),var(--bg-soft);padding:80px 0 90px}
+  .hero{background:radial-gradient(1200px 500px at 70% -10%,var(--hero-glow) 0%,transparent 60%),var(--bg-soft);padding:80px 0 90px}
   .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
   .hero h1{font-size:56px;line-height:1.05;font-weight:800;letter-spacing:-.02em}
   .hero h1 .hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -47,25 +78,26 @@
   .hero .cta-row{display:flex;gap:14px;flex-wrap:wrap}
   .trust{display:flex;gap:22px;margin-top:22px;font-size:13px;color:var(--muted);flex-wrap:wrap}
   .trust span::before{content:"✓";color:var(--violet);font-weight:800;margin-right:6px}
-  .mock{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 30px 60px rgba(80,50,160,.18);padding:20px}
+  .mock{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:20px}
   .mock-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
   .mock-top .name{font-weight:700;display:flex;align-items:center;gap:8px}
-  .badge{background:#ecfdf5;color:#059669;font-size:11px;font-weight:700;padding:5px 10px;border-radius:999px}
+  .badge{background:color-mix(in srgb,#10b981 15%,var(--card));color:#059669;font-size:11px;font-weight:700;padding:5px 10px;border-radius:999px}
   .mstats{display:flex;gap:10px;margin-bottom:16px}
   .mstat{flex:1;background:var(--bg-soft);border-radius:12px;padding:12px;text-align:center}
-  .mstat b{display:block;font-size:22px;color:var(--violet-dark)}
+  .mstat b{display:block;font-size:22px;color:var(--violet-light)}
   .mstat small{color:var(--muted);font-size:11px}
   .review{background:var(--bg-soft);border-radius:12px;padding:14px;margin-bottom:10px}
   .review .stars{color:#f59e0b;font-size:13px}
+  .review .rname{font-weight:700;color:var(--ink)}
   .review p{font-size:13px;color:var(--slate);margin-top:4px}
-  .aireply{background:#f3effe;border-left:3px solid var(--violet);border-radius:8px;padding:10px 12px;margin-top:8px;font-size:12px;color:var(--violet-dark)}
+  .aireply{background:var(--chip-bg);border-left:3px solid var(--violet);border-radius:8px;padding:10px 12px;margin-top:8px;font-size:12px;color:var(--chip-ink)}
   .aireply b{display:block;margin-bottom:2px}
   @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:40px}.hero h1{font-size:42px}}
 
   /* STATS BAR */
-  .statbar{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}
+  .statbar{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--card)}
   .statbar .wrap{display:grid;grid-template-columns:repeat(4,1fr);text-align:center;padding:34px 24px}
-  .statbar b{display:block;font-size:34px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .statbar b{display:block;font-size:34px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
   .statbar small{color:var(--muted);font-size:13px}
   @media(max-width:640px){.statbar .wrap{grid-template-columns:repeat(2,1fr);gap:24px}}
 
@@ -76,20 +108,20 @@
   .center p{color:var(--slate);font-size:17px}
 
   .features{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
-  .fcard{border:1px solid var(--line);border-radius:16px;padding:26px 22px;transition:box-shadow .2s,transform .2s;background:#fff}
-  .fcard:hover{box-shadow:0 16px 36px rgba(80,50,160,.12);transform:translateY(-3px)}
-  .ficon{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:22px;margin-bottom:16px}
+  .fcard{border:1px solid var(--line);border-radius:16px;padding:26px 22px;transition:box-shadow .2s,transform .2s;background:var(--card)}
+  .fcard:hover{box-shadow:var(--shadow-soft);transform:translateY(-3px)}
+  .ficon{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:22px;margin-bottom:16px;background:var(--chip-bg)}
   .fcard h3{font-size:17px;margin-bottom:8px}
   .fcard p{font-size:14px;color:var(--slate)}
   .tags{margin-top:14px;display:flex;gap:6px;flex-wrap:wrap}
-  .tag{font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;background:#f3effe;color:var(--violet-dark)}
+  .tag{font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--chip-bg);color:var(--chip-ink)}
   @media(max-width:900px){.features{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:560px){.features{grid-template-columns:1fr}}
 
   /* HOW */
-  .how{background:var(--bg-soft)}
+  .soft{background:var(--bg-soft)}
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
-  .step{text-align:center;position:relative}
+  .step{text-align:center}
   .snum{width:54px;height:54px;border-radius:50%;background:var(--grad);color:#fff;display:grid;place-items:center;font-weight:800;font-size:20px;margin:0 auto 18px;box-shadow:0 8px 20px rgba(124,58,237,.35)}
   .step h3{font-size:18px;margin-bottom:8px}
   .step p{font-size:14px;color:var(--slate);max-width:280px;margin:0 auto}
@@ -97,7 +129,7 @@
 
   /* PRICING */
   .prices{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:840px;margin:0 auto}
-  .price{border:1px solid var(--line);border-radius:20px;padding:34px 30px;background:#fff}
+  .price{border:1px solid var(--line);border-radius:20px;padding:34px 30px;background:var(--card)}
   .price.pro{background:var(--grad);color:#fff;border:none;box-shadow:0 24px 50px rgba(124,58,237,.35);position:relative}
   .pill{position:absolute;top:20px;right:24px;background:rgba(255,255,255,.2);font-size:11px;font-weight:700;padding:5px 12px;border-radius:999px}
   .price h3{font-size:15px;text-transform:uppercase;letter-spacing:.05em;opacity:.9}
@@ -114,7 +146,7 @@
 
   /* TESTIMONIALS */
   .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .tcard{border:1px solid var(--line);border-radius:16px;padding:26px;background:#fff}
+  .tcard{border:1px solid var(--line);border-radius:16px;padding:26px;background:var(--card)}
   .tcard .stars{color:#f59e0b;margin-bottom:12px}
   .tcard p{font-size:14px;color:var(--slate);font-style:italic}
   .tcard .who{display:flex;align-items:center;gap:10px;margin-top:16px}
@@ -130,7 +162,7 @@
   .finalcta .btn{background:#fff;color:var(--violet-dark);box-shadow:0 10px 30px rgba(0,0,0,.2)}
 
   /* FOOTER */
-  footer{background:#0f0f1a;color:#cbd5e1;padding:56px 0 30px}
+  footer{background:#0b0b13;color:#cbd5e1;padding:56px 0 30px}
   .fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px;padding-bottom:34px;border-bottom:1px solid #24243a}
   footer .logo{color:#fff;margin-bottom:14px}
   footer h4{color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px}
@@ -146,7 +178,7 @@
 <header>
   <div class="wrap">
     <nav>
-      <a href="#" class="logo"><span class="dot">R</span> ReviewDot</a>
+      <a href="/index.html" class="logo"><span class="dot">R</span> ReviewDot</a>
       <div class="navlinks">
         <a href="#features">Features</a>
         <a href="#how">How it works</a>
@@ -154,6 +186,14 @@
         <a href="#reviews">Reviews</a>
       </div>
       <div class="navcta">
+        <div class="theme-toggle" role="group" aria-label="Color theme">
+          <button type="button" data-set="light" onclick="setTheme('light')" aria-label="Light theme">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span>Light</span>
+          </button>
+          <button type="button" data-set="dark" onclick="setTheme('dark')" aria-label="Dark theme">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg><span>Dark</span>
+          </button>
+        </div>
         <a href="/login.html" class="sign" style="font-weight:600;color:var(--slate)">Sign in</a>
         <a href="/signup.html" class="btn btn-primary" style="padding:11px 20px">Start Free Trial</a>
       </div>
@@ -185,12 +225,12 @@
         <div class="mstat"><b>94%</b><small>Replied</small></div>
       </div>
       <div class="review">
-        <div class="stars">★★★★★ <b style="font-weight:700;color:var(--ink)">Sarah M.</b></div>
+        <div class="stars">★★★★★ <span class="rname">Sarah M.</span></div>
         <p>"Amazing food and great service! Will definitely come back."</p>
         <div class="aireply"><b>↳ AI Reply</b>Thank you so much, Sarah! We're thrilled you enjoyed your visit. We look forward to welcoming you again very soon! 😊</div>
       </div>
       <div class="review">
-        <div class="stars">★★★★★ <b style="font-weight:700;color:var(--ink)">Marie D. 🇫🇷</b></div>
+        <div class="stars">★★★★★ <span class="rname">Marie D. 🇫🇷</span></div>
         <p>"Très bon service, je recommande!"</p>
         <div class="aireply"><b>↳ AI Reply (French)</b>Merci beaucoup, Marie! Votre retour nous touche. À très bientôt! 😊</div>
       </div>
@@ -218,25 +258,25 @@
     </div>
     <div class="features">
       <div class="fcard">
-        <div class="ficon" style="background:#f3effe;color:var(--violet)">✦</div>
+        <div class="ficon" style="color:var(--violet)">✦</div>
         <h3>AI Tone Selection</h3>
         <p>Reply in your brand's voice — friendly, luxury, professional, or funny. The AI adapts to every review.</p>
         <div class="tags"><span class="tag">Friendly</span><span class="tag">Luxury</span><span class="tag">Professional</span></div>
       </div>
       <div class="fcard">
-        <div class="ficon" style="background:#fef2f2;color:#e11d48">🌐</div>
+        <div class="ficon" style="color:#e11d48">🌐</div>
         <h3>20+ Languages</h3>
         <p>Auto-detect the review language and reply in the same language — English, Hindi, French, German, Arabic &amp; more.</p>
         <div class="tags"><span class="tag">English</span><span class="tag">Hindi</span><span class="tag">French</span></div>
       </div>
       <div class="fcard">
-        <div class="ficon" style="background:#fff7ed;color:#ea580c">🔔</div>
+        <div class="ficon" style="color:#ea580c">🔔</div>
         <h3>Negative Review Alerts</h3>
         <p>Instant alerts for 1–3 star reviews. AI suggests a de-escalation reply so you approve before it posts.</p>
         <div class="tags"><span class="tag">Instant alerts</span><span class="tag">Owner approval</span></div>
       </div>
       <div class="fcard">
-        <div class="ficon" style="background:#ecfdf5;color:#059669">📊</div>
+        <div class="ficon" style="color:#059669">📊</div>
         <h3>Analytics Dashboard</h3>
         <p>Track rating trends, sentiment analysis, response rate, and top keywords from all your reviews.</p>
         <div class="tags"><span class="tag">Trends</span><span class="tag">Sentiment</span><span class="tag">Keywords</span></div>
@@ -246,7 +286,7 @@
 </section>
 
 <!-- HOW -->
-<section class="pad how" id="how">
+<section class="pad soft" id="how">
   <div class="wrap">
     <div class="center">
       <span class="eyebrow">How it works</span>
@@ -316,7 +356,7 @@
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="pad how" id="reviews">
+<section class="pad soft" id="reviews">
   <div class="wrap">
     <div class="center">
       <span class="eyebrow">Testimonials</span>
@@ -357,7 +397,7 @@
   <div class="wrap">
     <div class="fgrid">
       <div>
-        <a href="#" class="logo"><span class="dot">R</span> ReviewDot</a>
+        <a href="/index.html" class="logo"><span class="dot">R</span> ReviewDot</a>
         <p class="desc">AI-powered review management for businesses worldwide. Grow your reputation on autopilot.</p>
       </div>
       <div>
@@ -366,11 +406,11 @@
       </div>
       <div>
         <h4>Company</h4>
-        <ul><li><a href="#">About</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li></ul>
+        <ul><li><a href="#">About</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li><li><a href="mailto:hello@reviewdot.in">Contact</a></li></ul>
       </div>
       <div>
-        <h4>Legal</h4>
-        <ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Cookie Policy</a></li></ul>
+        <h4>Account</h4>
+        <ul><li><a href="/login.html">Sign in</a></li><li><a href="/signup.html">Create account</a></li></ul>
       </div>
     </div>
     <div class="fbottom">
@@ -380,5 +420,19 @@
   </div>
 </footer>
 
+<script>
+  function setTheme(t){
+    document.documentElement.setAttribute('data-theme',t);
+    try{localStorage.setItem('reviewdot-theme',t);}catch(e){}
+    syncToggle();
+  }
+  function syncToggle(){
+    var cur=document.documentElement.getAttribute('data-theme');
+    document.querySelectorAll('.theme-toggle button').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-set')===cur);
+    });
+  }
+  syncToggle();
+</script>
 </body>
 </html>
