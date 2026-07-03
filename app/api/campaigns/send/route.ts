@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
     });
   } else {
     await resend.emails.send({
-      from: "ReviewPilot <noreply@reviewpilot.in>",
+      from: "ReviewDot <noreply@reviewpilot.in>",
       to: recipient,
       subject: `How was your experience at ${business.name}?`,
       html: `

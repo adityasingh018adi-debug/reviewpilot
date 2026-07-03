@@ -2,7 +2,7 @@ export const dynamic = "force-dynamic";
 
 import { TeamPage } from "@/components/team/team-page";
 
-export const metadata = { title: "Team — ReviewPilot" };
+export const metadata = { title: "Team — ReviewDot" };
 
 export default function Page() {
   return (

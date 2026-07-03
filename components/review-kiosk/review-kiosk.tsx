@@ -373,7 +373,7 @@ export function ReviewKiosk({ businessName = "Sharma's Kitchen", businessCategor
         <div className="mt-8 text-center">
           <p className="text-xs text-gray-400">
             Powered by{" "}
-            <span className="text-violet-500 font-semibold">ReviewPilot AI</span>
+            <span className="text-violet-500 font-semibold">ReviewDot AI</span>
             {" "}· Review is AI-assisted, feel free to edit before posting
           </p>
         </div>

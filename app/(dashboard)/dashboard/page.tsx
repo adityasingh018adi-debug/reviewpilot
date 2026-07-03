@@ -9,7 +9,7 @@ import { MOCK_REVIEWS, MOCK_STATS, MOCK_BUSINESS } from "@/lib/mock-data";
 import { RefreshCw, Wifi, QrCode, Sparkles, TrendingUp, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-export const metadata = { title: "Dashboard — ReviewPilot" };
+export const metadata = { title: "Dashboard — ReviewDot" };
 
 async function getDashboardData() {
   return {

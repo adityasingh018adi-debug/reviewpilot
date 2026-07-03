@@ -1,6 +1,6 @@
 export const dynamic = "force-dynamic";
 
-export const metadata = { title: "Support — ReviewPilot" };
+export const metadata = { title: "Support — ReviewDot" };
 
 export default function Page() {
   return (

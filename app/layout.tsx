@@ -8,8 +8,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "ReviewPilot — AI Review Management for Businesses Worldwide",
-    template: "%s | ReviewPilot",
+    default: "ReviewDot — AI Review Management for Businesses Worldwide",
+    template: "%s | ReviewDot",
   },
   description:
     "Reply to Google reviews in seconds with AI, in 20+ languages. Protect your reputation and grow your business automatically — used by 500+ businesses worldwide.",

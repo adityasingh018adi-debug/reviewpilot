@@ -163,7 +163,7 @@ export function FeatureSlides() {
             <Sparkles className="h-5 w-5 text-violet-500" />
             All Features
           </h2>
-          <p className="text-xs text-gray-500 mt-0.5">Explore everything ReviewPilot can do for you</p>
+          <p className="text-xs text-gray-500 mt-0.5">Explore everything ReviewDot can do for you</p>
         </div>
         <div className="flex items-center gap-2">
           {/* Dot indicators */}
