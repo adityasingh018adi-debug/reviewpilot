@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create an account — ReviewDot</title>
+<meta name="description" content="Create your ReviewDot account — AI-powered review management to build trust, improve reputation, and grow your business.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%237c3aed'/%3E%3Ccircle cx='16' cy='16' r='6' fill='white'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#06060f; --card:#0c0c18; --panel-left:#0a0a16;
+    --input:#111120; --line:rgba(255,255,255,.09); --line-strong:rgba(255,255,255,.14);
+    --ink:#f5f6fb; --muted:#9096ad; --faint:#6b708a;
+    --blue:#60a5fa; --indigo:#6366f1; --purple:#a855f7; --green:#34d399;
+    --grad:linear-gradient(90deg,#4f46e5 0%,#7c3aed 55%,#a855f7 100%);
+    --grad-text:linear-gradient(90deg,#60a5fa,#a78bfa);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:
+      radial-gradient(900px 500px at 15% -5%,rgba(124,58,237,.18),transparent 55%),
+      radial-gradient(900px 600px at 100% 110%,rgba(59,130,246,.15),transparent 55%),
+      var(--bg);
+    color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;
+    padding:40px 20px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  .shell{width:100%;max-width:1060px}
+  .card{
+    display:grid;grid-template-columns:1fr 1.05fr;
+    background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.005));
+    border:1px solid var(--line);border-radius:26px;overflow:hidden;
+    box-shadow:0 40px 90px rgba(0,0,0,.55);
+  }
+
+  /* LEFT PANEL */
+  .left{padding:44px 42px;background:linear-gradient(160deg,rgba(99,102,241,.10),rgba(168,85,247,.04) 60%,transparent);border-right:1px solid var(--line)}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:38px}
+  .brand .mark{width:46px;height:46px;border-radius:14px;background:var(--grad);display:grid;place-items:center;box-shadow:0 10px 26px rgba(124,58,237,.5);position:relative}
+  .brand .mark svg{width:24px;height:24px}
+  .brand .name{font-size:26px;font-weight:800;letter-spacing:-.01em}
+  .brand .name b{background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .left h1{font-size:34px;line-height:1.15;font-weight:800;letter-spacing:-.02em;margin-bottom:16px}
+  .left h1 .hl{background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .left .sub{color:var(--muted);font-size:15.5px;max-width:330px;margin-bottom:34px}
+  .feat{display:flex;gap:14px;margin-bottom:22px}
+  .feat .ic{width:44px;height:44px;flex:none;border-radius:12px;display:grid;place-items:center}
+  .feat .ic svg{width:22px;height:22px}
+  .feat h3{font-size:15px;font-weight:700;margin-bottom:2px}
+  .feat p{font-size:13.5px;color:var(--muted);max-width:270px}
+  .ic-indigo{background:rgba(99,102,241,.16);color:#818cf8}
+  .ic-blue{background:rgba(59,130,246,.16);color:#60a5fa}
+  .ic-purple{background:rgba(168,85,247,.16);color:#c084fc}
+  .ic-green{background:rgba(52,211,153,.16);color:#34d399}
+  .illus{margin-top:30px;display:flex;justify-content:center}
+  .illus svg{width:100%;max-width:320px;height:auto}
+
+  /* RIGHT PANEL */
+  .right{padding:44px 46px}
+  .avatar{width:58px;height:58px;border-radius:16px;background:rgba(124,58,237,.14);border:1px solid rgba(168,85,247,.3);display:grid;place-items:center;margin-bottom:22px}
+  .avatar svg{width:26px;height:26px;color:#c084fc}
+  .right h2{font-size:32px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+  .right .haveacc{color:var(--muted);font-size:14.5px;margin-bottom:28px}
+  .right .haveacc a{color:#a78bfa;font-weight:600}
+  form{display:flex;flex-direction:column;gap:14px}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .field{position:relative}
+  .field .lead-ic{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--faint);pointer-events:none}
+  .field input{
+    width:100%;background:var(--input);border:1px solid var(--line);border-radius:12px;
+    color:var(--ink);font-size:14.5px;padding:15px 15px 15px 44px;outline:none;transition:border-color .15s,box-shadow .15s;
+  }
+  .field input::placeholder{color:var(--faint)}
+  .field input:focus{border-color:#7c3aed;box-shadow:0 0 0 3px rgba(124,58,237,.22)}
+  .field .eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:20px;height:20px;color:var(--faint);cursor:pointer;background:none;border:none;padding:0}
+  .forgot{text-align:right;margin-top:-4px}
+  .forgot a{color:#a78bfa;font-size:13.5px;font-weight:600}
+  .agree{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:var(--muted);margin:6px 0 4px}
+  .agree input{accent-color:#7c3aed;width:17px;height:17px;margin-top:2px;flex:none}
+  .agree a{color:#a78bfa;font-weight:600}
+  .submit{
+    display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
+    background:var(--grad);color:#fff;font-size:16px;font-weight:700;border:none;border-radius:14px;
+    padding:16px;cursor:pointer;box-shadow:0 14px 34px rgba(124,58,237,.45);transition:transform .15s,box-shadow .15s;margin-top:6px;
+  }
+  .submit:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(124,58,237,.55)}
+  .submit svg{width:20px;height:20px}
+  .divider{display:flex;align-items:center;gap:14px;color:var(--faint);font-size:13px;margin:22px 0}
+  .divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+  .oauth{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .oauth a{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--input);border:1px solid var(--line);border-radius:12px;padding:13px;font-size:14px;font-weight:600;transition:border-color .15s,background .15s}
+  .oauth a:hover{border-color:var(--line-strong);background:#16162a}
+  .oauth svg{width:19px;height:19px}
+
+  /* FOOTER TRUST */
+  .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:30px;padding-top:6px}
+  .trust .t{display:flex;align-items:center;gap:12px}
+  .trust .tic{width:44px;height:44px;flex:none;border-radius:12px;display:grid;place-items:center}
+  .trust .tic svg{width:20px;height:20px}
+  .trust b{display:block;font-size:14px}
+  .trust small{font-size:12.5px;color:var(--muted)}
+  .copyright{text-align:center;color:var(--faint);font-size:13px;margin-top:24px;display:flex;align-items:center;justify-content:center;gap:8px}
+  .copyright svg{width:15px;height:15px;color:var(--faint)}
+
+  @media(max-width:860px){
+    .card{grid-template-columns:1fr}
+    .left{display:none}
+    .right{padding:38px 26px}
+  }
+  @media(max-width:520px){
+    .row2{grid-template-columns:1fr}
+    .oauth{grid-template-columns:1fr}
+    .trust{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="card">
+
+    <!-- LEFT -->
+    <div class="left">
+      <a href="/index.html" class="brand">
+        <span class="mark">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.6-.8L3 21l1.9-5.4A8.38 8.38 0 0 1 4 12a8.5 8.5 0 0 1 8.5-8.5A8.38 8.38 0 0 1 21 11.5Z" fill="#fff" opacity=".95"/><path d="m15.4 5.6.9 1.9 2 .3-1.5 1.4.4 2-1.8-1-1.8 1 .4-2-1.5-1.4 2-.3.9-1.9Z" fill="#facc15"/></svg>
+        </span>
+        <span class="name">Review<b>Dot</b></span>
+      </a>
+
+      <h1>Smarter Reviews.<br>Stronger <span class="hl">Business.</span></h1>
+      <p class="sub">AI-Powered Review Management to Build Trust, Improve Reputation and Grow Your Business.</p>
+
+      <div class="feat">
+        <div class="ic ic-indigo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div><h3>Collect More Reviews</h3><p>Automatically collect reviews from Google, Facebook and 20+ platforms.</p></div>
+      </div>
+      <div class="feat">
+        <div class="ic ic-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
+        <div><h3>Manage All in One Place</h3><p>View, reply and manage all your reviews from one powerful dashboard.</p></div>
+      </div>
+      <div class="feat">
+        <div class="ic ic-purple"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg></div>
+        <div><h3>AI Auto Response</h3><p>Generate smart, personalized responses in seconds with AI.</p></div>
+      </div>
+      <div class="feat">
+        <div class="ic ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg></div>
+        <div><h3>Build Trust &amp; Grow</h3><p>Improve your reputation, get more customers and grow faster.</p></div>
+      </div>
+
+      <div class="illus" aria-hidden="true">
+        <svg viewBox="0 0 320 190" fill="none">
+          <rect x="30" y="20" width="260" height="150" rx="14" fill="#12122a" stroke="rgba(255,255,255,.08)"/>
+          <circle cx="46" cy="36" r="3" fill="#f87171"/><circle cx="58" cy="36" r="3" fill="#fbbf24"/><circle cx="70" cy="36" r="3" fill="#34d399"/>
+          <rect x="46" y="52" width="90" height="7" rx="3.5" fill="rgba(255,255,255,.14)"/>
+          <rect x="46" y="66" width="150" height="7" rx="3.5" fill="rgba(255,255,255,.08)"/>
+          <path d="M50 150 L90 120 L120 132 L160 96 L200 108 L250 74" stroke="#a855f7" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M50 150 L90 120 L120 132 L160 96 L200 108 L250 74 L250 158 L50 158 Z" fill="url(#g)" opacity=".25"/>
+          <circle cx="80" cy="132" r="26" fill="none" stroke="#3b82f6" stroke-width="8" stroke-dasharray="90 120" transform="rotate(-90 80 132)"/>
+          <circle cx="80" cy="132" r="26" fill="none" stroke="#a855f7" stroke-width="8" stroke-dasharray="50 160" stroke-dashoffset="-90" transform="rotate(-90 80 132)"/>
+          <rect x="150" y="118" width="34" height="30" rx="4" fill="#6366f1" opacity=".5"/>
+          <rect x="190" y="104" width="34" height="44" rx="4" fill="#a855f7" opacity=".6"/>
+          <g transform="translate(210 30)">
+            <rect x="0" y="0" width="86" height="30" rx="8" fill="#1a1a3a" stroke="rgba(255,255,255,.1)"/>
+            <text x="10" y="20" font-size="14" fill="#fbbf24">★★★★★</text>
+          </g>
+          <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a855f7"/><stop offset="1" stop-color="#a855f7" stop-opacity="0"/></linearGradient></defs>
+        </svg>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+      <div class="avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></div>
+      <h2>Create an account</h2>
+      <p class="haveacc">Already have an account? <a href="/login.html">Log in</a></p>
+
+      <form onsubmit="event.preventDefault();alert('Demo form — connect this to your backend to create real accounts.');">
+        <div class="row2">
+          <div class="field">
+            <svg class="lead-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
+            <input type="text" placeholder="First name" autocomplete="given-name">
+          </div>
+          <div class="field">
+            <input type="text" placeholder="Last name" style="padding-left:15px" autocomplete="family-name">
+          </div>
+        </div>
+        <div class="field">
+          <svg class="lead-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          <input type="email" placeholder="Email address" autocomplete="email">
+        </div>
+        <div class="field">
+          <svg class="lead-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          <input type="password" placeholder="Enter your password" id="pw1" autocomplete="new-password">
+          <button type="button" class="eye" onclick="tog('pw1')" aria-label="Show password"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+        </div>
+        <div class="field">
+          <svg class="lead-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          <input type="password" placeholder="Confirm your password" id="pw2" autocomplete="new-password">
+          <button type="button" class="eye" onclick="tog('pw2')" aria-label="Show password"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+        </div>
+        <div class="forgot"><a href="/login.html">Forgot password?</a></div>
+        <label class="agree"><input type="checkbox" checked><span>I agree to the <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a></span></label>
+        <button type="submit" class="submit">Create account <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </form>
+
+      <div class="divider">Or register with</div>
+      <div class="oauth">
+        <a href="#"><svg viewBox="0 0 24 24"><path fill="#4285F4" d="M23 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.2a5.3 5.3 0 0 1-2.3 3.5v2.9h3.7c2.2-2 3.4-5 3.4-8.6Z"/><path fill="#34A853" d="M12 24c3.1 0 5.7-1 7.6-2.8l-3.7-2.9c-1 .7-2.3 1.1-3.9 1.1-3 0-5.5-2-6.4-4.7H1.8v3C3.7 21.4 7.6 24 12 24Z"/><path fill="#FBBC05" d="M5.6 14.7a7.2 7.2 0 0 1 0-4.6v-3H1.8a12 12 0 0 0 0 10.6l3.8-3Z"/><path fill="#EA4335" d="M12 4.8c1.7 0 3.2.6 4.4 1.7l3.3-3.3C17.7 1.2 15.1 0 12 0 7.6 0 3.7 2.6 1.8 6.4l3.8 3C6.5 6.7 9 4.8 12 4.8Z"/></svg> Google</a>
+        <a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2 1.6-3 1.7-3.1-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.3 2-1.4 2.4-.4 6 1 8 .7 1 1.5 2 2.5 2 1 0 1.4-.6 2.6-.6 1.2 0 1.5.6 2.6.6 1.1 0 1.8-1 2.4-2 .8-1.1 1.1-2.2 1.1-2.3 0 0-2.1-.8-2.1-3.1ZM14.6 5.9c.5-.7.9-1.6.8-2.6-.8 0-1.8.6-2.4 1.2-.5.6-1 1.5-.8 2.5.9 0 1.8-.5 2.4-1.1Z"/></svg> Apple</a>
+      </div>
+
+      <div class="trust">
+        <div class="t"><span class="tic ic-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg></span><div><b>Secure &amp; Protected</b><small>Your data is safe with us</small></div></div>
+        <div class="t"><span class="tic ic-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><div><b>No Credit Card</b><small>No credit card required</small></div></div>
+        <div class="t"><span class="tic ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="M22 4 12 14.1l-3-3"/></svg></span><div><b>Easy Setup</b><small>Get started in 2 minutes</small></div></div>
+      </div>
+
+      <div class="copyright"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg> © 2025 ReviewDot. All rights reserved.</div>
+    </div>
+
+  </div>
+</div>
+<script>
+  function tog(id){var i=document.getElementById(id);i.type=i.type==='password'?'text':'password';}
+</script>
+</body>
+</html>
