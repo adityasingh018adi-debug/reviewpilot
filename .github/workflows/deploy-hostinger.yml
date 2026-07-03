@@ -9,6 +9,12 @@ name: Deploy site to Hostinger
 #     FTP_USERNAME  e.g. u504476760.reviewdot.in
 #     FTP_PASSWORD  your FTP account password
 # Get these in Hostinger: hPanel → Websites → reviewdot.in → Files → FTP Accounts.
+#
+# server-dir is "./" (the FTP login's own home directory), not "public_html/" --
+# for this site-specific FTP account, the login home already IS the live docroot.
+# Using "public_html/" here previously caused every deploy to land one folder too
+# deep, in an unused public_html/public_html/, while the real site kept serving
+# whatever was last uploaded manually.
 
 on:
   push:
@@ -36,7 +42,7 @@ jobs:
           protocol: ftps
           port: 21
           local-dir: ./hostinger-site/
-          server-dir: public_html/
+          server-dir: ./
           # Keep the deploy log out of the served site
           exclude: |
             **/.git*
