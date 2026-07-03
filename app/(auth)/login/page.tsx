@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,23 +15,51 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Sparkles, ArrowRight, Star, Zap, Shield } from "lucide-react";
-
-// Demo mode — auth is bypassed; everyone can explore the full dashboard
-const DEMO_MODE = true;
+import { Sparkles, ArrowRight, Star, Zap, Shield, AlertCircle } from "lucide-react";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const router = useRouter();
 
   function enterDemo() {
     router.push("/dashboard");
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  function googleComingSoon() {
+    setError("Google sign-in isn't set up yet — use email and password below.");
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    enterDemo();
+    setError("");
+
+    if (!email || !password) {
+      setError("Please enter your email and password.");
+      return;
+    }
+
+    setLoading(true);
+    const supabase = createClient();
+    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+    setLoading(false);
+
+    if (signInError) {
+      const lower = signInError.message.toLowerCase();
+      setError(
+        lower.includes("invalid login")
+          ? "Incorrect email or password."
+          : lower.includes("email not confirmed")
+          ? "Please confirm your email first — check your inbox for the confirmation link."
+          : signInError.message
+      );
+      return;
+    }
+
+    router.push("/dashboard");
+    router.refresh();
   }
 
   return (
@@ -81,7 +110,7 @@ export default function LoginPage() {
           <Button
             variant="outline"
             className="w-full"
-            onClick={enterDemo}
+            onClick={googleComingSoon}
           >
             <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
@@ -100,6 +129,13 @@ export default function LoginPage() {
               <span className="bg-background px-2 text-muted-foreground">Or continue with email</span>
             </div>
           </div>
+
+          {error && (
+            <div className="flex items-start gap-2 rounded-lg bg-red-50 text-red-700 text-sm px-3 py-2.5">
+              <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
+              <span>{error}</span>
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
@@ -130,8 +166,8 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <Button type="submit" className="w-full">
-              Sign in
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "Signing in..." : "Sign in"}
             </Button>
           </form>
         </CardContent>
