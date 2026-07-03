@@ -1,0 +1,54 @@
+name: Diagnose Supabase auth
+
+# One-off diagnostic: tests the Supabase CDN, project health, and the actual
+# signup API call directly from GitHub's servers (which have real internet
+# access), to see the true error Supabase returns -- without needing to dig
+# through browser DevTools. Safe to run repeatedly; trigger manually from
+# the Actions tab ("Run workflow").
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Supabase CDN script is reachable
+        run: |
+          echo "=== CDN check ==="
+          curl -sS -o /dev/null -w "HTTP %{http_code}, %{size_download} bytes\n" \
+            "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" || true
+
+      - name: Check Supabase project health
+        run: |
+          echo "=== Project health check ==="
+          curl -sS -o /dev/null -w "HTTP %{http_code}\n" \
+            "https://okcjqgkbzhnslsafqebk.supabase.co/auth/v1/health" || true
+
+      - name: Check Supabase project settings (auth config)
+        run: |
+          echo "=== Auth settings ==="
+          curl -sS "https://okcjqgkbzhnslsafqebk.supabase.co/auth/v1/settings" \
+            -H "apikey: sb_publishable_OrP4ORHi5ROyKA7XPsxfKQ_4twHqLo1" || true
+          echo ""
+
+      - name: Attempt a real signup call
+        run: |
+          echo "=== Real signup attempt ==="
+          TEST_EMAIL="diag-test-$(date +%s)@example.com"
+          echo "Using test email: $TEST_EMAIL"
+          curl -sS -w "\nHTTP %{http_code}\n" \
+            -X POST "https://okcjqgkbzhnslsafqebk.supabase.co/auth/v1/signup" \
+            -H "apikey: sb_publishable_OrP4ORHi5ROyKA7XPsxfKQ_4twHqLo1" \
+            -H "Content-Type: application/json" \
+            -d "{\"email\":\"$TEST_EMAIL\",\"password\":\"diagTestPass123\"}"
+
+      - name: Check reviewdot.in serves signup.html with expected content
+        run: |
+          echo "=== Live site check ==="
+          curl -sS "https://reviewdot.in/signup.html" -o /tmp/live_signup.html \
+            -w "HTTP %{http_code}\n"
+          echo "-- contains supabase CDN reference --"
+          grep -o 'cdn.jsdelivr.net[^"]*' /tmp/live_signup.html || echo "NOT FOUND"
+          echo "-- contains signup form id --"
+          grep -o 'id="signupForm"' /tmp/live_signup.html || echo "NOT FOUND"
