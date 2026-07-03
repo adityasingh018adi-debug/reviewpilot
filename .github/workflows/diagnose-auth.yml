@@ -52,3 +52,23 @@ jobs:
           grep -o 'cdn.jsdelivr.net[^"]*' /tmp/live_signup.html || echo "NOT FOUND"
           echo "-- contains signup form id --"
           grep -o 'id="signupForm"' /tmp/live_signup.html || echo "NOT FOUND"
+
+      - name: List Resend domains
+        run: |
+          echo "=== Resend domains ==="
+          curl -sS "https://api.resend.com/domains" \
+            -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" | python3 -m json.tool
+
+      - name: Get reviewdot.in DNS records from Resend
+        run: |
+          echo "=== reviewdot.in DNS records (full, untruncated) ==="
+          DOMAIN_ID=$(curl -sS "https://api.resend.com/domains" \
+            -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" | \
+            python3 -c "import sys,json; d=json.load(sys.stdin); print(next((x['id'] for x in d['data'] if x['name']=='reviewdot.in'), 'NOT_FOUND'))")
+          echo "Domain ID: $DOMAIN_ID"
+          if [ "$DOMAIN_ID" != "NOT_FOUND" ]; then
+            curl -sS "https://api.resend.com/domains/$DOMAIN_ID" \
+              -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" | python3 -m json.tool
+          else
+            echo "reviewdot.in not found in this Resend account's domain list."
+          fi
