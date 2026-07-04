@@ -367,3 +367,7 @@
   0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
   50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.6); }
 }
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
