@@ -1,1 +1,93 @@
-bmFtZTogRGlhZ25vc2UgU3VwYWJhc2UgYXV0aAoKIyBPbmUtb2ZmIGRpYWdub3N0aWM6IHRlc3RzIHRoZSBTdXBhYmFzZSBDRE4sIHByb2plY3QgaGVhbHRoLCBhbmQgdGhlIGFjdHVhbAojIHNpZ251cCBBUEkgY2FsbCBkaXJlY3RseSBmcm9tIEdpdEh1YidzIHNlcnZlcnMgKHdoaWNoIGhhdmUgcmVhbCBpbnRlcm5ldAojIGFjY2VzcyksIHRvIHNlZSB0aGUgdHJ1ZSBlcnJvciBTdXBhYmFzZSByZXR1cm5zIC0tIHdpdGhvdXQgbmVlZGluZyB0byBkaWcKIyB0aHJvdWdoIGJyb3dzZXIgRGV2VG9vbHMuIFNhZmUgdG8gcnVuIHJlcGVhdGVkbHksIHRyaWdnZXIgbWFudWFsbHkgZnJvbQojIHRoZSBBY3Rpb25zIHRhYiAoIlJ1biB3b3JrZmxvdyIpLgoKb246CiAgd29ya2Zsb3dfZGlzcGF0Y2g6IHt9Cgpqb2JzOgogIGRpYWdub3NlOgogICAgcnVucy1vbjogdWJ1bnR1LWxhdGVzdAogICAgc3RlcHM6CiAgICAgIC0gbmFtZTogQ2hlY2sgU3VwYWJhc2UgQ0ROIHNjcmlwdCBpcyByZWFjaGFibGUKICAgICAgICBydW46IHwKICAgICAgICAgIGVjaG8gIj09PSBDRE4gY2hlY2sgPT09IgogICAgICAgICAgY3VybCAtc1MgLW8gL2Rldi9udWxsIC13ICJIVFRQICV7aHR0cF9jb2RlfSwgJXtzaXplX2Rvd25sb2FkfSBieXRlc1xuIiBcCiAgICAgICAgICAgICJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvbnBtL0BzdXBhYmFzZS9zdXBhYmFzZS1qc0AyIiB8fCB0cnVlCgogICAgICAtIG5hbWU6IENoZWNrIFN1cGFiYXNlIHByb2plY3QgaGVhbHRoCiAgICAgICAgcnVuOiB8CiAgICAgICAgICBlY2hvICI9PT0gUHJvamVjdCBoZWFsdGggY2hlY2sgPT09IgogICAgICAgICAgY3VybCAtc1MgLW8gL2Rldi9udWxsIC13ICJIVFRQICV7aHR0cF9jb2RlfVxuIiBcCiAgICAgICAgICAgICJodHRwczovL29rY2pxZ2tiemhuc2xzYWZxZWJrLnN1cGFiYXNlLmNvL2F1dGgvdjEvaGVhbHRoIiB8fCB0cnVlCgogICAgICAtIG5hbWU6IENoZWNrIFN1cGFiYXNlIHByb2plY3Qgc2V0dGluZ3MgKGF1dGggY29uZmlnKQogICAgICAgIHJ1bjogfAogICAgICAgICAgZWNobyAiPT09IEF1dGggc2V0dGluZ3MgPT09IgogICAgICAgICAgY3VybCAtc1MgImh0dHBzOi8vb2tjanFna2J6aG5zbHNhZnFlYmsuc3VwYWJhc2UuY28vYXV0aC92MS9zZXR0aW5ncyIgXAogICAgICAgICAgICAtSCAiYXBpa2V5OiBzYl9wdWJsaXNoYWJsZV9PclA0T1JIaTVST3lLQTdYUHN4ZlEmXzR0d0hxTG8xIiB8fCB0cnVlCiAgICAgICAgICBlY2hvICIiCgogICAgICAtIG5hbWU6IEF0dGVtcHQgYSByZWFsIHNpZ251cCBjYWxsCiAgICAgICAgcnVuOiB8CiAgICAgICAgICBlY2hvICI9PT0gUmVhbCBzaWdudXAgYXR0ZW1wdCA9PT0iCiAgICAgICAgICBURVNUX0VNQUlMPSJkaWFnLXRlc3QtJChkYXRlICslcyEpQGV4YW1wbGUuY29tIgogICAgICAgICAgZWNobyAiVXNpbmcgdGVzdCBlbWFpbDogJFRFU1RfRU1BSUwiCiAgICAgICAgICBjdXJsIC1zUyAtdyAiXG5IVFRQICV7aHR0cF9jb2RlfVxuIiBcCiAgICAgICAgICAgIC1YIFBPU1QgImh0dHBzOi8vb2tjanFna2J6aG5zbHNhZnFlYmsuc3VwYWJhc2UuY28vYXV0aC92MS9zaWdudXAiIFwKICAgICAgICAgICAgLUggImFwaWtleTogc2JfcHVibGlzaGFibGVfT3JQNE9SSGk1Uk95S0E3WFBzeGZRXzR0d0hxTG8xIiBcCiAgICAgICAgICAgIC1IICJDb250ZW50LVR5cGU6IGFwcGxpY2F0aW9uL2pzb24iIFwKICAgICAgICAgICAgLWQgIntcImVtYWlsXCI6XCIkVEVTVF9FTUFJTFwiLFwicGFzc3dvcmRcIjpcImRpYWdUZXN0UGFzczEyM1wifSIKCiAgICAgIC0gbmFtZTogQ2hlY2sgcmV2aWV3ZG90LmluIHNlcnZlcyBzaWdudXAuaHRtbCB3aXRoIGV4cGVjdGVkIGNvbnRlbnQKICAgICAgICBydW46IHwKICAgICAgICAgIGVjaG8gIj09PSBMaXZlIHNpdGUgY2hlY2sgPT09IgogICAgICAgICAgY3VybCAtc1MgImh0dHBzOi8vcmV2aWV3ZG90LmluL3NpZ251cC5odG1sIiAtbyAvdG1wL2xpdmVfc2lnbnVwLmh0bWwgXAogICAgICAgICAgICAtdyAiSFRUUCAle2h0dHBfY29kZX1cbiIKICAgICAgICAgIGVjaG8gIi0tIGNvbnRhaW5zIHN1cGFiYXNlIENETiByZWZlcmVuY2UgLS0iCiAgICAgICAgICBncmVwIC1vICdjZG4uanNkZWxpdnIubmV0W14iXSonIC90bXAvbGl2ZV9zaWdudXAuaHRtbCB8fCBlY2hvICJOT1QgRk9VTkQiCiAgICAgICAgICBlY2hvICItLSBjb250YWlucyBzaWdudXAgZm9ybSBpZCAtLSIKICAgICAgICAgIGdyZXAgLW8gJ2lkPSJzaWdudXBGb3JtIicgL3RtcC9saXZlX3NpZ251cC5odG1sIHx8IGVjaG8gIk5PVCBGT1VORCIKCiAgICAgIC0gbmFtZTogTGlzdCBSZXNlbmQgZG9tYWlucwogICAgICAgIHJ1bjogfAogICAgICAgICAgZWNobyAiPT09IFJlc2VuZCBkb21haW5zID09PSIKICAgICAgICAgIGN1cmwgLXNTICJodHRwczovL2FwaS5yZXNlbmQuY29tL2RvbWFpbnMiIFwKICAgICAgICAgICAgLUggIkF1dGhvcml6YXRpb246IEJlYXJlciAke3sgc2VjcmV0cy5SRVNFTkRfQVBJX0tFWSB9fSIgfCBweXRob24zIC1tIGpzb24udG9vbAoKICAgICAgLSBuYW1lOiBHZXQgcmV2aWV3ZG90LmluIEROUyByZWNvcmRzIGZyb20gUmVzZW5kCiAgICAgICAgcnVuOiB8CiAgICAgICAgICBlY2hvICI9PT0gcmV2aWV3ZG90LmluIEROUyByZWNvcmRzIChmdWxsLCB1bnRydW5jYXRlZCkgPT09IgogICAgICAgICAgRE9NQUlOX0lEPSQoY3VybCAtc1MgImh0dHBzOi8vYXBpLnJlc2VuZC5jb20vZG9tYWlucyIgXAogICAgICAgICAgICAtSCAiQXV0aG9yaXphdGlvbjogQmVhcmVyICR7eyBzZWNyZXRzLlJFU0VORF9BUElfS0VZIH19IiB8IFwKICAgICAgICAgICAgcHl0aG9uMyAtYyAiaW1wb3J0IHN5cyxqc29uOyBkPWpzb24ubG9hZChzeXMuc3RkaW4pOyBwcmludChuZXh0KCh4WydpZCddIGZvciB4IGluIGRbJ2RhdGEnXSBpZiB4WyduYW1lJ109PSdyZXZpZXdkb3QuaW4nKSwgJ05PVF9GT1VORCcpKSIpCiAgICAgICAgICBlY2hvICJEb21haW4gSUQ6ICRET01BSU5fSUQiCiAgICAgICAgICBpZiBbICIkRE9NQUlOX0lEIiAhPSAiTk9UX0ZPVU5EIiBdOyB0aGVuCiAgICAgICAgICAgIGN1cmwgLXNTICJodHRwczovL2FwaS5yZXNlbmQuY29tL2RvbWFpbnMvJERPTUFJTl9JRCIgXAogICAgICAgICAgICAgIC1IICJBdXRob3JpemF0aW9uOiBCZWFyZXIgJHt7IHNlY3JldHMuUkVTRU5EX0FQSV9LRVkgfX0iIHwgcHl0aG9uMyAtbSBqc29uLnRvb2wKICAgICAgICAgIGVsc2UKICAgICAgICAgICAgZWNobyAicmV2aWV3ZG90LmluIG5vdCBmb3VuZCBpbiB0aGlzIFJlc2VuZCBhY2NvdW50J3MgZG9tYWluIGxpc3QuIgogICAgICAgICAgZmkKCiAgICAgIC0gbmFtZTogQ2hlY2sgSG9zdGluZ2VyIGFwcCdzIGxvZ2luIHBhZ2UgYW5kIEpTIGJ1bmRsZSBmb3IgcmVhbCB2cyBwbGFjZWhvbGRlciBTdXBhYmFzZSBjb25maWcKICAgICAgICBydW46IHwKICAgICAgICAgIGVjaG8gIj09PSBIb3N0aW5nZXIgYXBwIEhUTUwgPT09IgogICAgICAgICAgY3VybCAtc1NMICJodHRwczovL3NreWJsdWUtYW50ZWF0ZXItNjg0OTg5Lmhvc3RpbmdlcnNpdGUuY29tL2xvZ2luIiAtbyAvdG1wL2hvc3Rpbmdlcl9sb2dpbi5odG1sIFwKICAgICAgICAgICAgLXcgIkhUVFAgJXtodHRwX2NvZGV9XG4iCiAgICAgICAgICBlY2hvICItLSBpbmxpbmUgU3VwYWJhc2UgVVJMIHJlZmVyZW5jZXMgaW4gSFRNTCAtLSIKICAgICAgICAgIGdyZXAgLW8gJ29rY2pxZ2tiemhuc2xzYWZxZWJrW2EtekEtWjAtOS4vXSpcfHBsYWNlaG9sZGVyXC5zdXBhYmFzZVwuY28nIC90bXAvaG9zdGluZ2VyX2xvZ2luLmh0bWwgfHwgZWNobyAiTk9UIEZPVU5EIGluIEhUTUwiCgogICAgICAgICAgZWNobyAiPT09IEV4dHJhY3RpbmcgSlMgYnVuZGxlIFVSTHMgPT09IgogICAgICAgICAgQlVORExFUz0kKGdyZXAgLW8gJy9fbmV4dC9zdGF0aWMvW14iXSpcLmpzJyAvdG1wL2hvc3Rpbmdlcl9sb2dpbi5odG1sIHwgc29ydCAtdSkKICAgICAgICAgIGVjaG8gIiRCVU5ETEVTIgoKICAgICAgICAgIGVjaG8gIj09PSBTY2FubmluZyBKUyBidW5kbGVzIGZvciBTdXBhYmFzZSBjb25maWcgPT09IgogICAgICAgICAgZm9yIGIgaW4gJEJVTkRMRVM7IGRvCiAgICAgICAgICAgIGVjaG8gIi0tICRiIC0tIgogICAgICAgICAgICBjdXJsIC1zU0wgImh0dHBzOi8vc2t5Ymx1ZS1hbnRlYXRlci02ODQ5ODkuaG9zdGluZ2Vyc2l0ZS5jb20kYiIgLW8gL3RtcC9idW5kbGUuanMKICAgICAgICAgICAgZ3JlcCAtbyAnb2tjanFna2J6aG5zbHNhZnFlYmtbYS16QS1aMC05Li9dKlx8cGxhY2Vob2xkZXJcLnN1cGFiYXNlXC5jb1x8cGxhY2Vob2xkZXIta2V5JyAvdG1wL2J1bmRsZS5qcyB8fCBlY2hvICIgICAobm8gbWF0Y2ggaW4gdGhpcyBidW5kbGUpIgogICAgICAgICAgZG9uZQo=
+name: Diagnose Supabase auth
+
+# One-off diagnostic: tests the Supabase CDN, project health, and the actual
+# signup API call directly from GitHub's servers (which have real internet
+# access), to see the true error Supabase returns -- without needing to dig
+# through browser DevTools. Safe to run repeatedly; trigger manually from
+# the Actions tab ("Run workflow").
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Supabase CDN script is reachable
+        run: |
+          echo "=== CDN check ==="
+          curl -sS -o /dev/null -w "HTTP %{http_code}, %{size_download} bytes\n" \
+            "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" || true
+
+      - name: Check Supabase project health
+        run: |
+          echo "=== Project health check ==="
+          curl -sS -o /dev/null -w "HTTP %{http_code}\n" \
+            "https://okcjqgkbzhnslsafqebk.supabase.co/auth/v1/health" || true
+
+      - name: Check Supabase project settings (auth config)
+        run: |
+          echo "=== Auth settings ==="
+          curl -sS "https://okcjqgkbzhnslsafqebk.supabase.co/auth/v1/settings" \
+            -H "apikey: sb_publishable_OrP4ORHi5ROyKA7XPsxfKQ_4twHqLo1" || true
+          echo ""
+
+      - name: Attempt a real signup call
+        run: |
+          echo "=== Real signup attempt ==="
+          TEST_EMAIL="diag-test-$(date +%s)@example.com"
+          echo "Using test email: $TEST_EMAIL"
+          curl -sS -w "\nHTTP %{http_code}\n" \
+            -X POST "https://okcjqgkbzhnslsafqebk.supabase.co/auth/v1/signup" \
+            -H "apikey: sb_publishable_OrP4ORHi5ROyKA7XPsxfKQ_4twHqLo1" \
+            -H "Content-Type: application/json" \
+            -d "{\"email\":\"$TEST_EMAIL\",\"password\":\"diagTestPass123\"}"
+
+      - name: Check reviewdot.in serves signup.html with expected content
+        run: |
+          echo "=== Live site check ==="
+          curl -sS "https://reviewdot.in/signup.html" -o /tmp/live_signup.html \
+            -w "HTTP %{http_code}\n"
+          echo "-- contains supabase CDN reference --"
+          grep -o 'cdn.jsdelivr.net[^"]*' /tmp/live_signup.html || echo "NOT FOUND"
+          echo "-- contains signup form id --"
+          grep -o 'id="signupForm"' /tmp/live_signup.html || echo "NOT FOUND"
+
+      - name: List Resend domains
+        run: |
+          echo "=== Resend domains ==="
+          curl -sS "https://api.resend.com/domains" \
+            -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" | python3 -m json.tool
+
+      - name: Get reviewdot.in DNS records from Resend
+        run: |
+          echo "=== reviewdot.in DNS records (full, untruncated) ==="
+          DOMAIN_ID=$(curl -sS "https://api.resend.com/domains" \
+            -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" | \
+            python3 -c "import sys,json; d=json.load(sys.stdin); print(next((x['id'] for x in d['data'] if x['name']=='reviewdot.in'), 'NOT_FOUND'))")
+          echo "Domain ID: $DOMAIN_ID"
+          if [ "$DOMAIN_ID" != "NOT_FOUND" ]; then
+            curl -sS "https://api.resend.com/domains/$DOMAIN_ID" \
+              -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" | python3 -m json.tool
+          else
+            echo "reviewdot.in not found in this Resend account's domain list."
+          fi
+
+      - name: Check Hostinger app's login page and JS bundle for real vs placeholder Supabase config
+        run: |
+          echo "=== Hostinger app HTML ==="
+          curl -sSL "https://skyblue-anteater-684989.hostingersite.com/login" -o /tmp/hostinger_login.html \
+            -w "HTTP %{http_code}\n"
+          echo "-- inline Supabase URL references in HTML --"
+          grep -o 'okcjqgkbzhnslsafqebk[a-zA-Z0-9./]*\|placeholder\.supabase\.co' /tmp/hostinger_login.html || echo "NOT FOUND in HTML"
+
+          echo "=== Extracting JS bundle URLs ==="
+          BUNDLES=$(grep -o '/_next/static/[^"]*\.js' /tmp/hostinger_login.html | sort -u)
+          echo "$BUNDLES"
+
+          echo "=== Scanning JS bundles for Supabase config ==="
+          for b in $BUNDLES; do
+            echo "-- $b --"
+            curl -sSL "https://skyblue-anteater-684989.hostingersite.com$b" -o /tmp/bundle.js
+            grep -o 'okcjqgkbzhnslsafqebk[a-zA-Z0-9./]*\|placeholder\.supabase\.co\|placeholder-key' /tmp/bundle.js || echo "  (no match in this bundle)"
+          done
