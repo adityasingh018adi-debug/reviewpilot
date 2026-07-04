@@ -43,15 +43,17 @@ jobs:
             -H "Content-Type: application/json" \
             -d "{\"email\":\"$TEST_EMAIL\",\"password\":\"diagTestPass123\"}"
 
-      - name: Check reviewdot.in serves signup.html with expected content
+      - name: Check reviewdot.in serves the Next.js app (root domain now points here)
         run: |
           echo "=== Live site check ==="
-          curl -sS "https://reviewdot.in/signup.html" -o /tmp/live_signup.html \
+          curl -sS "https://reviewdot.in/" -o /tmp/live_root.html \
             -w "HTTP %{http_code}\n"
-          echo "-- contains supabase CDN reference --"
-          grep -o 'cdn.jsdelivr.net[^"]*' /tmp/live_signup.html || echo "NOT FOUND"
-          echo "-- contains signup form id --"
-          grep -o 'id="signupForm"' /tmp/live_signup.html || echo "NOT FOUND"
+          echo "-- contains ReviewDot landing page marker --"
+          grep -o 'Turn Every' /tmp/live_root.html || echo "NOT FOUND"
+          echo ""
+          echo "=== /signup route check ==="
+          curl -sS "https://reviewdot.in/signup" -o /tmp/live_signup.html \
+            -w "HTTP %{http_code}\n"
 
       - name: List Resend domains
         run: |
@@ -73,10 +75,10 @@ jobs:
             echo "reviewdot.in not found in this Resend account's domain list."
           fi
 
-      - name: Check Hostinger app's login page and JS bundle for real vs placeholder Supabase config
+      - name: Check reviewdot.in login page JS bundle for real vs placeholder Supabase config, and for stale Vercel URLs
         run: |
-          echo "=== Hostinger app HTML ==="
-          curl -sSL "https://skyblue-anteater-684989.hostingersite.com/login" -o /tmp/hostinger_login.html \
+          echo "=== reviewdot.in app HTML (/login) ==="
+          curl -sSL "https://reviewdot.in/login" -o /tmp/hostinger_login.html \
             -w "HTTP %{http_code}\n"
           echo "-- inline Supabase URL references in HTML --"
           grep -o 'okcjqgkbzhnslsafqebk[a-zA-Z0-9./]*\|placeholder\.supabase\.co' /tmp/hostinger_login.html || echo "NOT FOUND in HTML"
@@ -85,9 +87,9 @@ jobs:
           BUNDLES=$(grep -o '/_next/static/[^"]*\.js' /tmp/hostinger_login.html | sort -u)
           echo "$BUNDLES"
 
-          echo "=== Scanning JS bundles for Supabase config ==="
+          echo "=== Scanning JS bundles for Supabase config and stale vercel.app references ==="
           for b in $BUNDLES; do
             echo "-- $b --"
-            curl -sSL "https://skyblue-anteater-684989.hostingersite.com$b" -o /tmp/bundle.js
-            grep -o 'okcjqgkbzhnslsafqebk[a-zA-Z0-9./]*\|placeholder\.supabase\.co\|placeholder-key' /tmp/bundle.js || echo "  (no match in this bundle)"
+            curl -sSL "https://reviewdot.in$b" -o /tmp/bundle.js
+            grep -o 'okcjqgkbzhnslsafqebk[a-zA-Z0-9./]*\|placeholder\.supabase\.co\|placeholder-key\|reviewpilot-eosin\.vercel\.app' /tmp/bundle.js || echo "  (no match in this bundle)"
           done
