@@ -134,7 +134,7 @@ export function WidgetPage() {
   const embedCode = `<!-- ReviewDot Widget -->
 <div id="reviewpilot-widget"></div>
 <script
-  src="https://reviewpilot-eosin.vercel.app/widget.js"
+  src="https://reviewdot.in/widget.js"
   data-business="${businessSlug}"
   data-layout="${layout}"
   data-theme="${themeId}"

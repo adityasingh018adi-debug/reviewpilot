@@ -19,7 +19,7 @@ const BUSINESS_SLUG = "sharmas-kitchen";
 const APP_BASE_URL =
   typeof window !== "undefined"
     ? window.location.origin
-    : "https://reviewpilot-eosin.vercel.app";
+    : "https://reviewdot.in";
 
 function qrUrl(platform: string, size = 220): string {
   const target = `${APP_BASE_URL}/review/${BUSINESS_SLUG}?platform=${platform}`;
