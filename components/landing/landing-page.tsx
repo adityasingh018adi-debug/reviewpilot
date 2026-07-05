@@ -27,10 +27,10 @@ const RESOURCES_LINKS = [
 const TRUST_LOGOS = ["Google", "Capterra", "GetApp", "Software Advice"];
 
 const FEATURE_PILLARS = [
-  { icon: Sparkles, title: "AI That Understands", desc: "Smart replies that match your brand tone." },
-  { icon: Globe, title: "Reply in 20+ Languages", desc: "Connect with customers globally." },
-  { icon: Zap, title: "Save Time, Every Day", desc: "Automate replies and focus on what matters." },
-  { icon: ShieldCheck, title: "Build Trust & Loyalty", desc: "Happy customers. Stronger reputation." },
+  { icon: Sparkles, title: "AI That Understands", desc: "Smart replies that match your brand tone.", iconBg: "bg-violet-50 dark:bg-violet-950/40", iconColor: "text-violet-700 dark:text-violet-400" },
+  { icon: Globe, title: "Reply in 20+ Languages", desc: "Connect with customers globally.", iconBg: "bg-rose-50 dark:bg-rose-950/40", iconColor: "text-rose-700 dark:text-rose-400" },
+  { icon: Zap, title: "Save Time, Every Day", desc: "Automate replies and focus on what matters.", iconBg: "bg-amber-50 dark:bg-amber-950/40", iconColor: "text-amber-700 dark:text-amber-400" },
+  { icon: ShieldCheck, title: "Build Trust & Loyalty", desc: "Happy customers. Stronger reputation.", iconBg: "bg-emerald-50 dark:bg-emerald-950/40", iconColor: "text-emerald-700 dark:text-emerald-400" },
 ];
 
 const TESTIMONIALS = [
@@ -408,8 +408,8 @@ export default function LandingPage() {
               const Icon = f.icon;
               return (
                 <div key={f.title} className="flex flex-col items-start gap-3">
-                  <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-secondary">
-                    <Icon className="w-5 h-5 text-primary" />
+                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${f.iconBg}`}>
+                    <Icon className={`w-5 h-5 ${f.iconColor}`} />
                   </div>
                   <div>
                     <h3 className="text-sm font-semibold text-foreground">{f.title}</h3>
@@ -480,38 +480,54 @@ export default function LandingPage() {
                 title: "AI Tone Selection",
                 description: "Reply in your brand's voice — friendly, luxury, professional, or funny. The AI adapts perfectly to every review.",
                 tags: ["Friendly", "Luxury", "Professional", "Funny"],
+                iconBg: "bg-violet-50 dark:bg-violet-950/40",
+                iconColor: "text-violet-700 dark:text-violet-400",
+                tagBg: "bg-violet-50 dark:bg-violet-950/40 text-violet-700 dark:text-violet-400",
+                hoverBorder: "hover:border-violet-300 dark:hover:border-violet-700",
               },
               {
                 icon: Globe,
                 title: "20+ Languages",
                 description: "Auto-detect the review language and reply in the same language — English, Hindi, French, German, Arabic & more.",
                 tags: ["English", "Hindi", "French", "German"],
+                iconBg: "bg-rose-50 dark:bg-rose-950/40",
+                iconColor: "text-rose-700 dark:text-rose-400",
+                tagBg: "bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400",
+                hoverBorder: "hover:border-rose-300 dark:hover:border-rose-700",
               },
               {
                 icon: Shield,
                 title: "Negative Review Alerts",
                 description: "Instant alerts for 1-3 star reviews. AI suggests a de-escalation reply — you approve before it posts.",
                 tags: ["Instant alerts", "Owner approval"],
+                iconBg: "bg-amber-50 dark:bg-amber-950/40",
+                iconColor: "text-amber-700 dark:text-amber-400",
+                tagBg: "bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400",
+                hoverBorder: "hover:border-amber-300 dark:hover:border-amber-700",
               },
               {
                 icon: BarChart3,
                 title: "Analytics Dashboard",
                 description: "Track rating trends, sentiment analysis, response rate, and top keywords from all your reviews.",
                 tags: ["Trends", "Sentiment", "Keywords"],
+                iconBg: "bg-emerald-50 dark:bg-emerald-950/40",
+                iconColor: "text-emerald-700 dark:text-emerald-400",
+                tagBg: "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400",
+                hoverBorder: "hover:border-emerald-300 dark:hover:border-emerald-700",
               },
             ].map((feature) => {
               const Icon = feature.icon;
               return (
                 <div key={feature.title}
-                  className="group p-6 rounded-2xl border border-border bg-card hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 bg-secondary group-hover:scale-110 transition-transform">
-                    <Icon className="w-6 h-6 text-primary" />
+                  className={`group p-6 rounded-2xl border border-border bg-card hover:shadow-xl hover:shadow-black/[0.03] transition-all duration-300 hover:-translate-y-1 ${feature.hoverBorder}`}>
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform ${feature.iconBg}`}>
+                    <Icon className={`w-6 h-6 ${feature.iconColor}`} />
                   </div>
                   <h3 className="font-semibold text-foreground mb-2 text-base">{feature.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed mb-4">{feature.description}</p>
                   <div className="flex flex-wrap gap-1.5">
                     {feature.tags.map((tag) => (
-                      <span key={tag} className="text-xs px-2.5 py-1 rounded-full font-medium bg-secondary text-secondary-foreground">{tag}</span>
+                      <span key={tag} className={`text-xs px-2.5 py-1 rounded-full font-medium ${feature.tagBg}`}>{tag}</span>
                     ))}
                   </div>
                 </div>
