@@ -93,3 +93,13 @@ jobs:
             curl -sSL "https://reviewdot.in$b" -o /tmp/bundle.js
             grep -o 'okcjqgkbzhnslsafqebk[a-zA-Z0-9./]*\|placeholder\.supabase\.co\|placeholder-key\|reviewpilot-eosin\.vercel\.app' /tmp/bundle.js || echo "  (no match in this bundle)"
           done
+
+      - name: Check which landing page nav is actually live (deployed vs reference confusion check)
+        run: |
+          curl -sS "https://reviewdot.in/" -o /tmp/home.html
+          echo "-- nav text check --"
+          grep -o 'Languages</a>\|How it works' /tmp/home.html | sort -u || echo "NOT FOUND"
+          echo "-- demo button text check --"
+          grep -o 'View Live Demo\|See how it works' /tmp/home.html | sort -u || echo "NOT FOUND"
+          echo "-- logo mark check --"
+          grep -o '>R</span>\|>R\.</span>' /tmp/home.html | sort -u || echo "NOT FOUND"
