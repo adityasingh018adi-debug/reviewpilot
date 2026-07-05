@@ -1,0 +1,30 @@
+name: Fetch 3D asset
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/brand-name-reviewdot-hifg4e
+
+      - name: Download GLB
+        run: |
+          mkdir -p public/models
+          curl -sSL "https://d3u0tzju9qaucj.cloudfront.net/7d051b5a-7bfe-49fe-a484-24e7b3a9458a/a4b79220-f9f0-40e8-a5ea-ac1359473294.glb" \
+            -o public/models/reviewdot-badge.glb \
+            -w "HTTP %{http_code}, %{size_download} bytes\n"
+          ls -la public/models/
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/models/reviewdot-badge.glb
+          git commit -m "Add 3D hero badge asset" || echo "nothing to commit"
+          git push origin HEAD:claude/brand-name-reviewdot-hifg4e
