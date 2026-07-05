@@ -80,6 +80,7 @@ export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [demoOpen, setDemoOpen] = useState(false);
   const testimonialTrackRef = useRef<HTMLDivElement>(null);
   const resourcesRef = useRef<HTMLDivElement>(null);
 
@@ -98,6 +99,19 @@ export default function LandingPage() {
     document.addEventListener("mousedown", onClickOutside);
     return () => document.removeEventListener("mousedown", onClickOutside);
   }, []);
+
+  useEffect(() => {
+    if (!demoOpen) return;
+    document.body.style.overflow = "hidden";
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setDemoOpen(false);
+    }
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [demoOpen]);
 
   function scrollToTestimonial(i: number) {
     const track = testimonialTrackRef.current;
@@ -248,12 +262,13 @@ export default function LandingPage() {
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </Link>
-              <Link href="/dashboard">
-                <button className="flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold text-foreground bg-card border-2 border-border rounded-2xl hover:bg-muted transition-all w-full sm:w-auto">
-                  <Play className="w-4 h-4" />
-                  View Live Demo
-                </button>
-              </Link>
+              <button
+                onClick={() => setDemoOpen(true)}
+                className="flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold text-foreground bg-card border-2 border-border rounded-2xl hover:bg-muted transition-all w-full sm:w-auto"
+              >
+                <Play className="w-4 h-4" />
+                View Live Demo
+              </button>
             </div>
 
             <div className="flex flex-wrap items-center gap-5 text-sm text-muted-foreground">
@@ -861,6 +876,34 @@ export default function LandingPage() {
           </div>
         </div>
       </footer>
+
+      {/* ── DEMO VIDEO MODAL ── */}
+      {demoOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-fade-in"
+          onClick={() => setDemoOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-3xl rounded-2xl overflow-hidden shadow-2xl bg-black"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setDemoOpen(false)}
+              aria-label="Close demo video"
+              className="absolute -top-3 -right-3 z-10 w-9 h-9 rounded-full bg-card border border-border shadow-lg flex items-center justify-center text-foreground hover:bg-muted transition-colors"
+            >
+              <X className="w-4 h-4" />
+            </button>
+            <video
+              src="/videos/demo.mp4"
+              controls
+              autoPlay
+              playsInline
+              className="w-full h-full aspect-video"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
