@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useTheme } from "next-themes";
 import {
   Star, Zap, Globe, Shield, TrendingUp, CheckCircle,
@@ -11,6 +12,8 @@ import {
   CreditCard, RotateCcw, Gift,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
+const Hero3D = dynamic(() => import("./hero-3d").then((m) => m.Hero3D), { ssr: false });
 
 const NAV_LINKS = ["Features", "Languages", "Pricing"];
 
@@ -290,6 +293,8 @@ export default function LandingPage() {
           {/* Right — dashboard mockup */}
           <div className="relative flex items-center justify-center lg:justify-end">
             <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 rounded-3xl blur-3xl" />
+
+            <Hero3D className="hidden sm:block absolute -top-16 -left-10 z-20 w-40 h-40 pointer-events-none" />
 
             <div className="relative dashboard-3d-card w-full max-w-md">
               <div className="absolute -top-5 -right-3 z-20 flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white rounded-full shadow-xl animate-bounce-slow bg-gradient-to-r from-primary to-primary/80">
