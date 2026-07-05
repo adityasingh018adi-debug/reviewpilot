@@ -399,6 +399,23 @@ export default function LandingPage() {
               );
             })}
           </div>
+
+          <div className="flex flex-wrap items-center gap-3 mt-10 pt-8 border-t border-border">
+            <span className="flex items-center gap-2 text-sm font-semibold text-foreground">
+              <Globe className="w-4 h-4 text-primary" />
+              Supports 20+ Languages
+            </span>
+            <div className="flex items-center gap-1.5 flex-wrap">
+              {["🇺🇸", "🇪🇸", "🇫🇷", "🇩🇪", "🇮🇹", "🇧🇷", "🇯🇵", "🇮🇳", "🇦🇪"].map((flag, i) => (
+                <span key={i} className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-sm">
+                  {flag}
+                </span>
+              ))}
+              <span className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-[11px] font-bold text-muted-foreground">
+                +10
+              </span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -499,16 +516,25 @@ export default function LandingPage() {
                 Whether your customer writes in Hindi, French, German, or Arabic —
                 ReviewDot detects the language and crafts a perfect, on-brand reply in the same language.
               </p>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { icon: Sparkles, label: "AI-Powered Replies" },
+                  { icon: Globe, label: "20+ Languages" },
+                  { icon: CheckCircle, label: "On-Brand & Natural" },
+                ].map(({ icon: Icon, label }) => (
+                  <span key={label} className="flex items-center gap-1.5 bg-card border border-border rounded-full px-3.5 py-1.5 text-xs font-semibold text-foreground">
+                    <Icon className="w-3.5 h-3.5 text-primary" /> {label}
+                  </span>
+                ))}
+              </div>
               <div className="grid grid-cols-2 gap-3">
                 {[
                   { code: "IN", lang: "Hindi / English" },
-                  { code: "FR", lang: "French" },
+                  { code: "MR", lang: "Marathi" },
+                  { code: "GJ", lang: "Gujarati" },
+                  { code: "EN", lang: "English" },
                   { code: "DE", lang: "German" },
-                  { code: "ES", lang: "Spanish" },
-                  { code: "AE", lang: "Arabic" },
-                  { code: "JP", lang: "Japanese" },
-                  { code: "BR", lang: "Portuguese" },
-                  { code: "CN", lang: "Chinese" },
+                  { code: "FR", lang: "French" },
                 ].map(({ code, lang }) => (
                   <div key={lang} className="flex items-center gap-2.5 bg-card rounded-xl p-3 border border-border shadow-sm hover:border-primary/40 transition-colors">
                     <span className="text-[10px] font-bold text-primary bg-secondary rounded px-1.5 py-0.5">{code}</span>
@@ -517,7 +543,7 @@ export default function LandingPage() {
                   </div>
                 ))}
               </div>
-              <p className="text-sm text-muted-foreground">+ Italian, Korean, Russian, Turkish, Dutch, and 8 more...</p>
+              <p className="text-sm text-muted-foreground">+ 15 more languages supported</p>
             </div>
 
             {/* Language demo card */}
