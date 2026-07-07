@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+import { Reveal } from "./reveal";
+
 const Hero3D = dynamic(() => import("./hero-3d").then((m) => m.Hero3D), { ssr: false });
 
 const NAV_LINKS = ["Features", "Languages", "Pricing"];
@@ -230,10 +232,10 @@ export default function LandingPage() {
       <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-secondary via-background to-secondary/60" />
 
-        {/* Animated blobs */}
-        <div className="absolute top-24 left-8 w-72 h-72 bg-primary/15 rounded-full blur-3xl animate-blob pointer-events-none" />
-        <div className="absolute bottom-16 right-8 w-96 h-96 bg-accent/15 rounded-full blur-3xl animate-blob pointer-events-none" style={{ animationDelay: "2s" }} />
-        <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-blob pointer-events-none" style={{ animationDelay: "4s" }} />
+        {/* Animated aurora blobs */}
+        <div className="absolute top-24 left-8 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-aurora pointer-events-none" />
+        <div className="absolute bottom-16 right-8 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-aurora pointer-events-none" style={{ animationDelay: "6s" }} />
+        <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-indigo-500/15 rounded-full blur-3xl animate-aurora pointer-events-none" style={{ animationDelay: "12s" }} />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
 
@@ -246,7 +248,7 @@ export default function LandingPage() {
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.1] text-balance">
               Turn Every{" "}
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Review</span>
+              <span className="bg-gradient-to-r from-indigo-500 via-primary to-accent bg-clip-text text-transparent text-gradient-animate">Review</span>
               <br />Into Growth
             </h1>
 
@@ -308,6 +310,10 @@ export default function LandingPage() {
           {/* Right — dashboard mockup */}
           <div className="relative flex items-center justify-center lg:justify-end">
             <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 rounded-3xl blur-3xl" />
+            <div
+              className="absolute -inset-8 rounded-full opacity-40 blur-2xl animate-spin-sheen pointer-events-none hidden lg:block"
+              style={{ background: "conic-gradient(from 0deg, transparent, hsl(var(--primary) / 0.35), transparent, hsl(var(--accent) / 0.3), transparent)" }}
+            />
 
             <Hero3D className="hidden sm:block absolute -top-16 -left-10 z-20 w-40 h-40 pointer-events-none" />
 
@@ -404,10 +410,10 @@ export default function LandingPage() {
       <section className="py-14 bg-card border-y border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-            {FEATURE_PILLARS.map((f) => {
+            {FEATURE_PILLARS.map((f, i) => {
               const Icon = f.icon;
               return (
-                <div key={f.title} className="flex flex-col items-start gap-3">
+                <Reveal key={f.title} delay={i * 90} from="up" className="flex flex-col items-start gap-3">
                   <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${f.iconBg}`}>
                     <Icon className={`w-5 h-5 ${f.iconColor}`} />
                   </div>
@@ -415,7 +421,7 @@ export default function LandingPage() {
                     <h3 className="text-sm font-semibold text-foreground">{f.title}</h3>
                     <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{f.desc}</p>
                   </div>
-                </div>
+                </Reveal>
               );
             })}
           </div>
@@ -463,7 +469,7 @@ export default function LandingPage() {
       {/* ── FEATURES ── */}
       <section id="features" className="py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 space-y-4">
+          <Reveal from="up" className="text-center mb-16 space-y-4">
             <span className="inline-block bg-secondary text-secondary-foreground text-sm font-semibold px-4 py-1.5 rounded-full">
               Features
             </span>
@@ -471,7 +477,7 @@ export default function LandingPage() {
             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
               From AI replies to multi-language support — ReviewDot handles your entire review strategy automatically.
             </p>
-          </div>
+          </Reveal>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
@@ -515,22 +521,24 @@ export default function LandingPage() {
                 tagBg: "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400",
                 hoverBorder: "hover:border-emerald-300 dark:hover:border-emerald-700",
               },
-            ].map((feature) => {
+            ].map((feature, i) => {
               const Icon = feature.icon;
               return (
-                <div key={feature.title}
-                  className={`group p-6 rounded-2xl border border-border bg-card hover:shadow-xl hover:shadow-black/[0.03] transition-all duration-300 hover:-translate-y-1 ${feature.hoverBorder}`}>
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform ${feature.iconBg}`}>
-                    <Icon className={`w-6 h-6 ${feature.iconColor}`} />
+                <Reveal key={feature.title} delay={i * 100} from="up">
+                  <div
+                    className={`group h-full p-6 rounded-2xl border border-border bg-card hover:shadow-xl hover:shadow-black/[0.03] transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1.5 ${feature.hoverBorder}`}>
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform ${feature.iconBg}`}>
+                      <Icon className={`w-6 h-6 ${feature.iconColor}`} />
+                    </div>
+                    <h3 className="font-semibold text-foreground mb-2 text-base">{feature.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{feature.description}</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {feature.tags.map((tag) => (
+                        <span key={tag} className={`text-xs px-2.5 py-1 rounded-full font-medium ${feature.tagBg}`}>{tag}</span>
+                      ))}
+                    </div>
                   </div>
-                  <h3 className="font-semibold text-foreground mb-2 text-base">{feature.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">{feature.description}</p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {feature.tags.map((tag) => (
-                      <span key={tag} className={`text-xs px-2.5 py-1 rounded-full font-medium ${feature.tagBg}`}>{tag}</span>
-                    ))}
-                  </div>
-                </div>
+                </Reveal>
               );
             })}
           </div>
@@ -541,7 +549,7 @@ export default function LandingPage() {
       <section id="languages" className="py-24 bg-gradient-to-br from-secondary via-background to-secondary/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-6">
+            <Reveal from="left" className="space-y-6">
               <span className="inline-block bg-secondary text-secondary-foreground text-sm font-semibold px-4 py-1.5 rounded-full">
                 Global Reach
               </span>
@@ -580,10 +588,10 @@ export default function LandingPage() {
                 ))}
               </div>
               <p className="text-sm text-muted-foreground">+ 15 more languages supported</p>
-            </div>
+            </Reveal>
 
             {/* Language demo card */}
-            <div className="relative">
+            <Reveal from="right" delay={120} className="relative">
               <div className="bg-card rounded-2xl shadow-2xl shadow-primary/10 border border-border overflow-hidden">
                 <div className="p-5 bg-gradient-to-r from-primary to-primary/80">
                   <p className="text-white/70 text-xs font-medium mb-1.5">Incoming review (Hindi) IN</p>
@@ -613,7 +621,7 @@ export default function LandingPage() {
                   </button>
                 </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -621,12 +629,12 @@ export default function LandingPage() {
       {/* ── HOW IT WORKS ── */}
       <section className="py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 space-y-4">
+          <Reveal from="up" className="text-center mb-16 space-y-4">
             <span className="inline-block bg-secondary text-secondary-foreground text-sm font-semibold px-4 py-1.5 rounded-full">
               How It Works
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground text-balance">Set up in under 5 minutes</h2>
-          </div>
+          </Reveal>
 
           <div className="grid md:grid-cols-3 gap-10 relative">
             <div className="hidden md:block absolute top-10 left-[28%] right-[28%] h-0.5 bg-gradient-to-r from-primary to-accent" />
@@ -635,10 +643,10 @@ export default function LandingPage() {
               { step: "1", icon: Globe, title: "Connect", desc: "Link your Google Business Profile with one click. No technical skills needed — takes under 60 seconds." },
               { step: "2", icon: Sparkles, title: "AI Replies", desc: "ReviewDot reads every new review and crafts a personalized, on-brand reply in the right language instantly." },
               { step: "3", icon: TrendingUp, title: "Grow", desc: "Approve replies, track your ratings over time, and watch your business reputation grow automatically." },
-            ].map((item) => {
+            ].map((item, i) => {
               const Icon = item.icon;
               return (
-                <div key={item.step} className="relative text-center space-y-5 group">
+                <Reveal key={item.step} delay={i * 130} from="up" className="relative text-center space-y-5 group">
                   <div className="relative inline-flex">
                     <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto transition-transform group-hover:scale-110 bg-secondary">
                       <Icon className="w-9 h-9 text-primary" />
@@ -649,7 +657,7 @@ export default function LandingPage() {
                   </div>
                   <h3 className="text-xl font-semibold text-foreground">{item.title}</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto">{item.desc}</p>
-                </div>
+                </Reveal>
               );
             })}
           </div>
@@ -659,17 +667,17 @@ export default function LandingPage() {
       {/* ── PRICING ── */}
       <section id="pricing" className="py-24 bg-gradient-to-br from-secondary via-background to-secondary/60">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 space-y-4">
+          <Reveal from="up" className="text-center mb-16 space-y-4">
             <span className="inline-block bg-secondary text-secondary-foreground text-sm font-semibold px-4 py-1.5 rounded-full">
               Pricing
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground text-balance">Simple, transparent pricing</h2>
             <p className="text-muted-foreground text-lg">Start free for 14 days. No credit card required.</p>
-          </div>
+          </Reveal>
 
           <div className="grid md:grid-cols-2 gap-8">
             {/* Pro Plan */}
-            <div className="relative rounded-3xl p-8 text-white shadow-2xl shadow-primary/20 overflow-hidden bg-gradient-to-br from-primary via-primary/90 to-primary/70">
+            <Reveal from="up" className="relative rounded-3xl p-8 text-white shadow-2xl shadow-primary/20 overflow-hidden bg-gradient-to-br from-primary via-primary/90 to-primary/70">
               <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
               <div className="absolute bottom-0 left-0 w-36 h-36 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
@@ -709,10 +717,10 @@ export default function LandingPage() {
                   </button>
                 </Link>
               </div>
-            </div>
+            </Reveal>
 
             {/* Enterprise Plan */}
-            <div className="bg-card rounded-3xl p-8 border border-border shadow-xl shadow-black/[0.02]">
+            <Reveal from="up" delay={120} className="bg-card rounded-3xl p-8 border border-border shadow-xl shadow-black/[0.02]">
               <h3 className="text-2xl font-bold text-foreground mb-1">Enterprise</h3>
               <div className="flex items-baseline gap-1 mb-1">
                 <span className="text-4xl font-bold text-foreground">Custom</span>
@@ -741,7 +749,7 @@ export default function LandingPage() {
                 Contact Sales
                 <ChevronRight className="w-4 h-4" />
               </button>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -749,12 +757,12 @@ export default function LandingPage() {
       {/* ── TESTIMONIALS ── */}
       <section className="py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 space-y-4">
+          <Reveal from="up" className="text-center mb-16 space-y-4">
             <span className="inline-flex items-center gap-1.5 bg-secondary text-secondary-foreground text-sm font-semibold px-4 py-1.5 rounded-full">
               <ShieldCheck className="w-3.5 h-3.5" /> Trusted Globally
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground text-balance">Loved by businesses worldwide</h2>
-          </div>
+          </Reveal>
 
           <div
             ref={testimonialTrackRef}
@@ -803,7 +811,7 @@ export default function LandingPage() {
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/4 pointer-events-none" />
         <div className="absolute top-1/2 left-1/2 w-[600px] h-[300px] bg-accent/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
+        <Reveal from="scale" className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
           <span className="inline-block bg-white/15 text-white text-xs font-bold px-4 py-1.5 rounded-full border border-white/20 uppercase tracking-wide">
             Join 500+ businesses
           </span>
@@ -824,7 +832,7 @@ export default function LandingPage() {
             <span className="flex items-center gap-1.5"><RotateCcw className="w-4 h-4" /> Cancel anytime</span>
             <span className="flex items-center gap-1.5"><Gift className="w-4 h-4" /> Free for 14 days</span>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* ── FOOTER ── */}

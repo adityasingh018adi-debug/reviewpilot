@@ -371,3 +371,69 @@
 .scrollbar-none::-webkit-scrollbar {
   display: none;
 }
+
+/* ─── Premium hero enhancements ────────────────────────────────────────────── */
+
+/* Animated gradient shine that sweeps across the hero headline word. */
+.text-gradient-animate {
+  background-size: 200% auto;
+  animation: gradientShine 5s ease-in-out infinite;
+}
+
+@keyframes gradientShine {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+}
+
+/* Slow aurora drift for hero background blobs — richer than a static blur. */
+@keyframes aurora {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+  33% { transform: translate(40px, -30px) scale(1.15); opacity: 0.85; }
+  66% { transform: translate(-30px, 25px) scale(0.9); opacity: 0.5; }
+}
+.animate-aurora {
+  animation: aurora 18s ease-in-out infinite;
+}
+
+/* Soft conic sheen that rotates behind the hero card. */
+@keyframes spinSheen {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-sheen {
+  animation: spinSheen 22s linear infinite;
+}
+
+/* Subtle infinite bob for small badges/pills. */
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+.animate-bob {
+  animation: bob 3.5s ease-in-out infinite;
+}
+
+/* Marquee for the trust logos — gentle, pauses on hover. */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 24s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-gradient-animate,
+  .animate-aurora,
+  .animate-spin-sheen,
+  .animate-bob,
+  .animate-marquee,
+  .animate-blob,
+  .animate-float,
+  .animate-bounce-slow {
+    animation: none !important;
+  }
+}
