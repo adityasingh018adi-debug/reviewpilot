@@ -315,7 +315,7 @@ export default function LandingPage() {
               style={{ background: "conic-gradient(from 0deg, transparent, hsl(var(--primary) / 0.35), transparent, hsl(var(--accent) / 0.3), transparent)" }}
             />
 
-            <Hero3D className="hidden sm:block absolute -top-16 -left-10 z-20 w-40 h-40 pointer-events-none" />
+            <Hero3D className="hidden sm:block absolute -top-24 -left-24 z-20 w-72 h-72 pointer-events-none" />
 
             <div className="relative dashboard-3d-card w-full max-w-md">
               <div className="absolute -top-5 -right-3 z-20 flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white rounded-full shadow-xl animate-bounce-slow bg-gradient-to-r from-primary to-primary/80">
