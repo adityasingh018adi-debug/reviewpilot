@@ -59,7 +59,7 @@ export function buildDigestEmailHtml(data: DigestEmailData): string {
 
     <!-- Header -->
     <div style="background:#1a1a2e;padding:24px 32px;">
-      <h1 style="margin:0;color:#fff;font-size:22px;">ReviewPilot</h1>
+      <h1 style="margin:0;color:#fff;font-size:22px;">Reviewdot.in</h1>
       <p style="margin:4px 0 0;color:#8888aa;font-size:14px;">Your Daily Review Digest</p>
     </div>
 
@@ -103,7 +103,7 @@ export function buildDigestEmailHtml(data: DigestEmailData): string {
     <!-- Footer -->
     <div style="padding:16px 32px;background:#f7f7f8;text-align:center;">
       <p style="margin:0;font-size:12px;color:#999;">
-        ReviewPilot · Helping Indian businesses build trust, one reply at a time.<br>
+        Reviewdot.in · Helping Indian businesses build trust, one reply at a time.<br>
         <a href="${dashboardUrl}/settings" style="color:#888;">Manage email preferences</a>
       </p>
     </div>
@@ -118,7 +118,7 @@ export async function sendDailyDigest(
   data: DigestEmailData
 ): Promise<void> {
   await resend.emails.send({
-    from: "ReviewPilot <digest@reviewpilot.in>",
+    from: "Reviewdot.in <digest@reviewdot.in>",
     to,
     subject: `${data.newReviews.length} new review${data.newReviews.length !== 1 ? "s" : ""} for ${data.businessName} — Daily Digest`,
     html: buildDigestEmailHtml(data),

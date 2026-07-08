@@ -17,8 +17,8 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "ReviewPilot — AI Review Management",
-    template: "%s | ReviewPilot",
+    default: "Reviewdot.in — AI Review Management",
+    template: "%s | Reviewdot.in",
   },
   description:
     "Reply to Google reviews in seconds with AI. Manage your business reputation from anywhere — on desktop or your Android phone.",
@@ -30,15 +30,15 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "ReviewPilot",
+    title: "Reviewdot.in",
     startupImage: "/icons/icon-512x512.png",
   },
   formatDetection: { telephone: false },
   openGraph: {
-    title: "ReviewPilot — AI Review Management",
+    title: "Reviewdot.in — AI Review Management",
     description: "Reply to Google reviews in seconds with AI.",
     type: "website",
-    siteName: "ReviewPilot",
+    siteName: "Reviewdot.in",
   },
   icons: {
     icon: [
@@ -61,14 +61,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <link rel="manifest" href="/manifest.json" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="ReviewPilot" />
-        <meta name="application-name" content="ReviewPilot" />
+        <meta name="apple-mobile-web-app-title" content="Reviewdot.in" />
+        <meta name="application-name" content="Reviewdot.in" />
         <meta name="msapplication-TileColor" content="#7c3aed" />
         <meta name="msapplication-TileImage" content="/icons/icon-144x144.png" />
       </head>

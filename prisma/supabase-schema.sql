@@ -1,4 +1,4 @@
--- ReviewPilot — Supabase SQL Schema
+-- Reviewdot.in — Supabase SQL Schema
 -- Run this in the Supabase SQL editor to set up your database
 
 -- Enable UUID extension

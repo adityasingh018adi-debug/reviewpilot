@@ -39,13 +39,29 @@ const PLATFORMS: Record<string, PlatformConfig> = {
       </svg>
     ),
   },
-  yelp: {
-    name: "Yelp",
-    url: "https://www.yelp.com/writeareview",
-    color: "text-red-700",
-    bg: "bg-red-600 hover:bg-red-700",
+  zomato: {
+    name: "Zomato",
+    url: "https://www.zomato.com",
+    color: "text-red-600",
+    bg: "bg-red-500 hover:bg-red-600",
     borderColor: "border-red-200",
-    logo: <div className="h-5 w-5 bg-red-600 rounded flex items-center justify-center shrink-0"><span className="text-white font-black text-base" style={{fontFamily:"Georgia,serif"}}>y</span></div>,
+    logo: (
+      <div className="h-5 w-5 bg-red-500 rounded shrink-0 flex items-center justify-center">
+        <span className="text-white font-black text-sm leading-none">Z</span>
+      </div>
+    ),
+  },
+  justdial: {
+    name: "Justdial",
+    url: "https://www.justdial.com",
+    color: "text-orange-600",
+    bg: "bg-orange-500 hover:bg-orange-600",
+    borderColor: "border-orange-200",
+    logo: (
+      <div className="h-5 w-5 rounded shrink-0 flex items-center justify-center" style={{ background: "linear-gradient(135deg,#FF6600,#ff8c33)" }}>
+        <span className="text-white font-black text-[10px] leading-none">JD</span>
+      </div>
+    ),
   },
   tripadvisor: {
     name: "TripAdvisor",
@@ -53,7 +69,11 @@ const PLATFORMS: Record<string, PlatformConfig> = {
     color: "text-emerald-700",
     bg: "bg-emerald-600 hover:bg-emerald-700",
     borderColor: "border-emerald-200",
-    logo: <div className="h-5 w-5 bg-emerald-500 rounded-full flex items-center justify-center shrink-0"><span className="text-white font-bold text-xs">T</span></div>,
+    logo: (
+      <div className="h-5 w-5 bg-emerald-500 rounded-full flex items-center justify-center shrink-0">
+        <span className="text-white font-bold text-xs">TA</span>
+      </div>
+    ),
   },
 };
 
@@ -373,7 +393,7 @@ export function ReviewKiosk({ businessName = "Sharma's Kitchen", businessCategor
         <div className="mt-8 text-center">
           <p className="text-xs text-gray-400">
             Powered by{" "}
-            <span className="text-violet-500 font-semibold">ReviewPilot AI</span>
+            <span className="text-violet-500 font-semibold">Reviewdot.in AI</span>
             {" "}· Review is AI-assisted, feel free to edit before posting
           </p>
         </div>

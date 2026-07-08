@@ -10,6 +10,11 @@ out/
 # Production build
 build/
 
+# Deployment archives
+*.zip
+*.tar.gz
+*.tgz
+
 # Environment files — NEVER commit secrets
 .env.local
 .env.*.local

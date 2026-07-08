@@ -156,7 +156,7 @@ const INTEGRATIONS: Integration[] = [
     id: "zapier",
     name: "Zapier",
     category: "Automation",
-    description: "Connect ReviewPilot with 3000+ apps via Zapier automation.",
+    description: "Connect Reviewdot.in with 3000+ apps via Zapier automation.",
     status: "not_connected",
     logo: "Z",
     logoColor: "bg-orange-600",

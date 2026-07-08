@@ -87,7 +87,7 @@ export function PWAInstallPrompt() {
             <span className="text-white font-black text-lg">R</span>
           </div>
           <div>
-            <p className="font-bold text-white text-sm">Install ReviewPilot</p>
+            <p className="font-bold text-white text-sm">Install Reviewdot.in</p>
             <p className="text-xs text-violet-300">Add to your Android home screen</p>
           </div>
         </div>

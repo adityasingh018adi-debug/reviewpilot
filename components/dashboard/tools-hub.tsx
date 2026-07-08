@@ -240,7 +240,7 @@ export function ToolsHub() {
             WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
           }}>All Tools</h1>
         </div>
-        <p className="text-sm" style={{ color: "#5D6590" }}>Every ReviewPilot feature in one place — {TOOLS.length} tools total</p>
+        <p className="text-sm" style={{ color: "#5D6590" }}>Every Reviewdot.in feature in one place — {TOOLS.length} tools total</p>
       </div>
 
       {/* ── Quick stats ── */}

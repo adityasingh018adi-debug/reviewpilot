@@ -1,6 +1,6 @@
 {
-  "name": "ReviewPilot — AI Review Management",
-  "short_name": "ReviewPilot",
+  "name": "Reviewdot.in — AI Review Management",
+  "short_name": "Reviewdot.in",
   "description": "Reply to Google reviews with AI in seconds. Manage your business reputation on the go.",
   "start_url": "/dashboard",
   "scope": "/",
@@ -65,7 +65,7 @@
       "src": "/screenshots/dashboard.png",
       "sizes": "1280x720",
       "type": "image/png",
-      "label": "ReviewPilot Dashboard"
+      "label": "Reviewdot.in Dashboard"
     }
   ],
   "shortcuts": [

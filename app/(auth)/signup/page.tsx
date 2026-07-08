@@ -45,7 +45,7 @@ export default function SignupPage() {
           <div>
             <p className="font-bold text-sm">Live Demo — No signup needed</p>
             <p className="text-violet-200 text-xs mt-0.5">
-              Jump straight into the full ReviewPilot dashboard
+              Jump straight into the full Reviewdot.in dashboard
             </p>
           </div>
         </div>

@@ -156,7 +156,7 @@ export function ReviewHeroAnimation() {
               <div className="w-5 h-5 rounded-lg flex items-center justify-center" style={{ background: "linear-gradient(135deg,#7B5CFF,#9B6FFF)" }}>
                 <span className="text-white text-[8px] font-black">AI</span>
               </div>
-              <span className="text-[11px] font-bold" style={{ color: "#7B5CFF" }}>ReviewPilot AI</span>
+              <span className="text-[11px] font-bold" style={{ color: "#7B5CFF" }}>Reviewdot.in AI</span>
               {phase >= 4 && <span className="text-[9px] text-emerald-400 ml-auto">✓ Sent</span>}
             </div>
             <p style={{ color: "#A0AABF" }}>Thank you so much for your kind words! We truly appreciate your support and look forward to seeing you again! 🙏</p>
@@ -247,7 +247,7 @@ export function ReviewHeroAnimation() {
           {phase === 0 && "Customer visits your business"}
           {phase === 1 && "Customer writes a review ✍️"}
           {phase === 2 && "Review posted instantly ✅"}
-          {phase === 3 && "ReviewPilot AI crafting reply..."}
+          {phase === 3 && "Reviewdot.in AI crafting reply..."}
           {phase === 4 && "AI replied in seconds — customer delighted! 🎉"}
         </p>
         {/* Progress dots */}

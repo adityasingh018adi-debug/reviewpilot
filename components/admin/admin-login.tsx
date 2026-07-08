@@ -78,7 +78,7 @@ export function AdminLogin({ onLogin }: Props) {
 
           <div className="text-center mb-6">
             <h1 className="text-xl font-bold text-white mb-1">Admin Command Center</h1>
-            <p className="text-sm text-gray-400">ReviewPilot · Restricted Access</p>
+            <p className="text-sm text-gray-400">Reviewdot.in · Restricted Access</p>
           </div>
 
           {/* Hint badge */}

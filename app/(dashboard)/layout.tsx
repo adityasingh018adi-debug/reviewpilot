@@ -8,7 +8,7 @@ import type { User, Business } from "@/types";
 
 const DEMO_USER: User = {
   id: "demo",
-  email: "demo@reviewpilot.in",
+  email: "demo@reviewdot.in",
   name: "Demo User",
   avatarUrl: null,
   plan: "FREE",
@@ -59,7 +59,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
       <div className="hidden md:flex">
         <Sidebar user={data.user} business={data.business} />
       </div>
-      <main className="flex-1 overflow-y-auto bg-background pb-16 md:pb-0">
+      <main className="flex-1 overflow-y-auto bg-background pb-16 md:pb-0 dashboard-main">
         <PageTransition>{children}</PageTransition>
       </main>
       {/* Bottom nav — only on mobile */}

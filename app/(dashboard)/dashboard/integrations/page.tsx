@@ -2,7 +2,7 @@ export const dynamic = "force-dynamic";
 
 import { IntegrationsPage } from "@/components/integrations/integrations-page";
 
-export const metadata = { title: "Integrations — ReviewPilot" };
+export const metadata = { title: "Integrations — Reviewdot.in" };
 
 export default function Page() {
   return (

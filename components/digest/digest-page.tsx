@@ -141,7 +141,7 @@ export function DigestPage() {
                       <div className="w-7 h-7 bg-white/20 rounded-lg flex items-center justify-center">
                         <span className="font-black text-white text-xs">R</span>
                       </div>
-                      <span className="font-bold text-white">ReviewPilot</span>
+                      <span className="font-bold text-white">Reviewdot.in</span>
                     </div>
                     <h3 className="font-bold text-lg">Weekly Review Summary</h3>
                     <p className="text-violet-200 text-xs mt-0.5">May 19 – May 25, 2025 · Sharma's Kitchen</p>

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Admin — ReviewPilot",
-  description: "ReviewPilot Admin Command Center",
+  title: "Admin — Reviewdot.in",
+  description: "Reviewdot.in Admin Command Center",
 };
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
