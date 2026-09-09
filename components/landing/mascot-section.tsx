@@ -91,11 +91,11 @@ export function MascotSection() {
               <div className="absolute inset-0 -m-6 rounded-full bg-gradient-to-b from-primary/15 to-accent/10 blur-2xl" />
               <div className="absolute top-4 right-2 sm:right-6 z-20 animate-bob">
                 <div className="relative px-6 py-3 rounded-2xl rounded-br-sm bg-white shadow-xl border border-border">
-                  <span className="text-2xl font-extrabold bg-gradient-to-r from-indigo-600 to-primary bg-clip-text text-transparent">Hi!</span>
+                  <span className="text-2xl font-extrabold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Hi!</span>
                 </div>
               </div>
               <Image
-                src="/mascot/robot-b.png"
+                src="/mascot/robot-violet.png"
                 alt="ReviewBot — the ReviewDot AI assistant, a friendly white robot waving hello"
                 width={480}
                 height={640}
