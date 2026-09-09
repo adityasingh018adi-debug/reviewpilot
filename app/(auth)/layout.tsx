@@ -5,8 +5,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
     >
       {/* Background blobs */}
       <div className="absolute top-20 left-16 w-64 h-64 bg-violet-300/25 rounded-full blur-3xl animate-blob pointer-events-none" />
-      <div className="absolute bottom-20 right-16 w-80 h-80 bg-rose-300/20 rounded-full blur-3xl animate-blob pointer-events-none" style={{ animationDelay: "3s" }} />
-      <div className="absolute top-1/2 left-1/2 w-48 h-48 bg-purple-300/15 rounded-full blur-3xl animate-blob pointer-events-none" style={{ animationDelay: "6s" }} />
+      <div className="absolute bottom-20 right-16 w-80 h-80 bg-fuchsia-300/20 rounded-full blur-3xl animate-blob pointer-events-none" style={{ animationDelay: "3s" }} />
+      <div className="absolute top-1/2 left-1/2 w-48 h-48 bg-violet-300/15 rounded-full blur-3xl animate-blob pointer-events-none" style={{ animationDelay: "6s" }} />
 
       <div className="relative w-full max-w-md z-10">
         {/* Logo */}
