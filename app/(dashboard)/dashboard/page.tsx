@@ -82,14 +82,14 @@ export default async function DashboardPage() {
 
         <Link
           href="/dashboard/ai-replies"
-          className="group flex items-center gap-4 p-5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg shadow-emerald-200/50 hover:shadow-emerald-300/60 transition-all hover:-translate-y-0.5 card-3d"
+          className="group flex items-center gap-4 p-5 rounded-2xl bg-gradient-to-r from-fuchsia-500 to-purple-600 text-white shadow-lg shadow-fuchsia-200/50 hover:shadow-fuchsia-300/60 transition-all hover:-translate-y-0.5 card-3d"
         >
           <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
             <Sparkles className="h-6 w-6 text-white" />
           </div>
           <div className="flex-1">
             <p className="font-bold">AI Reply Studio</p>
-            <p className="text-sm text-emerald-100">15 languages · 4 tones · 5-min human delay</p>
+            <p className="text-sm text-fuchsia-100">15 languages · 4 tones · 5-min human delay</p>
           </div>
           <ArrowRight className="h-5 w-5 text-white/60 group-hover:translate-x-1 transition-transform" />
         </Link>
@@ -97,14 +97,14 @@ export default async function DashboardPage() {
 
       {/* ── Google connect banner ── */}
       {!business.googleLocationId && (
-        <div className="rounded-2xl border border-blue-200 bg-blue-50/80 backdrop-blur-sm p-5 flex items-center justify-between gap-4 flex-wrap">
+        <div className="rounded-2xl border border-violet-200 bg-violet-50/80 backdrop-blur-sm p-5 flex items-center justify-between gap-4 flex-wrap">
           <div>
-            <p className="font-semibold text-sm text-blue-900">Connect Google My Business</p>
-            <p className="text-xs text-blue-700 mt-0.5">
+            <p className="font-semibold text-sm text-violet-900">Connect Google My Business</p>
+            <p className="text-xs text-violet-700 mt-0.5">
               Pull live reviews and post AI replies directly to Google.
             </p>
           </div>
-          <Button size="sm" asChild className="bg-blue-600 hover:bg-blue-700 text-white gap-2">
+          <Button size="sm" asChild className="bg-violet-600 hover:bg-violet-700 text-white gap-2">
             <a href="/api/auth/google">
               <svg className="h-4 w-4" viewBox="0 0 24 24">
                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>

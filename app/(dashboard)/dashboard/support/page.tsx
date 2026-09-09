@@ -34,7 +34,7 @@ export default function Page() {
             <div className="text-4xl mb-4">{card.icon}</div>
             <h3 className="text-base font-semibold text-gray-900 mb-2">{card.title}</h3>
             <p className="text-sm text-gray-500 mb-4">{card.desc}</p>
-            <button className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors">
+            <button className="px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white text-sm font-medium rounded-lg transition-colors">
               {card.action}
             </button>
           </div>
