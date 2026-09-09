@@ -97,10 +97,10 @@ export function MascotSection() {
               <Image
                 src="/mascot/robot-violet.png"
                 alt="ReviewBot — the ReviewDot AI assistant, a friendly white robot waving hello"
-                width={480}
-                height={640}
+                width={620}
+                height={827}
                 priority
-                className="relative z-10 w-64 sm:w-80 lg:w-full max-w-sm h-auto drop-shadow-2xl animate-float"
+                className="relative z-10 w-80 sm:w-96 lg:w-full max-w-lg h-auto drop-shadow-2xl animate-float"
               />
             </div>
           </div>
