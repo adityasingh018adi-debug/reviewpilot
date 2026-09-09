@@ -29,16 +29,16 @@ function Stars({ count = 5 }: { count?: number }) {
 }
 
 const FEATURES = [
-  { icon: MessageSquare, title: "Auto Reply to Reviews", sub: "Instant & Smart", tint: "bg-blue-500/12 text-blue-500" },
+  { icon: MessageSquare, title: "Auto Reply to Reviews", sub: "Instant & Smart", tint: "bg-primary/12 text-primary" },
   { icon: Star, title: "Google Reviews Automation", sub: "Increase 5★ Ratings", tint: "bg-primary/12 text-primary" },
-  { icon: MessageSquare, title: "Zomato Reviews Management", sub: "Reply. Engage. Grow.", tint: "bg-red-500/12 text-red-500" },
-  { icon: QrCode, title: "QR Code Solution", sub: "Scan. Review. Done", tint: "bg-emerald-500/12 text-emerald-500" },
+  { icon: MessageSquare, title: "Zomato Reviews Management", sub: "Reply. Engage. Grow.", tint: "bg-primary/12 text-primary" },
+  { icon: QrCode, title: "QR Code Solution", sub: "Scan. Review. Done", tint: "bg-primary/12 text-primary" },
 ];
 
 const TRUST = [
-  { icon: Lock, title: "Secure & Safe", sub: "100% Secure Data", tint: "text-blue-500" },
-  { icon: Clock, title: "24/7 Automation", sub: "Always Working for You", tint: "text-purple-500" },
-  { icon: Zap, title: "Save Time", sub: "Focus on Your Business", tint: "text-emerald-500" },
+  { icon: Lock, title: "Secure & Safe", sub: "100% Secure Data", tint: "text-primary" },
+  { icon: Clock, title: "24/7 Automation", sub: "Always Working for You", tint: "text-primary" },
+  { icon: Zap, title: "Save Time", sub: "Focus on Your Business", tint: "text-primary" },
   { icon: TrendingUp, title: "Grow Faster", sub: "More Reviews, More Trust", tint: "text-primary" },
 ];
 
