@@ -31,9 +31,9 @@ const TRUST_LOGOS = ["Google", "Capterra", "GetApp", "Software Advice"];
 
 const FEATURE_PILLARS = [
   { icon: Sparkles, title: "AI That Understands", desc: "Smart replies that match your brand tone.", iconBg: "bg-violet-50 dark:bg-violet-950/40", iconColor: "text-violet-700 dark:text-violet-400" },
-  { icon: Globe, title: "Reply in 20+ Languages", desc: "Connect with customers globally.", iconBg: "bg-rose-50 dark:bg-rose-950/40", iconColor: "text-rose-700 dark:text-rose-400" },
-  { icon: Zap, title: "Save Time, Every Day", desc: "Automate replies and focus on what matters.", iconBg: "bg-amber-50 dark:bg-amber-950/40", iconColor: "text-amber-700 dark:text-amber-400" },
-  { icon: ShieldCheck, title: "Build Trust & Loyalty", desc: "Happy customers. Stronger reputation.", iconBg: "bg-emerald-50 dark:bg-emerald-950/40", iconColor: "text-emerald-700 dark:text-emerald-400" },
+  { icon: Globe, title: "Reply in 20+ Languages", desc: "Connect with customers globally.", iconBg: "bg-fuchsia-50 dark:bg-fuchsia-950/40", iconColor: "text-fuchsia-700 dark:text-fuchsia-400" },
+  { icon: Zap, title: "Save Time, Every Day", desc: "Automate replies and focus on what matters.", iconBg: "bg-violet-50 dark:bg-violet-950/40", iconColor: "text-violet-700 dark:text-violet-400" },
+  { icon: ShieldCheck, title: "Build Trust & Loyalty", desc: "Happy customers. Stronger reputation.", iconBg: "bg-fuchsia-50 dark:bg-fuchsia-950/40", iconColor: "text-fuchsia-700 dark:text-fuchsia-400" },
 ];
 
 const TESTIMONIALS = [
@@ -500,30 +500,30 @@ export default function LandingPage() {
                 title: "20+ Languages",
                 description: "Auto-detect the review language and reply in the same language — English, Hindi, French, German, Arabic & more.",
                 tags: ["English", "Hindi", "French", "German"],
-                iconBg: "bg-rose-50 dark:bg-rose-950/40",
-                iconColor: "text-rose-700 dark:text-rose-400",
-                tagBg: "bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400",
-                hoverBorder: "hover:border-rose-300 dark:hover:border-rose-700",
+                iconBg: "bg-fuchsia-50 dark:bg-fuchsia-950/40",
+                iconColor: "text-fuchsia-700 dark:text-fuchsia-400",
+                tagBg: "bg-fuchsia-50 dark:bg-fuchsia-950/40 text-fuchsia-700 dark:text-fuchsia-400",
+                hoverBorder: "hover:border-fuchsia-300 dark:hover:border-fuchsia-700",
               },
               {
                 icon: Shield,
                 title: "Negative Review Alerts",
                 description: "Instant alerts for 1-3 star reviews. AI suggests a de-escalation reply — you approve before it posts.",
                 tags: ["Instant alerts", "Owner approval"],
-                iconBg: "bg-amber-50 dark:bg-amber-950/40",
-                iconColor: "text-amber-700 dark:text-amber-400",
-                tagBg: "bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400",
-                hoverBorder: "hover:border-amber-300 dark:hover:border-amber-700",
+                iconBg: "bg-violet-50 dark:bg-violet-950/40",
+                iconColor: "text-violet-700 dark:text-violet-400",
+                tagBg: "bg-violet-50 dark:bg-violet-950/40 text-violet-700 dark:text-violet-400",
+                hoverBorder: "hover:border-violet-300 dark:hover:border-violet-700",
               },
               {
                 icon: BarChart3,
                 title: "Analytics Dashboard",
                 description: "Track rating trends, sentiment analysis, response rate, and top keywords from all your reviews.",
                 tags: ["Trends", "Sentiment", "Keywords"],
-                iconBg: "bg-emerald-50 dark:bg-emerald-950/40",
-                iconColor: "text-emerald-700 dark:text-emerald-400",
-                tagBg: "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400",
-                hoverBorder: "hover:border-emerald-300 dark:hover:border-emerald-700",
+                iconBg: "bg-fuchsia-50 dark:bg-fuchsia-950/40",
+                iconColor: "text-fuchsia-700 dark:text-fuchsia-400",
+                tagBg: "bg-fuchsia-50 dark:bg-fuchsia-950/40 text-fuchsia-700 dark:text-fuchsia-400",
+                hoverBorder: "hover:border-fuchsia-300 dark:hover:border-fuchsia-700",
               },
             ].map((feature, i) => {
               const Icon = feature.icon;
