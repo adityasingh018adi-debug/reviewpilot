@@ -1,0 +1,73 @@
+name: Deploy to Hostinger (Node.js app)
+
+# Auto-deploys the Next.js app to the Hostinger Node.js app over SSH on
+# every push to master. It pulls the new code, installs deps, rebuilds,
+# and restarts the app (Passenger).
+#
+# ── ONE-TIME SETUP (your side, in GitHub + Hostinger) ─────────────────────
+# 1. Hostinger: enable SSH access for the plan
+#      hPanel → Advanced → SSH Access  (note the Host, Port, Username).
+#      Hostinger SSH port is usually 65002, not 22.
+# 2. Hostinger: make the Node.js app directory a git checkout of this repo.
+#      SSH in once and run (adjust the path to your app's root):
+#        cd ~/domains/reviewdot.in/app        # <-- your Node.js app root
+#        git init && git remote add origin https://github.com/adityasingh018adi-debug/reviewpilot.git
+#        git fetch origin && git reset --hard origin/master
+#      (If it is already a git clone, skip this.)
+# 3. GitHub: add these repository secrets
+#      Settings → Secrets and variables → Actions → New repository secret
+#        HOSTINGER_SSH_HOST      e.g. 82.180.xxx.xxx  or  reviewdot.in
+#        HOSTINGER_SSH_PORT      e.g. 65002
+#        HOSTINGER_SSH_USER      e.g. u504476760
+#        HOSTINGER_SSH_PASSWORD  your SSH password
+#        HOSTINGER_APP_PATH      absolute path to the app root on the server,
+#                                e.g. /home/u504476760/domains/reviewdot.in/app
+# 4. Make sure the app's runtime env vars (DATABASE_URL, the NEXT_PUBLIC_*
+#    keys, Claude/Google/Razorpay/Resend/Twilio) are also readable by the
+#    build — either exported in the shell profile or in a .env file in
+#    HOSTINGER_APP_PATH. `next build` needs them.
+#
+# Once the secrets exist, every push to master deploys automatically.
+# You can also trigger it by hand from the Actions tab (Run workflow).
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch: {}
+
+concurrency:
+  group: hostinger-nodejs-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.HOSTINGER_SSH_HOST }}
+          username: ${{ secrets.HOSTINGER_SSH_USER }}
+          password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
+          port: ${{ secrets.HOSTINGER_SSH_PORT }}
+          command_timeout: "20m"
+          script: |
+            set -euo pipefail
+            cd "${{ secrets.HOSTINGER_APP_PATH }}"
+
+            echo "→ Pulling latest master"
+            git fetch origin master
+            git reset --hard origin/master
+
+            echo "→ Installing dependencies"
+            if [ -f package-lock.json ]; then npm ci; else npm install; fi
+
+            echo "→ Building"
+            npm run build
+
+            echo "→ Restarting app (Passenger)"
+            mkdir -p tmp
+            touch tmp/restart.txt
+
+            echo "✓ Deploy complete"
