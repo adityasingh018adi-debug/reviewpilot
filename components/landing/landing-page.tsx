@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { Reveal } from "./reveal";
+import { MascotSection } from "./mascot-section";
 
 const Hero3D = dynamic(() => import("./hero-3d").then((m) => m.Hero3D), { ssr: false });
 
@@ -465,6 +466,9 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* ── MEET YOUR AI ASSISTANT (mascot) ── */}
+      <MascotSection />
 
       {/* ── FEATURES ── */}
       <section id="features" className="py-24 bg-background">
