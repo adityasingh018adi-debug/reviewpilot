@@ -1,0 +1,29 @@
+name: Fetch Mascot Assets
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/brand-name-reviewdot-hifg4e
+      - name: Download mascot images
+        run: |
+          mkdir -p public/mascot
+          curl -sSL -o public/mascot/robot-a.png "https://d8j0ntlcm91z4.cloudfront.net/user_3FcmFxX3TZJfFWW6B84aZylAxIn/hf_20260719_163813_235261e9-8189-44b4-91c1-006cde7f3204.png"
+          curl -sSL -o public/mascot/robot-b.png "https://d8j0ntlcm91z4.cloudfront.net/user_3FcmFxX3TZJfFWW6B84aZylAxIn/hf_20260719_163826_09dcbe4e-dd0d-466f-8f6f-a9fdaaa6155e.png"
+          ls -la public/mascot/
+          file public/mascot/*.png
+      - name: Commit assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/mascot/robot-a.png public/mascot/robot-b.png
+          git commit -m "chore: add robot mascot image assets"
+          git push origin claude/brand-name-reviewdot-hifg4e
